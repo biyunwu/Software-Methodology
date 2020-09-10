@@ -28,20 +28,19 @@ public class GroceryItem {
 	public String toString() {
 		DecimalFormat df = new DecimalFormat("0.00");
 		String output = name + ": $" + df.format(price) + " : ";
-		if(this.taxable == false) {
+		if (this.taxable == false) {
 			output = output + "tax free";
-		}
-		else {
+		} else {
 			output = output + "is taxable";
 		}
-		
+
 		return output;
 	}
-	
+
 	public double getPrice() {
 		return price;
 	}
-	
+
 	public boolean getTaxable() {
 		return taxable;
 	}

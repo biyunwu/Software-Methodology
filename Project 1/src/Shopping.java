@@ -73,7 +73,7 @@ public class Shopping {
 				break;
 			}
 		}
-		if(bag.getSize() != 0) {
+		if (bag.getSize() != 0) {
 			System.out.println("Checking out " + bag.getSize() + " items.");
 			bag.print();
 			DecimalFormat df = new DecimalFormat("0.00");
@@ -85,6 +85,7 @@ public class Shopping {
 			System.out.println("*Total amount paid: $" + df.format(totalPrice));
 		}
 		System.out.println("Thanks for shopping with us!");
+		in.close();
 		return;
 	}
 }
