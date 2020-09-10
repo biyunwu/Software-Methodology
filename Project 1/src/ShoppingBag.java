@@ -12,6 +12,7 @@ public class ShoppingBag {
 		
 		this.bag = new GroceryItem[5];
 		this.capacity = bag.length;
+		this.size = 0;
 	}
 
 	private int find(GroceryItem item) {
