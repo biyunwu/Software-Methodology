@@ -17,8 +17,11 @@ public class GroceryItem {
 	}
 
 	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
+		if (obj instanceof GroceryItem) {
+			if (((GroceryItem) obj).name.equals(this.name) && ((GroceryItem) obj).price == this.price
+					&& ((GroceryItem) obj).taxable == this.taxable) {
+				return true;
+			}
 		}
 
 		return false;

@@ -37,7 +37,7 @@ public class Shopping {
 				boolean removeitemTaxable = Boolean.valueOf(seperatedInput[3]);
 				GroceryItem removeItem = new GroceryItem(removeitemName, removeitemPrice, removeitemTaxable);
 				if (bag.remove(removeItem) == false) {
-					System.out.print("Unable to remove, this item is not in the bag.");
+					System.out.println("Unable to remove, this item is not in the bag.");
 					break;
 				} else {
 					System.out.println(removeitemName + " " + removeitemPrice + " removed.");

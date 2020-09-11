@@ -17,7 +17,7 @@ public class ShoppingBag {
 
 	private int find(GroceryItem item) {
 		for (int i = 0; i < size; i++) {
-			if (bag[i].equals(item)) {
+			if (bag[i].equals(item) == true) {
 				return i;
 			}
 		}
@@ -52,6 +52,7 @@ public class ShoppingBag {
 		}
 		int removeIndex = find(item);
 		bag[removeIndex] = bag[size - 1];
+		bag[size - 1] = null;
 		size--;
 		return true;
 	}
