@@ -7,17 +7,11 @@ import java.util.Scanner;
 public class Shopping {
     private final ShoppingBag sb;
 
-    /**
-     * Constructor
-     */
     public Shopping() {
         sb = new ShoppingBag();
     }
 
-    /**
-     * Scan user input line by line.
-     */
-    public void run() {
+    public void run() { // Scan user input line by line.
         Scanner sc = new Scanner(System.in);
         while (true) {
             readInput(sc.nextLine());
