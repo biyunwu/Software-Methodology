@@ -57,6 +57,62 @@ Invalid command!
 *Sales total: $18.07
 *Sales tax: $0.00
 *Total amount paid: $18.07
-Unable to remove, this item is toast added to the bag. **Checking out 1 item.
+Unable to remove, this item is not in the bag.
+toast added to the bag.
+**Checking out 1 item.
 ·toast: $4.95 : tax free
-not in the bag.
+*Sales total: $4.95 *Sales tax: $0.00
+*Total amount paid: $4.95 milk added to the bag.
+salmon added to the bag.
+toilet_papers added to the bag.
+kitchen_towels added to the bag.
+bagels added to the bag.
+garbage_bags added to the bag.
+laundry_detergent added to the bag.
+Invalid command! **You have 7 items in the bag.
+·milk: $2.50 : tax free
+·salmon: $5.99 : tax free
+·toilet_papers: $7.95 : is taxable
+·kitchen_towels: $10.00 : is taxable
+·bagels: $3.99 : tax free
+·garbage_bags: $4.59 : is taxable
+·laundry_detergent: $12.99 : is taxable
+**End of list chicken added to the bag.
+pork added to the bag.
+shrimp added to the bag.
+masks added to the bag.
+sanitizer added to the bag.
+bleach added to the bag.
+**You have 13 items in the bag.
+·milk: $2.50 : tax free
+·salmon: $5.99 : tax free
+·toilet_papers: $7.95 : is taxable
+·kitchen_towels: $10.00 : is taxable
+·bagels: $3.99 : tax free
+·garbage_bags: $4.59 : is taxable
+·laundry_detergent: $12.99 : is taxable
+·chicken: $6.75 : tax free
+·pork: $4.59 : tax free
+·shrimp: $13.00 : tax free
+·masks: $15.59 : is taxable
+·sanitizer: $2.99 : is taxable
+·bleach: $3.95 : is taxable
+**End of list **Checking out 13 items.
+·milk: $2.50 : tax free
+·salmon: $5.99 : tax free
+·toilet_papers: $7.95 : is taxable
+·kitchen_towels: $10.00 : is taxable
+·bagels: $3.99 : tax free
+·garbage_bags: $4.59 : is taxable
+·laundry_detergent: $12.99 : is taxable
+·chicken: $6.75 : tax free
+·pork: $4.59 : tax free
+·shrimp: $13.00 : tax free
+·masks: $15.59 : is taxable
+·sanitizer: $2.99 : is taxable
+·bleach: $3.95 : is taxable
+*Sales total: $94.88
+*Sales tax: $3.85
+*Total amount paid: $98.73
+Invalid command!
+Thanks for shopping with us!
