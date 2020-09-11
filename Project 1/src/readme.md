@@ -1,0 +1,1 @@
+![UML chart](https://app.lucidchart.com/publicSegments/view/d1287646-0d1c-4a95-b79f-bd9a21f83cc5/image.png)
