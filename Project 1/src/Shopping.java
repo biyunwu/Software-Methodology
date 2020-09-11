@@ -1,31 +1,55 @@
-import java.util.Scanner;
-
 /**
- * 
+ *
  * @authors Anthony Triolo and Biyun Wu
  *
  */
-public class Shopping {
-	public void run() {
-		System.out.println("Let's start shopping!");
-		ShoppingBag bag = new ShoppingBag();
-		Scanner in = new Scanner(System.in);
-		String input;
-		while ((input = in.nextLine()) != "Q") {
-			String[] seperatedInput = input.split(" ");
-			switch (seperatedInput[0]) {
-			case "A":
-				if (seperatedInput.length < 4) {
-					System.out.println("Invalid command!");
-				}
-				String itemName = seperatedInput[1];
-				double itemPrice = Double.parseDouble(seperatedInput[2]);
-				boolean itemTaxable = Boolean.valueOf(seperatedInput[3]);
-				GroceryItem newItem = new GroceryItem(itemName, itemPrice, itemTaxable);
-				bag.add(newItem);
-			case "R":
 
-			}
-		}
-	}
+import java.util.Scanner;
+
+public class Shopping {
+    private final ShoppingBag sb;
+
+    // Constructor
+    public Shopping() {
+        sb = new ShoppingBag();
+    }
+
+    public void run() {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            readInput(sc.nextLine());
+        }
+    }
+
+    private void readInput(String input) {
+        String[] inputs = input.split("\\s+");
+        if (inputs.length == 1) {
+            switch (inputs[0]) {
+                case "P" -> sb.display();
+                case "C" -> sb.checkout();
+                case "Q" -> {
+                    print(Constants.THANKS);
+                    System.exit(0); // Exit the program.
+                }
+                default -> print(Constants.INVALID);
+            }
+        } else if (inputs.length == 4) {
+            String operation = inputs[0];
+            String item = inputs[1];
+            double price = Double.parseDouble(inputs[2]);
+            boolean taxable = Boolean.parseBoolean(inputs[3]);
+            GroceryItem itemObj = new GroceryItem(item, price, taxable);
+            switch(operation) {
+                case "A" -> sb.add(itemObj);
+                case "R" -> sb.remove(itemObj);
+                default -> print(Constants.INVALID);
+            }
+        } else {
+            print(Constants.INVALID);
+        }
+    }
+
+    private void print(String s){
+        System.out.println(s);
+    }
 }

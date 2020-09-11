@@ -1,30 +1,40 @@
 /**
- * 
- * @author Anthony Triolo and Biyun Wu
+ *
+ * @authors Anthony Triolo and Biyun Wu
  *
  */
 public class GroceryItem {
-	private String name;
-	private double price;
-	private boolean taxable;
+    private final String name;
+    private final double price;
+    private final boolean taxable;
 
-	public GroceryItem(String name, double price, boolean taxable) {
-		this.name = name;
-		this.price = price;
-		this.taxable = taxable;
-	}
+    public GroceryItem(String name, double price, boolean taxable){
+        this.name = name;
+        this.price = price;
+        this.taxable = taxable;
+    }
 
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
+    public boolean equals(Object obj) {
+        return obj instanceof GroceryItem
+                && ((GroceryItem) obj).name.equals(this.name)
+                && ((GroceryItem) obj).price == this.price
+                && ((GroceryItem) obj).taxable == this.taxable;
+    }
 
-		return false;
+    public String toString() {
+        String tax = taxable ? Constants.TAXABLE : Constants.TAX_FREE;
+        return String.format(Constants.ITEM_STR, name, price, tax);
+    }
 
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String toString() {
-		return name + ": " + price + " : " + taxable;
-	}
+    public double getPrice() {
+        return price;
+    }
 
+    public boolean getTaxable() {
+        return taxable;
+    }
 }
