@@ -36,9 +36,7 @@ public class ShoppingBag {
     private void grow() { // Helper method to grow the capacity.
         GroceryItem[] newBag = initBagArray(capacity + Constants.INCREMENT);
         System.arraycopy(bag, 0, newBag, 0, bag.length);
-
         capacity = newBag.length;
-
         bag = newBag;
     }
 
@@ -60,15 +58,15 @@ public class ShoppingBag {
      * @return success -> true / fail -> false.
      */
     public boolean remove(GroceryItem item) {
-        int found = find(item);
-        if (found < 0) {
+        int idx = find(item);
+        if (idx < 0) {
             print(Constants.FAIL_REMOVE);
             return false;
         }
 
         for (int i = bag.length - 1; i >= 0; i--) { // Find the last non-null item in the array.
             if (bag[i] != null) {   // Replace the ith item with the last non-null item.
-                bag[found] = bag[i];
+                bag[idx] = bag[i];
                 bag[i] = null;
                 break;
             }
@@ -95,10 +93,6 @@ public class ShoppingBag {
             }
         }
         return tax;
-    }
-
-    public void print(String s) { // Helper method.
-        System.out.println(s);
     }
 
     public void display() {
@@ -132,12 +126,16 @@ public class ShoppingBag {
 
     /**
      * Create a `GroceryItem` array filled with null.
-     * @param length: array size.
+     * @param length array size.
      * @return `GroceryItem` array filled with null.
      */
     private GroceryItem[] initBagArray(int length) {
         GroceryItem[] arr = new GroceryItem[length];
         Arrays.fill(arr, null);
         return arr;
+    }
+
+    private void print(String s) { // Helper method.
+        System.out.println(s);
     }
 }

@@ -20,7 +20,7 @@ public class Shopping {
 
     /**
      * Check whether user input is valid. Then do the corresponding operation.
-     * @param input: user input (1 line)
+     * @param input user input (1 line)
      */
     private void readInput(String input) {
         String[] inputs = input.split("\\s+");
@@ -52,7 +52,7 @@ public class Shopping {
 
     /**
      * Helper method.
-     * @param s: string to be printed.
+     * @param s string to be printed.
      */
     private void print(String s){
         System.out.println(s);
