@@ -41,7 +41,7 @@ public class ShoppingBag {
     }
 
     /**
-     * @param item to be added in to ShoppingBag
+     * @param item to be added to ShoppingBag
      */
     public void add(GroceryItem item) {
         if (size >= capacity) {
@@ -64,13 +64,8 @@ public class ShoppingBag {
             return false;
         }
 
-        for (int i = bag.length - 1; i >= 0; i--) { // Find the last non-null item in the array.
-            if (bag[i] != null) {   // Replace the ith item with the last non-null item.
-                bag[idx] = bag[i];
-                bag[i] = null;
-                break;
-            }
-        }
+        bag[idx] = bag[size - 1]; // Replace the ith item with the last non-null item.
+        bag[size - 1] = null;
 
         print(String.format(Constants.SUCCESS_REMOVE, item.getName(), item.getPrice()));
         size--;

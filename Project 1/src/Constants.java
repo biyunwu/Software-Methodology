@@ -15,14 +15,9 @@ public class Constants {
     public static final String LIST_END = "**End of list";
     public static final String CHECKOUT_EMPTY_BAG = "Unable to check out,the bag is empty!";
     public static final String CHECKOUT_START = "**Checking out %d items:"; // **Checking out 5 items.
-    /**
-     * *Sales total: $18.07
-     * *Sales tax: $0.00
-     * *Total amount paid: $18.07
-     */
-    public static final String CHECKOUT_END = "*Sales total: $%.2f\n"
-            + "*Sales tax: $%.2f\n"
-            + "*Total amount paid: $%.2f.";
+    public static final String CHECKOUT_END = "*Sales total: $%.2f\n"   // *Sales total: $18.07
+            + "*Sales tax: $%.2f\n"                                     // *Sales tax: $0.00
+            + "*Total amount paid: $%.2f.";                             // *Total amount paid: $18.07
     public static final String THANKS = "Thanks for shopping with us!";
     public static final String INVALID = "Invalid command!";
     public static final String TAXABLE = "is taxable";

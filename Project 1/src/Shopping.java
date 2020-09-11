@@ -24,29 +24,31 @@ public class Shopping {
      */
     private void readInput(String input) {
         String[] inputs = input.split("\\s+");
-        if (inputs.length == 1) {
-            switch (inputs[0]) {
-                case "P" -> sb.display();
-                case "C" -> sb.checkout();
-                case "Q" -> {
-                    print(Constants.THANKS);
-                    System.exit(0); // Exit the program.
+        switch(inputs.length) {
+            case 1 -> { // Display/Checkout/Quit
+                switch (inputs[0]) {
+                    case "P" -> sb.display();
+                    case "C" -> sb.checkout();
+                    case "Q" -> {
+                        print(Constants.THANKS);
+                        System.exit(0); // Exit the program.
+                    }
+                    default -> print(Constants.INVALID);
                 }
-                default -> print(Constants.INVALID);
             }
-        } else if (inputs.length == 4) {
-            String operation = inputs[0];
-            String item = inputs[1];
-            double price = Double.parseDouble(inputs[2]);
-            boolean taxable = Boolean.parseBoolean(inputs[3]);
-            GroceryItem itemObj = new GroceryItem(item, price, taxable);
-            switch(operation) {
-                case "A" -> sb.add(itemObj);
-                case "R" -> sb.remove(itemObj);
-                default -> print(Constants.INVALID);
+            case 4 -> { // Add/Remove + itemName + price + taxable
+                String operation = inputs[0];
+                String item = inputs[1];
+                double price = Double.parseDouble(inputs[2]);
+                boolean taxable = Boolean.parseBoolean(inputs[3]);
+                GroceryItem itemObj = new GroceryItem(item, price, taxable);
+                switch(operation) {
+                    case "A" -> sb.add(itemObj);
+                    case "R" -> sb.remove(itemObj);
+                    default -> print(Constants.INVALID);
+                }
             }
-        } else { // Input should contain 1 or 4 elements.
-            print(Constants.INVALID);
+            default -> print(Constants.INVALID);
         }
     }
 
