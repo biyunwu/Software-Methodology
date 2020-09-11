@@ -5,7 +5,7 @@
 public class Constants {
     public static final int INIT_CAPACITY = 5;
     public static final int INCREMENT = 5;
-    public static final double TAX_RATE = 0.0625;
+    public static final double TAX_RATE = 0.06625;
     public static final String ITEM_STR= "·%s: $%.2f : %s"; // ·toast: $4.95 : tax free
     public static final String SUCCESS_REMOVE = "%s %.2f removed."; // jam 3.95 removed.
     public static final String FAIL_REMOVE = "Unable to remove, this item is not in the bag.";
