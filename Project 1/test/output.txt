@@ -1,0 +1,62 @@
+Invalid command!
+Invalid command!
+The bag is empty!
+Unable to remove, this item is toast added to the bag.
+jam added to the bag.
+jam added to the bag.
+**You have 3 items in the bag.
+·toast: $4.95 : tax free
+·jam: $3.95 : tax free
+·jam: $3.95 : tax free
+**End of list
+jam 3.95 removed.
+**You have 2 items in the bag.
+·toast: $4.95 : tax free
+·jam: $3.95 : tax free
+**End of list
+Invalid command!
+Invalid command!
+jam added to the bag.
+jam added to the bag.
+jam added to the bag.
+toast added to the bag.
+jam added to the bag.
+**You have 7 items in the bag.
+·toast: $4.95 : tax free
+·jam: $3.95 : tax free
+·jam: $2.59 : tax free
+·jam: $2.59 : tax free
+·jam: $2.59 : tax free
+·toast: $4.95 : tax free
+·jam: $3.99 : tax free
+**End of list
+jam 2.59 removed.
+**You have 6 items in the bag.
+·toast: $4.95 : tax free
+·jam: $3.95 : tax free
+·jam: $3.99 : tax free
+·jam: $2.59 : tax free
+·jam: $2.59 : tax free
+·toast: $4.95 : tax free
+**End of list
+toast 4.95 removed.
+**You have 5 items in the bag.
+·toast: $4.95 : tax free
+·jam: $3.95 : tax free
+·jam: $3.99 : tax free
+·jam: $2.59 : tax free
+·jam: $2.59 : tax free
+**End of list
+Invalid command!
+**Checking out 5 items.
+·toast: $4.95 : tax free
+·jam: $3.95 : tax free
+·jam: $3.99 : tax free
+·jam: $2.59 : tax free
+·jam: $2.59 : tax free
+*Sales total: $18.07
+*Sales tax: $0.00
+*Total amount paid: $18.07
+Unable to remove, this item is toast added to the bag. **Checking out 1 item.
+·toast: $4.95 : tax free
+not in the bag.
