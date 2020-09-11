@@ -1,8 +1,7 @@
 /**
- *
  * @authors Anthony Triolo and Biyun Wu
- *
  */
+
 public class GroceryItem {
     private final String name;
     private final double price;

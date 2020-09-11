@@ -1,7 +1,5 @@
 /**
- *
  * @authors Anthony Triolo and Biyun Wu
- *
  */
 
 import java.util.Scanner;
@@ -9,11 +7,16 @@ import java.util.Scanner;
 public class Shopping {
     private final ShoppingBag sb;
 
-    // Constructor
+    /**
+     * Constructor
+     */
     public Shopping() {
         sb = new ShoppingBag();
     }
 
+    /**
+     * Scan user input line by line.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -21,6 +24,10 @@ public class Shopping {
         }
     }
 
+    /**
+     * Check whether user input is valid. Then do the corresponding operation.
+     * @param input: user input (1 line)
+     */
     private void readInput(String input) {
         String[] inputs = input.split("\\s+");
         if (inputs.length == 1) {
@@ -44,11 +51,15 @@ public class Shopping {
                 case "R" -> sb.remove(itemObj);
                 default -> print(Constants.INVALID);
             }
-        } else {
+        } else { // Input should contain 1 or 4 elements.
             print(Constants.INVALID);
         }
     }
 
+    /**
+     * Helper method.
+     * @param s: string to be printed.
+     */
     private void print(String s){
         System.out.println(s);
     }

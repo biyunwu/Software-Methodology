@@ -1,8 +1,7 @@
 /**
- *
  * @authors Anthony Triolo and Biyun Wu
- *
  */
+
 import java.util.Arrays;
 
 public class ShoppingBag {
@@ -10,18 +9,22 @@ public class ShoppingBag {
     private int size;          // number of items currently in the bag
     private int capacity;      // current capacity
 
-
-    public ShoppingBag() {
+    public ShoppingBag() { // Constructor.
         initShoppingBag();
     }
 
-    private void initShoppingBag() {
-        bag = initBag(Constants.INIT_CAPACITY);
+    private void initShoppingBag() { // Helper method for constructor.
+        bag = initBagArray(Constants.INIT_CAPACITY);
         size = 0;
         capacity = Constants.INIT_CAPACITY;
     }
 
-    private int find(GroceryItem item) { // helper method to find an item.
+    /**
+     * Helper method to find an item.
+     * @param item: GroceryItem to be searched in ShoppingBag.
+     * @return index of the item or -1 if not found.
+     */
+    private int find(GroceryItem item) {
         for (int i = 0; i < bag.length; i++) {
             if (item.equals(bag[i])) {
                 return i;
@@ -30,8 +33,8 @@ public class ShoppingBag {
         return -1;
     }
 
-    private void grow() { // helper method to grow the capacity
-        GroceryItem[] newBag = initBag(capacity + Constants.INCREMENT);
+    private void grow() { // Helper method to grow the capacity.
+        GroceryItem[] newBag = initBagArray(capacity + Constants.INCREMENT);
         System.arraycopy(bag, 0, newBag, 0, bag.length);
 
         capacity = newBag.length;
@@ -39,16 +42,15 @@ public class ShoppingBag {
         bag = newBag;
     }
 
+    /**
+     * @param item to be added in to ShoppingBag
+     */
     public void add(GroceryItem item) {
-        if (size < capacity) {
-            bag[size] = item;
-        } else {
+        if (size >= capacity) {
             grow();
-            bag[size] = item; // After grow(), the first available position is size, which is the old last index + 1.
         }
-
+        bag[size] = item; // After grow(), the first available position is size, which is the old last index + 1.
         print(String.format(Constants.SUCCESS_ADD, item.getName()));
-
         size++;
     }
 
@@ -65,8 +67,8 @@ public class ShoppingBag {
         }
 
         for (int i = bag.length - 1; i >= 0; i--) { // Find the last non-null item in the array.
-            if (bag[i] != null) {
-                bag[found] = bag[i]; // Replace.
+            if (bag[i] != null) {   // Replace the ith item with the last non-null item.
+                bag[found] = bag[i];
                 bag[i] = null;
                 break;
             }
@@ -95,7 +97,7 @@ public class ShoppingBag {
         return tax;
     }
 
-    public void print(String s) {
+    public void print(String s) { // Helper method.
         System.out.println(s);
     }
 
@@ -122,15 +124,20 @@ public class ShoppingBag {
         }
     }
 
-    private void listItems() {
+    private void listItems() { // Helper method printing all items in ShoppingBag.
         for (int i = 0; i < size; i++){
             print(bag[i].toString());
         }
     }
 
-    private GroceryItem[] initBag(int length) {
-        GroceryItem[] newBag = new GroceryItem[length];
-        Arrays.fill(newBag, null);
-        return newBag;
+    /**
+     * Create a `GroceryItem` array filled with null.
+     * @param length: array size.
+     * @return `GroceryItem` array filled with null.
+     */
+    private GroceryItem[] initBagArray(int length) {
+        GroceryItem[] arr = new GroceryItem[length];
+        Arrays.fill(arr, null);
+        return arr;
     }
 }
