@@ -18,7 +18,7 @@ public class Shopping {
             readInput(line);
             line = sc.nextLine();
         }
-        print(Constants.THANKS); // line: "Q", quit.
+        System.out.println(Constants.THANKS); // line: "Q", quit.
         sc.close();
     }
 
@@ -31,9 +31,9 @@ public class Shopping {
         switch(inputs.length) {
             case 1 -> { // Display/Checkout
                 switch (inputs[0]) {
-                    case "P" -> sb.display();
-                    case "C" -> sb.checkout();
-                    default -> print(Constants.INVALID);
+                    case "P" -> display();
+                    case "C" -> checkout();
+                    default -> System.out.println(Constants.INVALID);
                 }
             }
             case 4 -> { // Add/Remove + itemName + price + taxable
@@ -43,20 +43,58 @@ public class Shopping {
                 boolean taxable = Boolean.parseBoolean(inputs[3]);
                 GroceryItem itemObj = new GroceryItem(item, price, taxable);
                 switch(operation) {
-                    case "A" -> sb.add(itemObj);
-                    case "R" -> sb.remove(itemObj);
-                    default -> print(Constants.INVALID);
+                    case "A" -> add(itemObj);
+                    case "R" -> remove(itemObj);
+                    default -> System.out.println(Constants.INVALID);
                 }
             }
-            default -> print(Constants.INVALID);
+            default -> System.out.println(Constants.INVALID);
+        }
+    }
+
+    private void display() {
+        int size = sb.getSize();
+        if (sb.getSize() == 0) {
+            System.out.println(Constants.EMPTY_BAG);
+        } else {
+            System.out.println(String.format(Constants.LIST_START, size));
+            sb.print();
+            System.out.println(Constants.LIST_END);
+        }
+    }
+
+    private void checkout() {
+        int size = sb.getSize();
+        if (sb.getSize() == 0) {
+            System.out.println(Constants.CHECKOUT_EMPTY_BAG);
+        } else {
+            System.out.println(String.format(Constants.CHECKOUT_START, size));
+            sb.print();
+            double sales = sb.salesPrice();
+            double tax = sb.salesTax();
+            System.out.println(String.format(Constants.CHECKOUT_END, sales, tax, sales + tax));
+            sb.initShoppingBag(); // Empty bag after checking out.
         }
     }
 
     /**
      * Helper method.
-     * @param s string to be printed.
+     * @param item to be added to bag.
      */
-    private void print(String s){
-        System.out.println(s);
+    private void add(GroceryItem item) {
+        sb.add(item);
+        System.out.println(String.format(Constants.SUCCESS_ADD, item.getName()));
+    }
+
+    /**
+     * Helper method.
+     * @param item to be searched and removed from bag.
+     */
+    private void remove(GroceryItem item) {
+        if (sb.remove(item)){
+            System.out.println(String.format(Constants.SUCCESS_REMOVE, item.getName(), item.getPrice()));
+        } else {
+            System.out.println(Constants.FAIL_REMOVE);
+        }
     }
 }

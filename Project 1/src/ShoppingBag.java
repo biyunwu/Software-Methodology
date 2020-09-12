@@ -13,8 +13,8 @@ public class ShoppingBag {
         initShoppingBag();
     }
 
-    private void initShoppingBag() { // Helper method for constructor.
-        bag = initBagArray(Constants.INIT_CAPACITY);
+    protected void initShoppingBag() { // Helper method for constructor.
+        bag = new GroceryItem[Constants.INIT_CAPACITY];
         size = 0;
         capacity = Constants.INIT_CAPACITY;
     }
@@ -48,7 +48,6 @@ public class ShoppingBag {
             grow();
         }
         bag[size] = item; // After grow(), the first available position is size, which is the old last index + 1.
-        print(String.format(Constants.SUCCESS_ADD, item.getName()));
         size++;
     }
 
@@ -60,14 +59,11 @@ public class ShoppingBag {
     public boolean remove(GroceryItem item) {
         int idx = find(item);
         if (idx < 0) {
-            print(Constants.FAIL_REMOVE);
             return false;
         }
 
         bag[idx] = bag[size - 1]; // Replace the ith item with the last non-null item.
         bag[size - 1] = null;
-
-        print(String.format(Constants.SUCCESS_REMOVE, item.getName(), item.getPrice()));
         size--;
         return true;
     }
@@ -90,35 +86,6 @@ public class ShoppingBag {
         return tax;
     }
 
-    public void display() {
-        if (size == 0) {
-            print(Constants.EMPTY_BAG);
-        } else {
-            print(String.format(Constants.LIST_START, size));
-            listItems();
-            print(Constants.LIST_END);
-        }
-    }
-
-    public void checkout() {
-        if (size == 0) {
-            print(Constants.CHECKOUT_EMPTY_BAG);
-        } else {
-            print(String.format(Constants.CHECKOUT_START, size));
-            listItems();
-            double sales = salesPrice();
-            double tax = salesTax();
-            print(String.format(Constants.CHECKOUT_END, sales, tax, sales + tax));
-            initShoppingBag(); // Empty bag after checking out.
-        }
-    }
-
-    private void listItems() { // Helper method printing all items in ShoppingBag.
-        for (int i = 0; i < size; i++){
-            print(bag[i].toString());
-        }
-    }
-
     /**
      * Create a `GroceryItem` array filled with null.
      * @param length array size.
@@ -130,7 +97,13 @@ public class ShoppingBag {
         return arr;
     }
 
-    private void print(String s) { // Helper method.
-        System.out.println(s);
+    public void print() {
+        for (int i = 0; i < size; i++){
+            System.out.println(bag[i].toString());
+        }
+    }
+
+    public int getSize() {
+        return size;
     }
 }
