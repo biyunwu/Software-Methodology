@@ -19,6 +19,7 @@ public class Shopping {
             line = sc.nextLine();
         }
         print(Constants.THANKS); // line: "Q", quit.
+        sc.close();
     }
 
     /**
