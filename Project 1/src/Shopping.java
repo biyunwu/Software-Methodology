@@ -20,27 +20,27 @@ public class Shopping {
 						case "P" -> {
 							if (bag.getSize() == 0) {
 								System.out.println("The bag is empty!");
-								return;
+							} else {
+								System.out.println("**You have " + bag.getSize() + " items in the bag.");
+								bag.print();
+								System.out.println("**End of list");
 							}
-							System.out.println("**You have " + bag.getSize() + " items in the bag.");
-							bag.print();
-							System.out.println("**End of list");
 						}
 						case "C" -> {
 							if (bag.getSize() == 0) {
 								System.out.println("Unable to check out, the bag is empty!");
-								return;
+							} else {
+								System.out.println("Checking out " + bag.getSize() + " items.");
+								bag.print();
+								DecimalFormat df = new DecimalFormat("0.00");
+								double salesPrice = bag.salesPrice();
+								System.out.println("*Sales total: $" + df.format(salesPrice));
+								double salesTax = bag.salesTax();
+								System.out.println("*Sales tax: $" + df.format(salesTax));
+								double totalPrice = salesPrice + salesTax;
+								System.out.println("*Total amount paid: $" + df.format(totalPrice));
+								bag = new ShoppingBag();
 							}
-							System.out.println("Checking out " + bag.getSize() + " items.");
-							bag.print();
-							DecimalFormat df = new DecimalFormat("0.00");
-							double salesPrice = bag.salesPrice();
-							System.out.println("*Sales total: $" + df.format(salesPrice));
-							double salesTax = bag.salesTax();
-							System.out.println("*Sales tax: $" + df.format(salesTax));
-							double totalPrice = salesPrice + salesTax;
-							System.out.println("*Total amount paid: $" + df.format(totalPrice));
-							bag = new ShoppingBag();
 						}
 						default -> System.out.println("Invalid command!");
 					}
