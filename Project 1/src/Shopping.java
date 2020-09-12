@@ -13,9 +13,12 @@ public class Shopping {
 
     public void run() { // Scan user input line by line.
         Scanner sc = new Scanner(System.in);
-        while (true) {
-            readInput(sc.nextLine());
+        String line = sc.nextLine().trim();
+        while (!line.equals("Q")) {
+            readInput(line);
+            line = sc.nextLine();
         }
+        print(Constants.THANKS); // line: "Q", quit.
     }
 
     /**
@@ -25,14 +28,10 @@ public class Shopping {
     private void readInput(String input) {
         String[] inputs = input.split("\\s+");
         switch(inputs.length) {
-            case 1 -> { // Display/Checkout/Quit
+            case 1 -> { // Display/Checkout
                 switch (inputs[0]) {
                     case "P" -> sb.display();
                     case "C" -> sb.checkout();
-                    case "Q" -> {
-                        print(Constants.THANKS);
-                        System.exit(0); // Exit the program.
-                    }
                     default -> print(Constants.INVALID);
                 }
             }
