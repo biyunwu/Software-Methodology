@@ -1,43 +1,42 @@
 import java.text.DecimalFormat;
 
 /**
- * 
- * @author Anthony Triolo and Biyun Wu
- *
+ * @authors Anthony Triolo and Biyun Wu
  */
-public class GroceryItem {
-	private String name;
-	private double price;
-	private boolean taxable;
 
+public class GroceryItem {
+	private final String name;
+	private final double price;
+	private final boolean taxable;
+
+	/**
+	 * Constructor
+	 * @param name of GroceryItem
+	 * @param price of GroceryItem
+	 * @param taxable tax free or not
+	 */
 	public GroceryItem(String name, double price, boolean taxable) {
 		this.name = name;
 		this.price = price;
 		this.taxable = taxable;
 	}
 
+	/**
+	 * Compare the given item's attributes with `this`.
+	 * @param obj given to be compared with `this`.
+	 * @return true is they have identical name, price and taxable. Otherwise return false.
+	 */
 	public boolean equals(Object obj) {
-		if (obj instanceof GroceryItem) {
-			if (((GroceryItem) obj).name.equals(this.name) && ((GroceryItem) obj).price == this.price
-					&& ((GroceryItem) obj).taxable == this.taxable) {
-				return true;
-			}
-		}
-
-		return false;
-
+		return obj instanceof GroceryItem
+				&& ((GroceryItem) obj).name.equals(this.name)
+				&& ((GroceryItem) obj).price == this.price
+				&& ((GroceryItem) obj).taxable == this.taxable;
 	}
 
 	public String toString() {
 		DecimalFormat df = new DecimalFormat("0.00");
-		String output = name + ": $" + df.format(price) + " : ";
-		if (this.taxable == false) {
-			output = output + "tax free";
-		} else {
-			output = output + "is taxable";
-		}
-
-		return output;
+		String tax = taxable ? "is taxable" : "tax free";
+		return name + ": $" + df.format(price) + " : " + tax;
 	}
 
 	public double getPrice() {
@@ -47,5 +46,4 @@ public class GroceryItem {
 	public boolean getTaxable() {
 		return taxable;
 	}
-
 }

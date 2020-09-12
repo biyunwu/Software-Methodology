@@ -2,10 +2,9 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
- * 
  * @authors Anthony Triolo and Biyun Wu
- *
  */
+
 public class Shopping {
 	public void run() {
 		System.out.println("Let's start shopping!");
