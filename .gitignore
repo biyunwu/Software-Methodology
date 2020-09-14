@@ -1,2 +1,7 @@
 .metadata/
 timeLog.docx
+**/.DS_Store
+**/.settings
+**/bin
+**/.classpath
+**/.project
