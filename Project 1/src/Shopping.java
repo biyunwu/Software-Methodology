@@ -68,8 +68,17 @@ public class Shopping {
 			}
 			input = in.nextLine();
 		}
-
-		System.out.println("Thanks for shopping with us!");
-		in.close();
+		if(bag.getSize() == 0) {
+			bag.print();
+			DecimalFormat df = new DecimalFormat("0.00");
+			double salesPrice = bag.salesPrice();
+			System.out.println("*Sales total: $" + df.format(salesPrice));
+			double salesTax = bag.salesTax();
+			System.out.println("*Sales tax: $" + df.format(salesTax));
+			double totalPrice = salesPrice + salesTax;
+			System.out.println("*Total amount paid: $" + df.format(totalPrice));
+			System.out.println("Thanks for shopping with us!");
+			in.close();
+		}
 	}
 }

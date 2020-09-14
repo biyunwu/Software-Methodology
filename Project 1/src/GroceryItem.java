@@ -5,9 +5,9 @@ import java.text.DecimalFormat;
  */
 
 public class GroceryItem {
-	private final String name;
-	private final double price;
-	private final boolean taxable;
+	private String name;
+	private double price;
+	private boolean taxable;
 
 	/**
 	 * Constructor
