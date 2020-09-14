@@ -30,11 +30,8 @@ public class ShoppingBag {
 
 	private void grow() { // Helper method to grow the capacity.
 		int INCREMENT = 5; // "If the bag is full, the bag automatically grows the capacity by 5."
-		GroceryItem[] tempBag = new GroceryItem[capacity + INCREMENT];
+		GroceryItem[] tempBag = new GroceryItem[capacity + INCREMENT]; // Null is the default value for obj cells.
 		System.arraycopy(bag, 0, tempBag, 0, capacity);
-		for (int i = size; i < tempBag.length; i++){
-			tempBag[i] = null;
-		}
 		bag = tempBag;
 		capacity = bag.length;
 	}
