@@ -33,16 +33,25 @@ public class GroceryItem {
 				&& ((GroceryItem) obj).taxable == this.taxable;
 	}
 
+	/** @return string of detailed info for the grocery item. */
 	public String toString() {
 		DecimalFormat df = new DecimalFormat("0.00");
 		String tax = taxable ? "is taxable" : "tax free";
 		return name + ": $" + df.format(price) + " : " + tax;
 	}
 
+	/**
+	 * Getter
+	 * @return price for the grocery item.
+	 */
 	public double getPrice() {
 		return price;
 	}
 
+	/**
+	 * Getter
+	 * @return whether the grocery item is taxable.
+	 */
 	public boolean getTaxable() {
 		return taxable;
 	}

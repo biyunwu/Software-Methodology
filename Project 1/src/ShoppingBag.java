@@ -1,16 +1,15 @@
 /**
- * @authors Anthony Triolo and Biyun Wu
+ * @author Anthony Triolo and Biyun Wu
  */
 
 public class ShoppingBag {
 	private GroceryItem[] bag;
 	private int size;
-	private int capacity;
 
-	public ShoppingBag() { // Constructor
+	/** Constructor */
+	public ShoppingBag() {
 		int INITIAL_CAPACITY = 5;
 		this.bag = new GroceryItem[INITIAL_CAPACITY];
-		this.capacity = bag.length;
 		this.size = 0;
 	}
 
@@ -28,19 +27,17 @@ public class ShoppingBag {
 		return -1;
 	}
 
+	/** Helper method to increase the bag's capacity. */
 	private void grow() { // Helper method to grow the capacity.
 		int INCREMENT = 5; // "If the bag is full, the bag automatically grows the capacity by 5."
-		GroceryItem[] tempBag = new GroceryItem[capacity + INCREMENT]; // Null is the default value for obj cells.
-		System.arraycopy(bag, 0, tempBag, 0, capacity);
+		GroceryItem[] tempBag = new GroceryItem[bag.length + INCREMENT]; // Null is the default value for obj cells.
+		System.arraycopy(bag, 0, tempBag, 0, bag.length);
 		bag = tempBag;
-		capacity = bag.length;
 	}
 
-	/**
-	 * @param item to be added to ShoppingBag
-	 */
+	/** @param item to be added to ShoppingBag */
 	public void add(GroceryItem item) {
-		if (size == capacity) {
+		if (size == bag.length) {
 			grow();
 		}
 		bag[size] = item; // Index of `size` is always the first position available to add new item.
@@ -63,6 +60,7 @@ public class ShoppingBag {
 		return true;
 	}
 
+	/** @return the total price of items in the bag without tax. */
 	public double salesPrice() {
 		double totalSale = 0.0;
 		for (int i = 0; i < size; i++) {
@@ -71,6 +69,7 @@ public class ShoppingBag {
 		return totalSale;
 	}
 
+	/** @return the total tax of items in the bag. */
 	public double salesTax() {
 		double TAX_RATE = 0.06625;
 		double totalTax = 0.0;
@@ -82,12 +81,17 @@ public class ShoppingBag {
 		return totalTax;
 	}
 
+	/** Helper method to print detailed info of items in the bag. */
 	public void print() { // Print items in bag.
 		for (int i = 0; i < size; i++) {
 			System.out.println("\u2022 " + bag[i].toString());
 		}
 	}
 
+	/**
+	 * Getter
+	 * @return number of items in the bag.
+	 * */
 	public int getSize() {
 		return size;
 	}
