@@ -84,7 +84,7 @@ public class ShoppingBag {
 			System.out.println("\u2022 " + bag[i].toString());
 		}
 	}
-	
+	//test
 	public int getSize() {
 		return size;
 	}
