@@ -63,7 +63,7 @@ public class ShoppingBag {
 	public double salesPrice() {
 		double totalSale = 0.0;
 		for (int i = 0; i < size; i++) {
-			totalSale += bag[i].getPrice(); //test
+			totalSale += bag[i].getPrice();
 		}
 		return totalSale;
 	}
@@ -84,7 +84,7 @@ public class ShoppingBag {
 			System.out.println("\u2022 " + bag[i].toString());
 		}
 	}
-	//test
+	
 	public int getSize() {
 		return size;
 	}
