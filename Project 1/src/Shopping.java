@@ -13,7 +13,8 @@ public class Shopping {
 		bag = new ShoppingBag();
 	}
 
-	/** Scan input line by line and pass input to doOperation()
+	/**
+	 * Scan input line by line and pass input to doOperation()
 	 * unless the input is "Q" which means quit the program.
 	 */
 	public void run() {
@@ -35,7 +36,7 @@ public class Shopping {
 	}
 
 	/**
-	 * Do corresponding operation on the ShoppingBag based on given array if it is valid.
+	 * Do corresponding operation on ShoppingBag based on given array if it is valid.
 	 * @param separatedInput array stores the inputs.
 	 */
 	private void doOperation(String[] separatedInput) {
@@ -82,9 +83,7 @@ public class Shopping {
 		}
 	}
 
-	/**
-	 * Helper method to check out NOT-empty bag.
-	 */
+	/** Helper method to check out NOT empty bag. */
 	private void checkoutNotEmptyBag() {
 		System.out.println("Checking out " + bag.getSize() + " items.");
 		bag.print();

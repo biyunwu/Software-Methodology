@@ -47,7 +47,7 @@ public class ShoppingBag {
 	/**
 	 * Find the target in `GroceryItem[] bag` and replace it with the last no-NULL object in the array.
 	 * @param item object to be removed in the bag.
-	 * @return success -> true / fail -> false.
+	 * @return true if removed successfully, otherwise return false.
 	 */
 	public boolean remove(GroceryItem item) {
 		int removeIndex = find(item);
