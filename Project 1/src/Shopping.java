@@ -18,6 +18,9 @@ public class Shopping {
             readInput(line);
             line = sc.nextLine();
         }
+        if (sb.getSize() != 0) {
+            checkoutNonEmptyBag();
+        }
         System.out.println(Constants.THANKS); // line: "Q", quit.
         sc.close();
     }
@@ -57,24 +60,27 @@ public class Shopping {
         if (sb.getSize() == 0) {
             System.out.println(Constants.EMPTY_BAG);
         } else {
-            System.out.println(String.format(Constants.LIST_START, size));
+            System.out.printf((Constants.LIST_START) + "%n", size);
             sb.print();
             System.out.println(Constants.LIST_END);
         }
     }
 
     private void checkout() {
-        int size = sb.getSize();
         if (sb.getSize() == 0) {
             System.out.println(Constants.CHECKOUT_EMPTY_BAG);
         } else {
-            System.out.println(String.format(Constants.CHECKOUT_START, size));
-            sb.print();
-            double sales = sb.salesPrice();
-            double tax = sb.salesTax();
-            System.out.println(String.format(Constants.CHECKOUT_END, sales, tax, sales + tax));
-            sb.initShoppingBag(); // Empty bag after checking out.
+            checkoutNonEmptyBag();
         }
+    }
+
+    private void checkoutNonEmptyBag() {
+        System.out.printf((Constants.CHECKOUT_START) + "%n", sb.getSize());
+        sb.print();
+        double sales = sb.salesPrice();
+        double tax = sb.salesTax();
+        System.out.printf((Constants.CHECKOUT_END) + "%n", sales, tax, sales + tax);
+        sb.initShoppingBag(); // Empty bag after checking out.
     }
 
     /**
@@ -83,7 +89,7 @@ public class Shopping {
      */
     private void add(GroceryItem item) {
         sb.add(item);
-        System.out.println(String.format(Constants.SUCCESS_ADD, item.getName()));
+        System.out.printf((Constants.SUCCESS_ADD) + "%n", item.getName());
     }
 
     /**
@@ -92,7 +98,7 @@ public class Shopping {
      */
     private void remove(GroceryItem item) {
         if (sb.remove(item)){
-            System.out.println(String.format(Constants.SUCCESS_REMOVE, item.getName(), item.getPrice()));
+            System.out.printf((Constants.SUCCESS_REMOVE) + "%n", item.getName(), item.getPrice());
         } else {
             System.out.println(Constants.FAIL_REMOVE);
         }
