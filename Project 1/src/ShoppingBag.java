@@ -5,12 +5,10 @@
 public class ShoppingBag {
 	private GroceryItem[] bag;
 	private int size;
-	private int capacity;
 
 	public ShoppingBag() { // Constructor
 		int INITIAL_CAPACITY = 5;
 		this.bag = new GroceryItem[INITIAL_CAPACITY];
-		this.capacity = bag.length;
 		this.size = 0;
 	}
 
@@ -30,17 +28,16 @@ public class ShoppingBag {
 
 	private void grow() { // Helper method to grow the capacity.
 		int INCREMENT = 5; // "If the bag is full, the bag automatically grows the capacity by 5."
-		GroceryItem[] tempBag = new GroceryItem[capacity + INCREMENT]; // Null is the default value for obj cells.
-		System.arraycopy(bag, 0, tempBag, 0, capacity);
+		GroceryItem[] tempBag = new GroceryItem[bag.length + INCREMENT]; // Null is the default value for obj cells.
+		System.arraycopy(bag, 0, tempBag, 0, bag.length);
 		bag = tempBag;
-		capacity = bag.length;
 	}
 
 	/**
 	 * @param item to be added to ShoppingBag
 	 */
 	public void add(GroceryItem item) {
-		if (size == capacity) {
+		if (size == bag.length) {
 			grow();
 		}
 		bag[size] = item; // Index of `size` is always the first position available to add new item.
