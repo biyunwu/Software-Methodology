@@ -63,7 +63,7 @@ public class ShoppingBag {
 	public double salesPrice() {
 		double totalSale = 0.0;
 		for (int i = 0; i < size; i++) {
-			totalSale += bag[i].getPrice();
+			totalSale += bag[i].getPrice(); //add price of each item in bag
 		}
 		return totalSale;
 	}
