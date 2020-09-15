@@ -64,7 +64,6 @@ public class Shopping {
 		if(bag.getSize() != 0) {
 			checkout(bag);
 		}
-
 		in.close();
 	}
 
