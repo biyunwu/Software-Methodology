@@ -1,5 +1,5 @@
 /**
- * @authors Anthony Triolo and Biyun Wu
+ * @author Anthony Triolo and Biyun Wu
  */
 
 public class RunProject1 {
