@@ -1,7 +1,7 @@
 import java.text.DecimalFormat;
 
 /**
- * @authors Anthony Triolo and Biyun Wu
+ * @author Anthony Triolo and Biyun Wu
  */
 
 public class GroceryItem {
@@ -10,7 +10,7 @@ public class GroceryItem {
 	private boolean taxable;
 
 	/**
-	 * Constructor
+	 * Constructor with parameters.
 	 * @param name of GroceryItem
 	 * @param price of GroceryItem
 	 * @param taxable tax free or not
@@ -22,9 +22,9 @@ public class GroceryItem {
 	}
 
 	/**
-	 * Compare the given item's attributes with `this`.
-	 * @param obj given to be compared with `this`.
-	 * @return true is they have identical name, price and taxable. Otherwise return false.
+	 * Compare the given object's attributes with this GroceryItem object.
+	 * @param obj object given to be compared with this GroceryItem object.
+	 * @return true if they have identical name, price and taxable. Otherwise, return false.
 	 */
 	public boolean equals(Object obj) {
 		return obj instanceof GroceryItem
@@ -33,16 +33,25 @@ public class GroceryItem {
 				&& ((GroceryItem) obj).taxable == this.taxable;
 	}
 
+	/** @return string of detailed info of this object. */
 	public String toString() {
 		DecimalFormat df = new DecimalFormat("0.00");
 		String tax = taxable ? "is taxable" : "tax free";
 		return name + ": $" + df.format(price) + " : " + tax;
 	}
 
+	/**
+	 * Getter method.
+	 * @return price for the grocery item.
+	 */
 	public double getPrice() {
 		return price;
 	}
 
+	/**
+	 * Getter method.
+	 * @return whether the grocery item is taxable.
+	 */
 	public boolean getTaxable() {
 		return taxable;
 	}
