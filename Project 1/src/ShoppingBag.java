@@ -87,14 +87,11 @@ public class ShoppingBag {
 			System.out.println("\u2022 " + bag[i].toString());
 		}
 	}
-<<<<<<< HEAD
-=======
 
 	/**
 	 * Getter
 	 * @return number of items in the bag.
 	 * */
->>>>>>> 3c82031bad8e19d65aa205e356fbf2ae542b13e5
 	public int getSize() {
 		return size;
 	}
