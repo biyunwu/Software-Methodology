@@ -31,7 +31,7 @@ public class Shopping {
 			checkoutNotEmptyBag();
 		}
 
-		System.out.println("Thank you for shopping with us!");
+		System.out.println("Thanks for shopping with us!");
 		in.close();
 	}
 
@@ -104,7 +104,7 @@ public class Shopping {
 	 */
 	private void add(GroceryItem itemObj, String itemName) {
 		bag.add(itemObj);
-		System.out.println(itemName + " added to the bag");
+		System.out.println(itemName + " added to the bag.");
 	}
 
 	/**

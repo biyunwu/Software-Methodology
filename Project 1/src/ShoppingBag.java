@@ -95,4 +95,20 @@ public class ShoppingBag {
 	public int getSize() {
 		return size;
 	}
+	
+	public static void main(String[] args) { //test bed main
+		ShoppingBag testBag = new ShoppingBag(); //test the constructor
+		System.out.println(testBag.bag.length + "," + testBag.size); //print initial capacity of bag and initial number of items in bag
+		testBag.add(new GroceryItem("milk", 2.90, false)); //test add() method
+		testBag.print(); //output contents of testBag to prove add worked
+		System.out.println(testBag.remove(new GroceryItem("milk", 2.90, false))); //test remove() method; true case
+		System.out.println(testBag.remove(new GroceryItem("juice", 2.90, false))); //test remove() method; false case
+		System.out.println("Initial capacity: " + testBag.bag.length); //get capacity of bag before grow() is called
+		testBag.grow(); //test grow() method
+		System.out.println("New capacity: " + testBag.bag.length); //get capacity of bag after grow() is called
+		testBag.add(new GroceryItem("milk", 2.90, false));
+		System.out.println(testBag.salesTax()); //test salesTax() method; case where nothing is taxable
+		testBag.add(new GroceryItem("apple", 3.90, true));
+		System.out.println(testBag.salesTax()); //test salesTax() method; case where there are taxable items
+	}
 }
