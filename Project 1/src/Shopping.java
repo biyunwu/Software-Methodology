@@ -1,9 +1,7 @@
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-/**
- * @author Anthony Triolo and Biyun Wu
- */
+/* @author Anthony Triolo and Biyun Wu */
 
 /**
  * Definition of Shopping. It is built upon ShoopingBag and GroceryItem classes.

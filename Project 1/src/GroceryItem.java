@@ -1,8 +1,6 @@
 import java.text.DecimalFormat;
 
-/**
- * @author Anthony Triolo and Biyun Wu
- */
+/* @author Anthony Triolo and Biyun Wu */
 
 /**
  * Definition of grocery items (such as apple, tomato, etc.).

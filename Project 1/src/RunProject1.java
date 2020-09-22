@@ -1,6 +1,4 @@
-/**
- * @author Anthony Triolo and Biyun Wu
- */
+/* @author Anthony Triolo and Biyun Wu */
 
 /**
  * Entry class which is going to run the project.
