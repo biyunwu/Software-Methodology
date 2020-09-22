@@ -31,7 +31,11 @@ public class Shopping {
 			checkoutNotEmptyBag();
 		}
 
+<<<<<<< HEAD
 		System.out.println("Thank you for shopping with us!");
+=======
+		System.out.println("Thanks for shopping with us!");
+>>>>>>> upstream/master
 		in.close();
 	}
 
@@ -104,7 +108,11 @@ public class Shopping {
 	 */
 	private void add(GroceryItem itemObj, String itemName) {
 		bag.add(itemObj);
+<<<<<<< HEAD
 		System.out.println(itemName + " added to the bag");
+=======
+		System.out.println(itemName + " added to the bag.");
+>>>>>>> upstream/master
 	}
 
 	/**
