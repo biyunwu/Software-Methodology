@@ -5,6 +5,10 @@ import java.util.Scanner;
  * @author Anthony Triolo and Biyun Wu
  */
 
+/**
+ * Definition of Shopping. It is built upon ShoopingBag and GroceryItem classes.
+ * It has 1 member variable which stores the ShoppingBag instance.
+ */
 public class Shopping {
 	ShoppingBag bag;
 
