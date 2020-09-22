@@ -105,7 +105,7 @@ public class Shopping {
 	 */
 	private void add(GroceryItem itemObj, String itemName) {
 		bag.add(itemObj);
-		System.out.println(itemName + " added to the bag");
+		System.out.println(itemName + " added to the bag.");
 	}
 
 	/**
