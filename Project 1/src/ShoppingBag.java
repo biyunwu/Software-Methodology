@@ -37,7 +37,10 @@ public class ShoppingBag {
 		bag = tempBag;
 	}
 
-	/** @param item to be added to ShoppingBag */
+	/** 
+	* Add a specified item to the GroceryItem[] bag
+	* @param item to be added to ShoppingBag 
+	*/
 	public void add(GroceryItem item) {
 		if (size == bag.length) {
 			grow();
@@ -62,7 +65,10 @@ public class ShoppingBag {
 		return true;
 	}
 
-	/** @return the total price of items in the bag without tax. */
+	/**
+	* Calculates the total sales price of all items in the bag
+	* @return the total price of items in the bag without tax. 
+	*/
 	public double salesPrice() {
 		double totalSale = 0.0;
 		for (int i = 0; i < size; i++) {
@@ -71,7 +77,10 @@ public class ShoppingBag {
 		return totalSale;
 	}
 
-	/** @return the total tax of items in the bag. */
+	/**
+	* Calculates the total sales tax of the taxable items in the bag
+	* @return the total tax of items in the bag. 
+	*/
 	public double salesTax() {
 		double TAX_RATE = 0.06625;
 		double totalTax = 0.0;
