@@ -1,11 +1,9 @@
 import java.text.DecimalFormat;
 
-/* @author Anthony Triolo and Biyun Wu */
-
 /**
- * Definition of grocery items (such as apple, tomato, etc.).
- * It has 3 member variables: the grocery item's name, price and info of whether it is taxable.
+ * @author Anthony Triolo and Biyun Wu
  */
+
 public class GroceryItem {
 	private String name;
 	private double price;

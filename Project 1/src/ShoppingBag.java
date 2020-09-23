@@ -1,9 +1,7 @@
-/* @author Anthony Triolo and Biyun Wu */
-
 /**
- * Definition of ShoppingBag.
- * It has 2 member variables: an object array to store grocery items, and the number of the grocery items in the array.
+ * @author Anthony Triolo and Biyun Wu
  */
+
 public class ShoppingBag {
 	private GroceryItem[] bag;
 	private int size;
@@ -99,48 +97,18 @@ public class ShoppingBag {
 	}
 	
 	public static void main(String[] args) { //test bed main
-		int INITIAL_CAPACITY = 5;
-		int INCREMENT = 5;
-		System.out.print("Test 1, check constrictor: ");
 		ShoppingBag testBag = new ShoppingBag(); //test the constructor
-		//print initial capacity of bag and initial number of items in bag
-		System.out.println("\t" + testBag.bag.length + "," + testBag.getSize());
-		System.out.println("\t" + (testBag.bag.length == INITIAL_CAPACITY
-									&& testBag.getSize() == 0
-									? "pass" : "fail"));
-
-		System.out.print("Test 2, add(): ");
-		double price = 2.90;
-		testBag.add(new GroceryItem("milk", price, false)); //test add() method
+		System.out.println(testBag.bag.length + "," + testBag.size); //print initial capacity of bag and initial number of items in bag
+		testBag.add(new GroceryItem("milk", 2.90, false)); //test add() method
 		testBag.print(); //output contents of testBag to prove add worked
-		System.out.println("\t" + (testBag.bag.length == INITIAL_CAPACITY
-									&& testBag.getSize() == 1
-									&& testBag.bag[0].toString().equals("milk: $2.90 : tax free")
-									? "pass" : "fail"));
-
-		System.out.print("Test 3, remove(): ");
-		boolean remove1 = testBag.remove(new GroceryItem("milk", price, false)); // true case
-		boolean remove2 = testBag.remove(new GroceryItem("juice", price, false)); // false case
-		System.out.println(remove1 + ", " + remove2);
-		System.out.println("\t" + (remove1 && !remove2 ? "pass" : "fail"));
-
-		System.out.print("Test 4, grow(): ");
-		int initialCapacity = testBag.bag.length;
-		testBag.grow();
-		int newCapacity = testBag.bag.length;
-		System.out.println("Initial capacity " + initialCapacity + ", " + "New capacity " + newCapacity);
-		System.out.println("\t" + (newCapacity - initialCapacity == INCREMENT ? "pass" : "fail"));
-
-		System.out.print("Test 5, salesTax() without taxable item: ");
-		testBag.add(new GroceryItem("milk", price, false));
+		System.out.println(testBag.remove(new GroceryItem("milk", 2.90, false))); //test remove() method; true case
+		System.out.println(testBag.remove(new GroceryItem("juice", 2.90, false))); //test remove() method; false case
+		System.out.println("Initial capacity: " + testBag.bag.length); //get capacity of bag before grow() is called
+		testBag.grow(); //test grow() method
+		System.out.println("New capacity: " + testBag.bag.length); //get capacity of bag after grow() is called
+		testBag.add(new GroceryItem("milk", 2.90, false));
 		System.out.println(testBag.salesTax()); //test salesTax() method; case where nothing is taxable
-		System.out.println("\t" + (testBag.salesTax() == 0 ? "pass" : "fail"));
-
-		System.out.print("Test 5, salesTax() with taxable item: ");
-		price = 3.90;
-		testBag.add(new GroceryItem("apple", price, true));
+		testBag.add(new GroceryItem("apple", 3.90, true));
 		System.out.println(testBag.salesTax()); //test salesTax() method; case where there are taxable items
-		double TAX = 0.06625;
-		System.out.println("\t" + (testBag.salesTax() == price * TAX ? "pass" : "fail"));
 	}
 }
