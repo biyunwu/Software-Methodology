@@ -1,10 +1,12 @@
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-/**
- * @author Anthony Triolo and Biyun Wu
- */
+/* @author Anthony Triolo and Biyun Wu */
 
+/**
+ * Definition of Shopping. It is built upon ShoopingBag and GroceryItem classes.
+ * It has 1 member variable which stores the ShoppingBag instance.
+ */
 public class Shopping {
 	ShoppingBag bag;
 
@@ -30,7 +32,6 @@ public class Shopping {
 		if(bag.getSize() != 0) {
 			checkoutNotEmptyBag();
 		}
-
 		System.out.println("Thanks for shopping with us!");
 		in.close();
 	}
