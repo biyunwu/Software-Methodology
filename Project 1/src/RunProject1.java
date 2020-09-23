@@ -1,4 +1,5 @@
 /**
+ * Entry class which is going to run the project.
  * @author Anthony Triolo and Biyun Wu
  */
 

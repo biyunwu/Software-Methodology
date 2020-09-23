@@ -2,6 +2,8 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
+ * Definition of Shopping. It is built upon ShoopingBag and GroceryItem classes.
+ * It has 1 member variable which stores the ShoppingBag instance.
  * @author Anthony Triolo and Biyun Wu
  */
 

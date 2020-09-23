@@ -1,4 +1,6 @@
 /**
+ * Definition of ShoppingBag.
+ * It has 2 member variables: an object array to store grocery items, and the number of the grocery items in the array.
  * @author Anthony Triolo and Biyun Wu
  */
 
