@@ -1,7 +1,9 @@
-/**
- * @author Anthony Triolo and Biyun Wu
- */
+/* @author Anthony Triolo and Biyun Wu */
 
+/**
+ * Definition of ShoppingBag.
+ * It has 2 member variables: an object array to store grocery items, and the number of the grocery items in the array.
+ */
 public class ShoppingBag {
 	private GroceryItem[] bag;
 	private int size;
