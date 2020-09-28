@@ -3,9 +3,9 @@
 public class Checking extends Account{
 	private boolean directDeposit;
 
-	public Checking(Profile holder, double balance, Date dateOpen, boolean isDerectDeposit) {
+	public Checking(Profile holder, double balance, Date dateOpen, boolean isDirectDeposit) {
 		super(holder, balance, dateOpen);
-		this.directDeposit = isDerectDeposit;
+		this.directDeposit = isDirectDeposit;
 	}
 
 	@Override

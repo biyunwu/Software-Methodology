@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 /* @author Biyun Wu, Anthony Triolo */
 
@@ -16,36 +17,34 @@ public class TransactionManager {
 					case "WC", "WS", "WM" -> withdraw(inputs);
 					case "PA", "PD", "PN" -> print(inputs);
 					case "Q" -> {
-						System.out.println("Transaction processing completed.");
+						System.out.println("\nTransaction processing completed.");
 						return;
 					}
 					default -> System.out.println("Command '" + inputs[0] + "' not supported!");
 				}
 			}
 		}
+		sc.close();
 	}
 
 	private void openAccount(String[] inputs) {
 		Profile holder = new Profile(inputs[1], inputs[2]);
 		double amount = generateAmount(inputs[3]);
 		Date date = generateDate(inputs[4]);
-		if (amount == -1 || date == null) {
-			printMismatchError();
+		if (amount == -1 || date == null) { // Mismatch amount or date string.
 			return;
 		}
-
 		boolean status;
 		if (inputs[0].equals("OM")) { // Open money market account.
 			status = db.add(new MoneyMarket(holder, amount, date));
 		} else {
 			boolean hasSpecialRate;
-			if (inputs[5].toLowerCase().equals("true") || inputs[5].toLowerCase().equals("false")) {
+			try {
 				hasSpecialRate = Boolean.parseBoolean(inputs[5]);
-			} else {
+			} catch (InputMismatchException e) {
 				printMismatchError();
 				return;
 			}
-
 			status = (inputs[0].equals("OC")) // Open checking account or saving account;
 					? db.add(new Checking(holder, amount, date, hasSpecialRate))
 					: db.add(new Saving(holder, amount, date, hasSpecialRate));
@@ -70,11 +69,9 @@ public class TransactionManager {
 	private void deposit(String[] inputs) {
 		Profile holder = new Profile(inputs[1], inputs[2]);
 		double amount = generateAmount(inputs[3]);
-		if (amount == -1) {
-			printMismatchError();
+		if (amount == -1) { // Mismatch amount string.
 			return;
 		}
-
 		Date randomDate = generateDate("1/1/2000");
 		Account toBeDeposited;
 		switch (inputs[0]) {
@@ -117,10 +114,15 @@ public class TransactionManager {
 	}
 
 	private Date generateDate(String input) {
+		try {
 			String[] dateNums = input.split("/");
-			int year = Integer.parseInt(dateNums[2]);
+			if (dateNums.length < 3) {
+				System.out.println(input + " is not a valid date!");
+				return null;
+			}
 			int month = Integer.parseInt(dateNums[0]);
 			int day = Integer.parseInt(dateNums[1]);
+			int year = Integer.parseInt(dateNums[2]);
 			Date date = new Date(year, month, day);
 			if (!date.isValid()) {
 				System.out.println(input + " is not a valid date!");
@@ -128,13 +130,19 @@ public class TransactionManager {
 			} else {
 				return date;
 			}
+		} catch (InputMismatchException e) { // Which exception to catch???!!!
+			printMismatchError();
+			return null;
+		}
 	}
 
-	// How about amount < 0 ???!!!
+	// Should we take care of amount < 0 ???!!!
 	private double generateAmount(String amount) {
 		try {
-			return Double.parseDouble(amount);
+			double num = Double.parseDouble(amount);
+			return num < 0 ? -1 : num; // Negative amount is not allowed.
 		} catch (NumberFormatException e) {
+			printMismatchError();
 			return -1;
 		}
 	}

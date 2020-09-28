@@ -13,25 +13,6 @@ public class Date implements Comparable<Date> {
 
 	@Override
 	public int compareTo(Date date) {
-//		if (year < date.getYear()) {
-//			return -1;
-//		} else if (year > date.getYear()) {
-//			return 1;
-//		}
-//
-//		if (month < date.getMonth()) {
-//			return -1;
-//		} else if (month > date.getMonth()) {
-//			return 1;
-//		}
-//
-//		if (day < date.getDay()) {
-//			return -1;
-//		} else if (day > date.getDay()) {
-//			return 1;
-//		}
-//
-//		return 0;
 		if (year < date.year) {
 			return -1;
 		} else if (year > date.year) {

@@ -41,6 +41,7 @@ public abstract class Account{
 	}
 
 	public abstract double monthlyInterest();
+
 	public abstract double monthlyFee();
 
 	public abstract boolean equals(Account account); // Added abstract method.
