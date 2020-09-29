@@ -67,6 +67,9 @@ public class AccountDatabase {
 		for (int i = 0; i < size; i++) {
 			if (accounts[i].equals(account)) {
 				if (accounts[i].getBalance() >= amount) {
+					if(accounts[i] instanceof MoneyMarket) {
+						((MoneyMarket) accounts[i]).addWithdrawal();
+					}
 					accounts[i].debit(amount);
 					return 0; // Withdrawal successful.
 				} else {
@@ -86,6 +89,10 @@ public class AccountDatabase {
 	}
 
 	public void printByDateOpen() {
+		if(size == 0) {
+			System.out.println("Database is empty.");
+			return;
+		}
 		sortByDateOpen();
 		System.out.println("\n--Printing statements by date opened--");
 		printDetail();
@@ -93,12 +100,20 @@ public class AccountDatabase {
 	}
 
 	public void printByLastName() {
+		if(size == 0) {
+			System.out.println("Database is empty.");
+			return;
+		}
 		sortByLastName();
 		System.out.println("\n--Printing statements by last name--");
 		printDetail();
 	}
 
 	public void printAccounts() {
+		if(size == 0) {
+			System.out.println("Database is empty.");
+			return;
+		}
 		System.out.println("--Listing accounts in the database--");
 		for (int i = 0; i < size; i++) {
 			System.out.println(accounts[i].toString());
@@ -117,12 +132,12 @@ public class AccountDatabase {
 			} else {
 				accounts[i].debit(Math.abs(difference));
 			}
-			System.out.printf("-interest: $ %.2f\n-fee: $ %.2f\n-new balance: $ %.2f\n",
+			System.out.printf("-interest: $ %,.2f\n-fee: $ %.2f\n-new balance: $ %,.2f\n",
 								interest,
 								fee,
 								accounts[i].getBalance());
 		}
-		System.out.println("--end of printing--");
+		System.out.println("--end of printing--\n");
 	}
 
 	private void binaryInsertionSort(boolean toSortByLastName) {
@@ -159,11 +174,11 @@ public class AccountDatabase {
 	public static void main(String[] args) { // Testbed
 		AccountDatabase db = new AccountDatabase();
 		db.add(new Checking(new Profile("John", "Smith"),1000, new Date(2020, 9,1), true));
-		db.add(new Saving(new Profile("John", "Lee"),1000, new Date(2020, 8,1), true));
+		db.add(new Savings(new Profile("John", "Lee"),1000, new Date(2020, 8,1), true));
 		db.add(new MoneyMarket(new Profile("Jonathan", "Ty"),990, new Date(2020, 7,1)));
 		db.add(new MoneyMarket(new Profile("Jessica", "Hsie"),880, new Date(2020, 6,9)));
-		db.add(new Saving(new Profile("Jerseyca", "Liu"),1000, new Date(2020, 8,1), false));
-		db.add(new Saving(new Profile("Simon", "Robert"),1000, new Date(-189, 1,1), true));
+		db.add(new Savings(new Profile("Jerseyca", "Liu"),1000, new Date(2020, 8,1), false));
+		db.add(new Savings(new Profile("Simon", "Robert"),1000, new Date(-189, 1,1), true));
 		db.printByLastName();
 		db.printByDateOpen();
 	}

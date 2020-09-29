@@ -1,9 +1,9 @@
 /* @author Biyun Wu, Anthony Triolo */
 
-public class Saving extends Account{
+public class Savings extends Account{
 	private boolean isLoyal;
 
-	public Saving(Profile holder, double balance, Date dateOpen, boolean isLoyal) {
+	public Savings(Profile holder, double balance, Date dateOpen, boolean isLoyal) {
 		super(holder, balance, dateOpen);
 		this.isLoyal = isLoyal;
 	}
@@ -26,11 +26,11 @@ public class Saving extends Account{
 
 	@Override
 	public boolean equals(Account account) { // Compare account type and profile.
-		return account instanceof Saving && account.getProfile().equals(this.getProfile());
+		return account instanceof Savings && account.getProfile().equals(this.getProfile());
 	}
 
 	@Override
 	public String toString() {
-		return "*Savings*" + super.toString() + (isLoyal? "*special Saving account*" : "");
+		return "*Savings*" + super.toString() + (isLoyal? "*special Savings account*" : "");
 	}
 }

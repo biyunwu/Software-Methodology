@@ -20,7 +20,7 @@ public abstract class Account{
 
 	@Override
 	public String toString() {
-		return String.format("%s* $%.2f*%s", holder.toString(), balance, dateOpen.toString());
+		return String.format("%s* $%,.2f*%s", holder.toString(), balance, dateOpen.toString());
 	}
 
 	public int compareLastNameTo(Account account) {

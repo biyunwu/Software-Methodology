@@ -7,13 +7,7 @@ public class MoneyMarket extends Account{
 		super(holder, balance, dateOpen);
 		this.withdrawals = 0;
 	}
-
-	@Override
-	public void debit(double amount) {
-		super.debit(amount);
-		withdrawals++;
-	}
-
+	
 	@Override
 	public double monthlyInterest() {
 		double INTEREST_RATE = 0.0065;
@@ -35,6 +29,12 @@ public class MoneyMarket extends Account{
 
 	@Override
 	public String toString() {
-		return "*Money Market*" + super.toString() + "*" + withdrawals + " withdrawal*";
+		return withdrawals == 1 ? "*Money Market*" + super.toString() + "*" + withdrawals + " withdrawal*"
+				: "*Money Market*" + super.toString() + "*" + withdrawals + " withdrawals*";
 	}
+	
+	public void addWithdrawal() {
+		withdrawals++;
+	}
+
 }
