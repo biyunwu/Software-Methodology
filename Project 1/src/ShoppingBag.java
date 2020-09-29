@@ -95,7 +95,7 @@ public class ShoppingBag {
 	/** Helper method to print detailed info of items in the bag. */
 	public void print() { // Print items in bag.
 		for (int i = 0; i < size; i++) {
-			System.out.println("\u2022 " + bag[i].toString());
+			System.out.println("\u00B7 " + bag[i].toString());
 		}
 	}
 
