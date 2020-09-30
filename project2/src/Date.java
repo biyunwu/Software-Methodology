@@ -5,10 +5,11 @@ public class Date implements Comparable<Date> {
 	private int month;
 	private int day;
 
-	public Date(int month, int day, int year) {
-		this.year = year;
-		this.month = month;
-		this.day = day;
+	public Date(String date) {
+		String[] dateValues = date.split("/");
+		this.month = Integer.parseInt(dateValues[0]);
+		this.day = Integer.parseInt(dateValues[1]);
+		this.year = Integer.parseInt(dateValues[2]);
 	}
 
 	@Override
@@ -56,10 +57,10 @@ public class Date implements Comparable<Date> {
 	}
 
 	public static void main (String[] args) { // Testbed
-		Date date = new Date(1600, 2, 29);
-		System.out.println(date.toString() + ": isValid -> " + date.isValid());
-		Date date2 = new Date(1600, 2, 30);
-		System.out.println(date2.toString() + ": isValid -> " + date2.isValid());
-		System.out.println(date2 + " is larger than " + date + ": " + date2.compareTo(date));
+		//Date date = new Date(1600, 2, 29);
+		//System.out.println(date.toString() + ": isValid -> " + date.isValid());
+		//Date date2 = new Date(1600, 2, 30);
+		//System.out.println(date2.toString() + ": isValid -> " + date2.isValid());
+		//System.out.println(date2 + " is larger than " + date + ": " + date2.compareTo(date));
 	}
 }

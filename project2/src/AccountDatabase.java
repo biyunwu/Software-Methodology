@@ -170,7 +170,7 @@ public class AccountDatabase {
 	public boolean isEmpty() {
 		return size == 0;
 	}
-
+/*
 	public static void main(String[] args) { // Testbed
 		AccountDatabase db = new AccountDatabase();
 		db.add(new Checking(new Profile("John", "Smith"),1000, new Date(2020, 9,1), true));
@@ -181,5 +181,5 @@ public class AccountDatabase {
 		db.add(new Savings(new Profile("Simon", "Robert"),1000, new Date(-189, 1,1), true));
 		db.printByLastName();
 		db.printByDateOpen();
-	}
+	}*/
 }
