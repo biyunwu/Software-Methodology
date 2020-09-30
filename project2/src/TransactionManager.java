@@ -11,7 +11,6 @@ public class TransactionManager {
 	private double newBal;
 	private double depositAmount;
 	private double withdrawAmount;
-	private String dateValues[];
 	private Date date;
 	private boolean isLoyal;
 	private boolean isDirect;
@@ -32,14 +31,18 @@ public class TransactionManager {
 						firstName = sc.next();
 						lastName = sc.next();
 						newBal = sc.nextDouble();
-						dateValues = sc.next().split("/");
-						date = new Date(Integer.parseInt(dateValues[0]), Integer.parseInt(dateValues[1]), Integer.parseInt(dateValues[2]));
+						date = new Date(sc.next());
 						if(date.isValid() == false) {
 							System.out.println(date.toString() + " is not a valid date!");
 							sc.nextLine();
 							break;
 						}
 					}catch(InputMismatchException e) {
+						System.out.println("Input data type mismatch.");
+						sc.nextLine();
+						break;
+					}
+					catch(NumberFormatException e) {
 						System.out.println("Input data type mismatch.");
 						sc.nextLine();
 						break;

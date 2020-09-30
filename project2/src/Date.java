@@ -5,10 +5,11 @@ public class Date implements Comparable<Date> {
 	private int month;
 	private int day;
 
-	public Date(int month, int day, int year) {
-		this.year = year;
-		this.month = month;
-		this.day = day;
+	public Date(String date) {
+		String[] dateValues = date.split("/");
+		this.month = Integer.parseInt(dateValues[0]);
+		this.day = Integer.parseInt(dateValues[1]);
+		this.year = Integer.parseInt(dateValues[2]);
 	}
 
 	@Override
