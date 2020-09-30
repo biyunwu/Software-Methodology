@@ -164,7 +164,4 @@ public class AccountDatabase {
 			accounts[lo] = currAccount;
 		}
 	}
-	public boolean isEmpty() {
-		return size == 0;
-	}
 }
