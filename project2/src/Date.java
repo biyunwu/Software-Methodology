@@ -41,26 +41,21 @@ public class Date implements Comparable<Date> {
 	}
 
 	public boolean isValid() {
-		// What is the valid range for year? Is B.C.E acceptable?
 		// Case 1: leap year, Feb.29th. case 2: ordinary year, Feb.28th
-		boolean isLeapYear = (year % 100 == 0) ? (year % 400 == 0) : (year % 4 == 0);
-		boolean isDayLowerBounded = day >= 1; // Check lower bound.
+		boolean isLeapYear = (year % Num.CENTURY == 0)
+								? (year % Num.FOUR_CENTURY == 0)
+								: (year % Num.LEAP_YEAR_DENOMINATOR == 0);
+		boolean isDayLowerBounded = day >= Num.FIRST_DAY; // Check lower bound.
 		boolean isDayUpperBounded;
-		// !!! Need to declare constants first !!!
 		switch(month) { // Check upper bound.
-			case 1,3,5,7,8,10,12 -> isDayUpperBounded = day <= 31;
-			case 4,6,9,11 -> isDayUpperBounded = day <= 30;
-			case 2 -> isDayUpperBounded = (isLeapYear ? day <= 29 : day <= 28);
+			case Num.JAN,Num.MAR,Num.MAY,Num.JUL,Num.AUG,Num.OCT,Num.DEC ->
+					isDayUpperBounded = day <= Num.DAYS_ODD; // 31
+			case Num.APR,Num.JUN,Num.SEP,Num.NOV ->
+					isDayUpperBounded = day <= Num.DAYS_EVEN; // 30
+			case Num.FEB ->
+					isDayUpperBounded = isLeapYear ? day <= (Num.DAYS_FEB_LEAP) : (day <= Num.DAYS_FEB); // 29 or 28.
 			default -> isDayUpperBounded = false;
 		}
 		return isDayLowerBounded && isDayUpperBounded;
-	}
-
-	public static void main (String[] args) { // Testbed
-		//Date date = new Date(1600, 2, 29);
-		//System.out.println(date.toString() + ": isValid -> " + date.isValid());
-		//Date date2 = new Date(1600, 2, 30);
-		//System.out.println(date2.toString() + ": isValid -> " + date2.isValid());
-		//System.out.println(date2 + " is larger than " + date + ": " + date2.compareTo(date));
 	}
 }

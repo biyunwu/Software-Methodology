@@ -64,20 +64,18 @@ public class AccountDatabase {
 	}
 
 	public int withdrawal(Account account, double amount) {
-		for (int i = 0; i < size; i++) {
-			if (accounts[i].equals(account)) {
-				if (accounts[i].getBalance() >= amount) {
-					if(accounts[i] instanceof MoneyMarket) {
-						((MoneyMarket) accounts[i]).addWithdrawal();
-					}
-					accounts[i].debit(amount);
-					return 0; // Withdrawal successful.
-				} else {
-					return 1; // Insufficient fund.
-				}
-			}
+		int i = find(account);
+		if (i == -1) {
+			return -1; // Account does not exist.
 		}
-		return -1; // Account does not exist.
+		if (accounts[i].getBalance() >= amount) {
+			if(accounts[i] instanceof MoneyMarket) {
+				((MoneyMarket) accounts[i]).addWithdrawal();
+			}
+			accounts[i].debit(amount);
+			return 0; // Withdrawal successful.
+		}
+		return 1; // Insufficient fund.
 	}
 
 	private void sortByDateOpen() {
@@ -166,20 +164,7 @@ public class AccountDatabase {
 			accounts[lo] = currAccount;
 		}
 	}
-
 	public boolean isEmpty() {
 		return size == 0;
 	}
-/*
-	public static void main(String[] args) { // Testbed
-		AccountDatabase db = new AccountDatabase();
-		db.add(new Checking(new Profile("John", "Smith"),1000, new Date(2020, 9,1), true));
-		db.add(new Savings(new Profile("John", "Lee"),1000, new Date(2020, 8,1), true));
-		db.add(new MoneyMarket(new Profile("Jonathan", "Ty"),990, new Date(2020, 7,1)));
-		db.add(new MoneyMarket(new Profile("Jessica", "Hsie"),880, new Date(2020, 6,9)));
-		db.add(new Savings(new Profile("Jerseyca", "Liu"),1000, new Date(2020, 8,1), false));
-		db.add(new Savings(new Profile("Simon", "Robert"),1000, new Date(-189, 1,1), true));
-		db.printByLastName();
-		db.printByDateOpen();
-	}*/
 }
