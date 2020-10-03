@@ -1,8 +1,22 @@
-/* @author Biyun Wu, Anthony Triolo */
+/**
+ * Definition of Checking which extends Account. It has 1 member variable:
+ * directDeposit which is a boolean that tells if an account has direct deposit
+ * enabled
+ * 
+ * @author Biyun Wu, Anthony Triolo
+ */
 
-public class Checking extends Account{
+public class Checking extends Account {
 	private boolean directDeposit;
 
+	/**
+	 * Constructor with parameters
+	 * 
+	 * @param holder:          The profile of the account holder
+	 * @param balance:         The current balance of the account
+	 * @param dateOpen:        The date the account was opened
+	 * @param isDirectDeposit: Whether or not the account has direct deposit
+	 */
 	public Checking(Profile holder, double balance, Date dateOpen, boolean isDirectDeposit) {
 		super(holder, balance, dateOpen);
 		this.directDeposit = isDirectDeposit;
@@ -23,12 +37,12 @@ public class Checking extends Account{
 	}
 
 	@Override
-	public boolean equals(Account account) { // Compare account type and profile.
+	public boolean equals(Account account) {
 		return account instanceof Checking && account.getProfile().equals(this.getProfile());
 	}
 
 	@Override
 	public String toString() {
-		return "*Checking*" + super.toString() + (directDeposit? "*direct deposit account*" : "");
+		return "*Checking*" + super.toString() + (directDeposit ? "*direct deposit account*" : "");
 	}
 }
