@@ -1,3 +1,8 @@
+/**
+ * Definition of Num. This class defines constants used within the program
+ * 
+ * @author Biyun Wu, Anthony Triolo
+ */
 public class Num {
 	public static final int JAN = 1;
 	public static final int FEB = 2;

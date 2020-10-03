@@ -1,4 +1,7 @@
-/* @author Biyun Wu, Anthony Triolo */
+/**
+ * Entry class which is going to run the project.
+ * @author Biyun Wu, Anthony Triolo 
+ */
 
 public class RunProject2 {
 

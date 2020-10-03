@@ -1,24 +1,41 @@
-/* @author Biyun Wu, Anthony Triolo */
+/**
+ * Definition of Profile. It has 2 member variables: the first name, and the
+ * last name of an account holder
+ * 
+ * @author Biyun Wu, Anthony Triolo
+ */
 
 public class Profile {
 	private String fname;
 	private String lname;
 
+	/**
+	 * Constructor with parameters
+	 * 
+	 * @param fname: The first name associated with the profile
+	 * @param lname: The last name associated with the profile
+	 */
 	public Profile(String fname, String lname) {
 		this.fname = fname;
 		this.lname = lname;
 	}
 
+	/**
+	 * Check if the calling Profile has the same first and last name as the
+	 * specified profile
+	 * 
+	 * @param profile: The profile we want to compare to
+	 * @return true if the profiles are the same, false otherwise
+	 */
 	public boolean equals(Profile profile) {
-		return profile != null
-				&& profile.fname.equals(this.fname)
-				&& profile.lname.equals(this.lname);
+		return profile != null && profile.fname.equals(this.fname) && profile.lname.equals(this.lname);
 	}
 
 	/**
 	 * Compare this Profile(name1) with given Profile(name2) based on last name.
+	 * 
 	 * @param p Profile with name2
-	 * @return If name1 < name2, return -1; if name1 == name2, return 0; otherwise, return 1.
+	 * @return -1 if name1 < name2, 0 if name1 == name2, otherwise, return 1.
 	 */
 	public int compareTo(Profile p) {
 		String lastName1 = lname.toLowerCase();

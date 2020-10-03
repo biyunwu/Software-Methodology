@@ -1,8 +1,22 @@
-/* @author Biyun Wu, Anthony Triolo */
+/**
+ * Definition of Savings which extends Account. It has 1 member variable:
+ * isLoyal which is a boolean that tells if an account is owned by a loyal
+ * customer
+ * 
+ * @author Biyun Wu, Anthony Triolo
+ */
 
-public class Savings extends Account{
+public class Savings extends Account {
 	private boolean isLoyal;
 
+	/**
+	 * Constructor with parameters
+	 * 
+	 * @param holder:   The profile of the account holder
+	 * @param balance:  The current balance of the account
+	 * @param dateOpen: The date the account was opened
+	 * @param isLoyal:  Whether or not the account is owned by a loyal customer
+	 */
 	public Savings(Profile holder, double balance, Date dateOpen, boolean isLoyal) {
 		super(holder, balance, dateOpen);
 		this.isLoyal = isLoyal;
@@ -31,6 +45,6 @@ public class Savings extends Account{
 
 	@Override
 	public String toString() {
-		return "*Savings*" + super.toString() + (isLoyal? "*special Savings account*" : "");
+		return "*Savings*" + super.toString() + (isLoyal ? "*special Savings account*" : "");
 	}
 }
