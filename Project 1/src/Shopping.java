@@ -4,6 +4,7 @@ import java.util.Scanner;
 /**
  * Definition of Shopping. It is built upon ShoopingBag and GroceryItem classes.
  * It has 1 member variable which stores the ShoppingBag instance.
+ * 
  * @author Anthony Triolo and Biyun Wu
  */
 
@@ -16,8 +17,8 @@ public class Shopping {
 	}
 
 	/**
-	 * Scan input line by line and pass input to doOperation()
-	 * unless the input is "Q" which means quit the program.
+	 * Scan input line by line and pass input to doOperation() unless the input is
+	 * "Q" which means quit the program.
 	 */
 	public void run() {
 		System.out.println("Let's start shopping!");
@@ -29,7 +30,7 @@ public class Shopping {
 			input = in.nextLine();
 		}
 
-		if(bag.getSize() != 0) {
+		if (bag.getSize() != 0) {
 			checkoutNotEmptyBag();
 		}
 
@@ -38,34 +39,36 @@ public class Shopping {
 	}
 
 	/**
-	 * Do corresponding operation on ShoppingBag based on given array if it is valid.
+	 * Do corresponding operation on ShoppingBag based on given array if it is
+	 * valid.
+	 * 
 	 * @param separatedInput array stores the inputs.
 	 */
 	private void doOperation(String[] separatedInput) {
 		switch (separatedInput.length) {
-			case 1 -> {
-				switch (separatedInput[0]) {
-					case "P" -> display();
-					case "C" -> checkout();
-					default -> System.out.println("Invalid command!");
-				}
-			}
-			case 4 -> {
-				String itemName = separatedInput[1];
-				double itemPrice = Double.parseDouble(separatedInput[2]);
-				boolean itemTaxable = Boolean.parseBoolean(separatedInput[3]);
-				GroceryItem itemObj = new GroceryItem(itemName, itemPrice, itemTaxable);
-				switch (separatedInput[0]) {
-					case "A" -> add(itemObj, itemName);
-					case "R" -> remove(itemObj, itemName, itemPrice);
-					default -> System.out.println("Invalid command!");
-				}
-			}
+		case 1 -> {
+			switch (separatedInput[0]) {
+			case "P" -> display();
+			case "C" -> checkout();
 			default -> System.out.println("Invalid command!");
+			}
+		}
+		case 4 -> {
+			String itemName = separatedInput[1];
+			double itemPrice = Double.parseDouble(separatedInput[2]);
+			boolean itemTaxable = Boolean.parseBoolean(separatedInput[3]);
+			GroceryItem itemObj = new GroceryItem(itemName, itemPrice, itemTaxable);
+			switch (separatedInput[0]) {
+			case "A" -> add(itemObj, itemName);
+			case "R" -> remove(itemObj, itemName, itemPrice);
+			default -> System.out.println("Invalid command!");
+			}
+		}
+		default -> System.out.println("Invalid command!");
 		}
 	}
 
-	/** Helper method to display items in the bag.*/
+	/** Helper method to display items in the bag. */
 	private void display() {
 		if (bag.getSize() == 0) {
 			System.out.println("The bag is empty!");
@@ -76,7 +79,7 @@ public class Shopping {
 		}
 	}
 
-	/** Helper method to check out the shopping bag no matter it is empty or not.*/
+	/** Helper method to check out the shopping bag no matter it is empty or not. */
 	private void checkout() {
 		if (bag.getSize() == 0) {
 			System.out.println("Unable to check out, the bag is empty!");
@@ -101,7 +104,8 @@ public class Shopping {
 
 	/**
 	 * Helper method to add GroceryItem to the bag.
-	 * @param itemObj GroceryItem to be added to the bag.
+	 * 
+	 * @param itemObj  GroceryItem to be added to the bag.
 	 * @param itemName name of GroceryItem.
 	 */
 	private void add(GroceryItem itemObj, String itemName) {
@@ -111,8 +115,9 @@ public class Shopping {
 
 	/**
 	 * Helper method to remove a specific GroceryItem in the bag.
-	 * @param itemObj GroceryItem to be removed from the bag.
-	 * @param itemName name of the GroceryItem to be removed.
+	 * 
+	 * @param itemObj   GroceryItem to be removed from the bag.
+	 * @param itemName  name of the GroceryItem to be removed.
 	 * @param itemPrice price of the GroceryItem to be removed.
 	 */
 	private void remove(GroceryItem itemObj, String itemName, double itemPrice) {
