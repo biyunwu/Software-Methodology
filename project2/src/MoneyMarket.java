@@ -36,5 +36,4 @@ public class MoneyMarket extends Account{
 	public void addWithdrawal() {
 		withdrawals++;
 	}
-
 }

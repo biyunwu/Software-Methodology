@@ -43,8 +43,8 @@ public class Date implements Comparable<Date> {
 	public boolean isValid() {
 		// Case 1: leap year, Feb.29th. case 2: ordinary year, Feb.28th
 		boolean isLeapYear = (year % Num.CENTURY == 0)
-								? (year % Num.FOUR_CENTURY == 0)
-								: (year % Num.LEAP_YEAR_DENOMINATOR == 0);
+								? (year % Num.QUADRICENTENNIAL == 0)
+								: (year % Num.QUADRENNIUM == 0);
 		boolean isDayLowerBounded = day >= Num.FIRST_DAY; // Check lower bound.
 		boolean isDayUpperBounded;
 		switch(month) { // Check upper bound.
