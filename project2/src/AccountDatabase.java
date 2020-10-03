@@ -190,29 +190,26 @@ public class AccountDatabase {
 	 * @param toSortByLastName: Whether or not to sort by last name
 	 */
 	private void binaryInsertionSort(boolean toSortByLastName) {
-		int n = size;
-		for (int i = 1; i < n; i++) {
-			// binary search to determine index j at which to insert accounts[i]
+		for (int i = 1; i < size; i++) {
 			Account currAccount = accounts[i];
-			int lo = 0, hi = i;
-			while (lo < hi) {
-				int mid = lo + (hi - lo) / 2;
-				int comparator = toSortByLastName ? currAccount.compareLastNameTo(accounts[mid])
-						: currAccount.compareDateTo(accounts[mid]);
+			int low = 0, high = i;
+			while (low < high) {
+				int mid = low + (high - low) / 2;
+				int comparator = toSortByLastName
+									? currAccount.compareLastNameTo(accounts[mid])
+									: currAccount.compareDateTo(accounts[mid]);
 				if (comparator < 0) {
-					hi = mid;
+					high = mid;
 				} else {
-					lo = mid + 1;
+					low = mid + 1;
 				}
 			}
-
 			// insertion sort with "half exchanges": insert a[i] at index j and shift a[j],
 			// ..., a[i-1] to right.
-			if (i >= lo) {
-				System.arraycopy(accounts, lo, accounts, lo + 1, i - lo);
+			if (i >= low) {
+				System.arraycopy(accounts, low, accounts, low + 1, i - low);
 			}
-
-			accounts[lo] = currAccount;
+			accounts[low] = currAccount;
 		}
 	}
 }

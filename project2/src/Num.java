@@ -22,6 +22,6 @@ public class Num {
 	public static final int DAYS_FEB = 28;
 	public static final int DAYS_FEB_LEAP = 29;
 	public static final int CENTURY = 100;
-	public static final int FOUR_CENTURY = 400;
-	public static final int LEAP_YEAR_DENOMINATOR = 4;
+	public static final int QUADRICENTENNIAL = 400;
+	public static final int QUADRENNIUM = 4;
 }
