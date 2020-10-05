@@ -110,9 +110,6 @@ public class AccountDatabase {
 			return -1;
 		}
 		if (accounts[i].getBalance() >= amount) { // Check if account has enough money to withdraw
-			if (accounts[i] instanceof MoneyMarket) {
-				((MoneyMarket) accounts[i]).addWithdrawal();
-			}
 			accounts[i].debit(amount);
 			return 0;
 		}
@@ -172,11 +169,7 @@ public class AccountDatabase {
 			double interest = accounts[i].monthlyInterest();
 			double fee = accounts[i].monthlyFee();
 			double difference = interest - fee;
-			if (difference >= 0) {
-				accounts[i].credit(difference);
-			} else {
-				accounts[i].debit(Math.abs(difference));
-			}
+			accounts[i].credit(difference);
 			System.out.printf("-interest: $ %,.2f\n-fee: $ %.2f\n-new balance: $ %,.2f\n", interest, fee,
 					accounts[i].getBalance());
 		}
@@ -186,7 +179,7 @@ public class AccountDatabase {
 	/**
 	 * Helper recursive mergesort method.
 	 *
-	 * @param toSortByLastName 	if false, sort accounts by open date; otherwise, sort by last name.
+	 * @param toSortByLastName 	Whether or not to sort by last name
 	 * @param low 	first index of the array to be sorted
 	 * @param high 	(last index of the array to be sorted) + 1
 	 */
@@ -203,7 +196,7 @@ public class AccountDatabase {
 	/**
 	 * Helper method to merge two sub-arrays for mergesort
 	 *
-	 * @param toSortByLastName 	if false, sort accounts by open date; otherwise, sort by last name.
+	 * @param toSortByLastName 	Whether or not to sort by last name
 	 * @param low	first index of the first sub-array
 	 * @param mid	first index of the second sub-array
 	 * @param high 	(last index of the second sub-array) + 1
@@ -227,6 +220,6 @@ public class AccountDatabase {
 				temp[k] = accounts[i++];
 			}
 		}
-		System.arraycopy(temp, 0, accounts, low, n); // Copy sorted sub-array back to accounts.
+		System.arraycopy(temp, 0, accounts, low, n); // Copied sorted sub-array back to accounts.
 	}
 }
