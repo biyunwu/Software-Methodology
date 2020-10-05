@@ -110,9 +110,6 @@ public class AccountDatabase {
 			return -1;
 		}
 		if (accounts[i].getBalance() >= amount) { // Check if account has enough money to withdraw
-			if (accounts[i] instanceof MoneyMarket) {
-				((MoneyMarket) accounts[i]).addWithdrawal();
-			}
 			accounts[i].debit(amount);
 			return 0;
 		}
@@ -121,12 +118,12 @@ public class AccountDatabase {
 
 	/** Helper method to sort database by the date an account was opened */
 	private void sortByDateOpen() {
-		binaryInsertionSort(false);
+		mergeSort(false, 0, size);
 	}
 
 	/** Helper method to sort database by the last name of the account owner */
 	private void sortByLastName() {
-		binaryInsertionSort(true);
+		mergeSort(true, 0, size);
 	}
 
 	/** Helper method to print accounts in order of date opened */
@@ -172,11 +169,7 @@ public class AccountDatabase {
 			double interest = accounts[i].monthlyInterest();
 			double fee = accounts[i].monthlyFee();
 			double difference = interest - fee;
-			if (difference >= 0) {
-				accounts[i].credit(difference);
-			} else {
-				accounts[i].debit(Math.abs(difference));
-			}
+			accounts[i].credit(difference);
 			System.out.printf("-interest: $ %,.2f\n-fee: $ %.2f\n-new balance: $ %,.2f\n", interest, fee,
 					accounts[i].getBalance());
 		}
@@ -184,32 +177,49 @@ public class AccountDatabase {
 	}
 
 	/**
-	 * Helper method to do binary insertion sort based on either last name or date
-	 * created
-	 * 
-	 * @param toSortByLastName: Whether or not to sort by last name
+	 * Helper recursive mergesort method.
+	 *
+	 * @param toSortByLastName 	Whether or not to sort by last name
+	 * @param low 	first index of the array to be sorted
+	 * @param high 	(last index of the array to be sorted) + 1
 	 */
-	private void binaryInsertionSort(boolean toSortByLastName) {
-		for (int i = 1; i < size; i++) {
-			Account currAccount = accounts[i];
-			int low = 0, high = i;
-			while (low < high) {
-				int mid = low + (high - low) / 2;
-				int comparator = toSortByLastName
-									? currAccount.compareLastNameTo(accounts[mid])
-									: currAccount.compareDateTo(accounts[mid]);
-				if (comparator < 0) {
-					high = mid;
-				} else {
-					low = mid + 1;
-				}
-			}
-			// insertion sort with "half exchanges": insert a[i] at index j and shift a[j],
-			// ..., a[i-1] to right.
-			if (i >= low) {
-				System.arraycopy(accounts, low, accounts, low + 1, i - low);
-			}
-			accounts[low] = currAccount;
+	private void mergeSort(boolean toSortByLastName, int low, int high) { // Sort accounts[low, high)
+		if (high - low <= 1) { // Base case.
+			return;
 		}
+		int mid = low + (high - low) / 2;
+		mergeSort(toSortByLastName, low, mid);
+		mergeSort(toSortByLastName, mid, high);
+		mergeSubArrays(toSortByLastName, low, mid, high);
+	}
+
+	/**
+	 * Helper method to merge two sub-arrays for mergesort
+	 *
+	 * @param toSortByLastName 	Whether or not to sort by last name
+	 * @param low	first index of the first sub-array
+	 * @param mid	first index of the second sub-array
+	 * @param high 	(last index of the second sub-array) + 1
+	 */
+	private void mergeSubArrays(boolean toSortByLastName, int low, int mid, int high) {
+		// Merge accounts[lo, mid) with accounts[mid, hi) into temp[0, hi-lo)
+		int n = high - low;
+		Account[] temp = new Account[n];
+		int i = low;
+		int j = mid;
+		for (int k = 0; k < n; k++) {
+			if (i == mid) {
+				temp[k] = accounts[j++];
+			} else if (j == high) {
+				temp[k] = accounts[i++];
+			} else if ((toSortByLastName
+						? accounts[j].compareLastNameTo(accounts[i])
+						: accounts[j].compareDateTo(accounts[i])) < 0) {
+				temp[k] = accounts[j++];
+			} else {
+				temp[k] = accounts[i++];
+			}
+		}
+		System.arraycopy(temp, 0, accounts, low, n); // Copied sorted sub-array back to accounts.
 	}
 }
