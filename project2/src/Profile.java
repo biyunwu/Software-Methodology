@@ -34,8 +34,8 @@ public class Profile {
 	/**
 	 * Compare this Profile(name1) with given Profile(name2) based on last name.
 	 * 
-	 * @param p Profile with name2
-	 * @return -1 if name1 < name2, 0 if name1 == name2, otherwise, return 1.
+	 * @param p: Profile with name2
+	 * @return -1 if name1 is less than name2, 0 if name1 equals name2, otherwise, return 1.
 	 */
 	public int compareTo(Profile p) {
 		String lastName1 = lname.toLowerCase();

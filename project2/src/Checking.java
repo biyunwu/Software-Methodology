@@ -22,6 +22,11 @@ public class Checking extends Account {
 		this.directDeposit = isDirectDeposit;
 	}
 
+	/**
+	 * Calculates the monthly interest on a Checking account
+	 * 
+	 * @return The amount of monthly interest
+	 */
 	@Override
 	public double monthlyInterest() {
 		double INTEREST_RATE = 0.0005;
@@ -29,6 +34,11 @@ public class Checking extends Account {
 		return this.getBalance() * INTEREST_RATE / MONTHS;
 	}
 
+	/**
+	 * Calculates the monthly fee for an account
+	 * 
+	 * @return The monthly fee, 0 if no fee
+	 */
 	@Override
 	public double monthlyFee() {
 		double MIN_BALANCE_FOR_NO_FEE = 1500;
@@ -36,11 +46,22 @@ public class Checking extends Account {
 		return (directDeposit || this.getBalance() >= MIN_BALANCE_FOR_NO_FEE) ? 0 : MONTHLY_FEE;
 	}
 
+	/**
+	 * Check if two accounts are the same
+	 * 
+	 * @param account: The account to compare to
+	 * @return true if the two accounts are equal, false if not
+	 */
 	@Override
 	public boolean equals(Account account) {
 		return account instanceof Checking && account.getProfile().equals(this.getProfile());
 	}
 
+	/**
+	 * Format the account stats as a string
+	 * 
+	 * @return The account stats as a formatted string
+	 */
 	@Override
 	public String toString() {
 		return "*Checking*" + super.toString() + (directDeposit ? "*direct deposit account*" : "");

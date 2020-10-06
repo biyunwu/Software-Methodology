@@ -1,6 +1,6 @@
 /**
- * Definition of Date which implements Comparable. It has 3 member variables: the
- * year, the day, and the month an account was created
+ * Definition of Date which implements Comparable. It has 3 member variables:
+ * the year, the day, and the month an account was created
  * 
  * @author Biyun Wu, Anthony Triolo
  */
@@ -9,9 +9,10 @@ public class Date implements Comparable<Date> {
 	private int year;
 	private int month;
 	private int day;
-	
+
 	/**
-	 * Constructor with parameters 
+	 * Constructor with parameters
+	 * 
 	 * @param date: The input date given for a created account
 	 */
 	public Date(String date) {
@@ -21,6 +22,13 @@ public class Date implements Comparable<Date> {
 		this.year = Integer.parseInt(dateValues[2]);
 	}
 
+	/**
+	 * Compares two dates to each other
+	 * 
+	 * @param date: The date the caller is be compared to
+	 * @return 1 if the year, month, or day of the caller date are greater than the
+	 *         param's, -1 otherwise
+	 */
 	@Override
 	public int compareTo(Date date) {
 		if (year < date.year) {
@@ -44,6 +52,11 @@ public class Date implements Comparable<Date> {
 		return 0;
 	}
 
+	/**
+	 * Converts a date to a string
+	 * 
+	 * @return The date as a formatted string
+	 */
 	@Override
 	public String toString() {
 		return String.format("%d/%d/%d", month, day, year);
@@ -51,13 +64,13 @@ public class Date implements Comparable<Date> {
 
 	/**
 	 * Checks if a specified date is valid
+	 * 
 	 * @return true if the date is valid, false if the date is invalid
 	 */
 	public boolean isValid() {
 		// Case 1: leap year, Feb.29th. case 2: ordinary year, Feb.28th
-		boolean isLeapYear = (year % Num.CENTURY == 0)
-								? (year % Num.QUADRICENTENNIAL == 0)
-								: (year % Num.QUADRENNIUM == 0);
+		boolean isLeapYear = (year % Num.CENTURY == 0) ? (year % Num.QUADRICENTENNIAL == 0)
+				: (year % Num.QUADRENNIUM == 0);
 		boolean isDayLowerBounded = day >= Num.FIRST_DAY; // Check lower bound.
 		boolean isDayUpperBounded;
 		switch (month) { // Check upper bound.
