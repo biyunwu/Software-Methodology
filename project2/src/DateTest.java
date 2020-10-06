@@ -42,6 +42,11 @@ class DateTest {
 		assertTrue(date4.isValid()); // test valid leap year
 		Date date5 = new Date("2/29/2019");
 		assertFalse(date5.isValid()); // test invalid leap year
+		Date date6 = new Date("2/29/2000");
+		assertTrue(date6.isValid()); // test valid leap year divisible by 100 and 400
+		Date date7 = new Date("2/29/1800");
+		assertFalse(date7.isValid()); //test invalid leap year divisible by 100 but not 400
+		
 	}
 
 }
