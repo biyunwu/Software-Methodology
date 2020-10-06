@@ -22,6 +22,11 @@ public class Savings extends Account {
 		this.isLoyal = isLoyal;
 	}
 
+	/**
+	 * Calculates the monthly interest on a savings account
+	 * 
+	 * @return The monthly interest amount
+	 */
 	@Override
 	public double monthlyInterest() {
 		double LOYAL_RATE = 0.0035;
@@ -31,6 +36,11 @@ public class Savings extends Account {
 		return this.getBalance() * interestRate / MONTHS;
 	}
 
+	/**
+	 * Calculates the monthly fee on a Savings account
+	 * 
+	 * @return The monthly fee, 0 if no fee
+	 */
 	@Override
 	public double monthlyFee() {
 		double MIN_BALANCE_FOR_NO_FEE = 300;
@@ -38,11 +48,22 @@ public class Savings extends Account {
 		return (this.getBalance() >= MIN_BALANCE_FOR_NO_FEE) ? 0 : MONTHLY_FEE;
 	}
 
+	/**
+	 * Check if two accounts are the same
+	 * 
+	 * @param account: The account to compare to
+	 * @return true if the two accounts are equal, false if not
+	 */
 	@Override
-	public boolean equals(Account account) { // Compare account type and profile.
+	public boolean equals(Account account) {
 		return account instanceof Savings && account.getProfile().equals(this.getProfile());
 	}
 
+	/**
+	 * Format the account stats as a string
+	 * 
+	 * @return The account stats as a formatted string
+	 */
 	@Override
 	public String toString() {
 		return "*Savings*" + super.toString() + (isLoyal ? "*special Savings account*" : "");
