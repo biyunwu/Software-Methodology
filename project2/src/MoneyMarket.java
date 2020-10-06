@@ -20,6 +20,22 @@ public class MoneyMarket extends Account {
 		this.withdrawals = 0;
 	}
 
+	/**
+	 * Takes money out of an account
+	 * 
+	 * @param amount: The amount of money to take out
+	 */
+	@Override
+	public void debit(double amount) {
+		super.debit(amount);
+		this.withdrawals++;
+	}
+
+	/**
+	 * Calculates the monthly interest on a MoneyMarket account
+	 * 
+	 * @return The amount of monthly interest
+	 */
 	@Override
 	public void debit(double amount) {
 		super.debit(amount);
@@ -33,6 +49,11 @@ public class MoneyMarket extends Account {
 		return this.getBalance() * INTEREST_RATE / MONTHS;
 	}
 
+	/**
+	 * Calculates the monthly fee for an account
+	 * 
+	 * @return The monthly fee, 0 if no fee
+	 */
 	@Override
 	public double monthlyFee() {
 		double MIN_BALANCE_FOR_NO_FEE = 2500;
@@ -40,11 +61,22 @@ public class MoneyMarket extends Account {
 		return (withdrawals <= 6 && this.getBalance() >= MIN_BALANCE_FOR_NO_FEE) ? 0 : MONTHLY_FEE;
 	}
 
+	/**
+	 * Check if two accounts are the same
+	 * 
+	 * @param account: The account to compare to
+	 * @return true if the two accounts are equal, false if not
+	 */
 	@Override
-	public boolean equals(Account account) { // Compare account type and profile.
+	public boolean equals(Account account) {
 		return account instanceof MoneyMarket && account.getProfile().equals(this.getProfile());
 	}
 
+	/**
+	 * Format the account stats as a string
+	 * 
+	 * @return The account stats as a formatted string
+	 */
 	@Override
 	public String toString() {
 		return withdrawals == 1 ? "*Money Market*" + super.toString() + "*" + withdrawals + " withdrawal*"

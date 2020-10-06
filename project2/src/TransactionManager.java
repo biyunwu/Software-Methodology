@@ -21,7 +21,7 @@ public class TransactionManager {
 	private Date date;
 	private boolean isLoyal;
 	private boolean isDirect;
-	DecimalFormat df = new DecimalFormat("0.00");
+	private final DecimalFormat df = new DecimalFormat("0.00");
 
 	/**
 	 * Scan input token by token and set the required variables for the action Calls
@@ -97,6 +97,7 @@ public class TransactionManager {
 				case "PA", "PD", "PN" -> print(); // print commands
 				case "Q" -> {
 					System.out.println("Transaction processing completed.");
+					sc.close();
 					return;
 				}
 				default -> { // any other commands
