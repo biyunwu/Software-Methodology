@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <TabPane prefHeight="500.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+          <Tab fx:id="tab1" text="Open/Close Account">
+              <fx:include fx:id="ocTab" source="tab1.fxml" />
+          </Tab>
+          <Tab fx:id="tab2" text="Deposit/Withdraw">
+              <fx:include fx:id="dwTab" source="tab2.fxml" />
+          </Tab>
+          <Tab fx:id="tab3" text="Account Database">
+<!--              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="600.0" />-->
+              <fx:include fx:id="dbTab" source="tab3.fxml" />
+          </Tab>
+      </TabPane>
+   </top>
+</BorderPane>
