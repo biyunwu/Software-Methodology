@@ -13,16 +13,16 @@ public class Date implements Comparable<Date> {
 	private int day;
 
 	/**
-	 * Constructor with parameters
+	 * Constructor with one parameter
 	 * 
 	 * @param date: The input date given for a created account
 	 */
-//	public Date(String date) {
-//		String[] dateValues = date.split("/");
-//		this.month = Integer.parseInt(dateValues[0]);
-//		this.day = Integer.parseInt(dateValues[1]);
-//		this.year = Integer.parseInt(dateValues[2]);
-//	}
+	public Date(String date) {
+		String[] dateValues = date.split("/");
+		this.month = Integer.parseInt(dateValues[0]);
+		this.day = Integer.parseInt(dateValues[1]);
+		this.year = Integer.parseInt(dateValues[2]);
+	}
 
 	/**
 	 * Constructor with parameters

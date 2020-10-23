@@ -1,12 +1,9 @@
 package Application.Controller;
 
 import Application.Model.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-
-import java.util.InputMismatchException;
 
 public class OpenAndClose {
 	private final AccountDatabase db;
@@ -30,31 +27,31 @@ public class OpenAndClose {
 	private RadioButton openAccountRadio, closeAccountRadio, savingRadio, checkingRadio, moneyMarketRadio, yesRadio, noRadio;
 
 	@FXML
-	private TextField firstName, lastName, newBalance, openDate;
+	private TextField firstName, lastName, newBalance, monthTF, dayTF, yearTF;
 
 	@FXML
 	private HBox policyGroup;
 
 	@FXML
-	private Label policyLabel;
+	private Label balanceLabel, policyLabel, dateLabel;
 
 	@FXML
 	private TextArea feedback;
 
 	@FXML
-	void selectOpenAccount(ActionEvent event) {
+	void selectOpenAccount() {
 		toggleBalanceAndDate(false);
 		if(!moneyMarketRadio.isSelected()) policyGroup.setDisable(false);
 	}
 
 	@FXML
-	void selectCloseAccount(ActionEvent event) {
+	void selectCloseAccount() {
 		toggleBalanceAndDate(true);
 		policyGroup.setDisable(true);
 	}
 
 	@FXML
-	void enablePolicyGroup(ActionEvent event) {
+	void enablePolicyGroup() {
 		if(openAccountRadio.isSelected()) policyGroup.setDisable(false);
 		if (accountType == 1) {
 			policyLabel.setText("Direct Deposit:");
@@ -64,22 +61,23 @@ public class OpenAndClose {
 	}
 
 	@FXML
-	void disablePolicyGroup(ActionEvent event) {
+	void disablePolicyGroup() {
 		policyGroup.setDisable(true);
 	}
 
 	@FXML
-	void processAccount(ActionEvent event) {
+	void processAccount() {
 		if (isOpenAccount) {
 			try { // check whether balance and date strings are valid.
 				Profile holder = getHolder(firstName.getText(), lastName.getText());
 				double balance = Double.parseDouble(newBalance.getText());
 				if (balance < 0) throw new IllegalArgumentException("");
-				String[] dateArr = openDate.getText().split("/");
-				if (dateArr.length != 3) throw new IllegalArgumentException("Error: invalid date string!");
-				Date date = new Date(Integer.parseInt(dateArr[0]), Integer.parseInt(dateArr[1]), Integer.parseInt(dateArr[2]));
-				if (!date.isValid()) throw new IllegalArgumentException("Error: invalid date!");
+				Date date = new Date(Integer.parseInt(monthTF.getText()), Integer.parseInt(dayTF.getText()),
+										Integer.parseInt(yearTF.getText()));
+				if (!date.isValid()) throw new IllegalArgumentException("ERROR: invalid date!");
 				openAccount(holder, balance, date);
+			} catch (NumberFormatException e) {
+				feedback.setText("ERROR: date fields require integer input!");
 			} catch (Exception e) {
 				feedback.setText(e.toString());
 			}
@@ -92,9 +90,9 @@ public class OpenAndClose {
 		}
 	}
 
-	protected static Profile getHolder(String first, String last) {
+	protected static Profile getHolder(String first, String last) { // This method is also used in Tab 2.
 		if (first == null || last == null || first.length() == 0 || last.length() == 0) {
-			throw new IllegalArgumentException("Error! First name and last name CANNOT be empty!!!");
+			throw new IllegalArgumentException("ERROR! First name and last name CANNOT be empty!!!");
 		}
 		return new Profile(first, last);
 	}
@@ -120,8 +118,12 @@ public class OpenAndClose {
 	}
 
 	private void toggleBalanceAndDate(boolean bool) {
+		balanceLabel.setDisable(bool);
 		newBalance.setDisable(bool);
-		openDate.setDisable(bool);
+		dateLabel.setDisable(bool);
+		monthTF.setDisable(bool);
+		dayTF.setDisable(bool);
+		yearTF.setDisable(bool);
 	}
 
 	@FXML
