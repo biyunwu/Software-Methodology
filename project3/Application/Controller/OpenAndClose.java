@@ -3,37 +3,33 @@ package Application.Controller;
 import Application.Model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 
 public class OpenAndClose {
 	private final AccountDatabase db;
-	private final ToggleGroup serviceTG, accountTG, policyTG;
+	private final ToggleGroup serviceTG, accountTG;
 	private boolean isOpenAccount;
 	private int accountType; // 1: checking, 2: savings, 3: money market
-	private boolean isDirectOrLoyal;
 
 	public OpenAndClose(AccountDatabase db) {
 		this.db = db; // Model
 		serviceTG = new ToggleGroup();
 		accountTG = new ToggleGroup();
-		policyTG = new ToggleGroup();
 		// set default values.
 		isOpenAccount = true;
 		accountType = 1;
-		isDirectOrLoyal = true;
 	}
 
 	@FXML
-	private RadioButton openAccountRadio, closeAccountRadio, savingRadio, checkingRadio, moneyMarketRadio, yesRadio, noRadio;
+	private RadioButton openAccountRadio, closeAccountRadio, savingRadio, checkingRadio, moneyMarketRadio;
 
 	@FXML
-	private TextField firstName, lastName, newBalance, monthTF, dayTF, yearTF;
+	private TextField firstNameTF, lastName, newBalance, monthTF, dayTF, yearTF;
 
 	@FXML
-	private HBox policyGroup;
+	private CheckBox policyCheckBox;
 
 	@FXML
-	private Label balanceLabel, policyLabel, dateLabel;
+	private Label balanceLabel, dateLabel, checkLabel;
 
 	@FXML
 	private TextArea feedback;
@@ -41,35 +37,52 @@ public class OpenAndClose {
 	@FXML
 	void selectOpenAccount() {
 		toggleBalanceAndDate(false);
-		if(!moneyMarketRadio.isSelected()) policyGroup.setDisable(false);
+		if(!moneyMarketRadio.isSelected()) hideCheckBox(false);
 	}
 
 	@FXML
 	void selectCloseAccount() {
 		toggleBalanceAndDate(true);
-		policyGroup.setDisable(true);
+		hideCheckBox(true);
 	}
 
 	@FXML
-	void enablePolicyGroup() {
-		if(openAccountRadio.isSelected()) policyGroup.setDisable(false);
+	void enableCheckBoxRow() {
+		if(openAccountRadio.isSelected()) hideCheckBox(false);
 		if (accountType == 1) {
-			policyLabel.setText("Direct Deposit:");
+			policyCheckBox.setText("Direct Deposit");
 		} else if (accountType == 2) {
-			policyLabel.setText("Loyal Customer:");
+			policyCheckBox.setText("Loyal Customer");
 		}
 	}
 
 	@FXML
-	void disablePolicyGroup() {
-		policyGroup.setDisable(true);
+	void disableCheckBoxRow() {
+		checkLabel.setDisable(true);
+		policyCheckBox.setDisable(true);
+	}
+
+	private void hideCheckBox(boolean bool) {
+		checkLabel.setDisable(bool);
+		policyCheckBox.setDisable(bool);
+	}
+
+	@FXML
+	void clearTab1 () {
+		firstNameTF.clear();
+		lastName.clear();
+		newBalance.clear();
+		monthTF.clear();
+		dayTF.clear();
+		yearTF.clear();
+		feedback.clear();
 	}
 
 	@FXML
 	void processAccount() {
 		if (isOpenAccount) {
 			try { // check whether balance and date strings are valid.
-				Profile holder = getHolder(firstName.getText(), lastName.getText());
+				Profile holder = getHolder(firstNameTF.getText(), lastName.getText());
 				double balance = Double.parseDouble(newBalance.getText());
 				if (balance < 0) throw new IllegalArgumentException("");
 				Date date = new Date(Integer.parseInt(monthTF.getText()), Integer.parseInt(dayTF.getText()),
@@ -77,13 +90,13 @@ public class OpenAndClose {
 				if (!date.isValid()) throw new IllegalArgumentException("ERROR: invalid date!");
 				openAccount(holder, balance, date);
 			} catch (NumberFormatException e) {
-				feedback.setText("ERROR: date fields require integer input!");
+				feedback.setText("ERROR: balance and date fields require integer input!");
 			} catch (Exception e) {
 				feedback.setText(e.toString());
 			}
 		} else { // close account
 			try {
-				closeAccount(getHolder(firstName.getText(), lastName.getText()));
+				closeAccount(getHolder(firstNameTF.getText(), lastName.getText()));
 			} catch (Exception e) {
 				feedback.setText(e.toString());
 			}
@@ -100,8 +113,8 @@ public class OpenAndClose {
 	private void openAccount(Profile holder, double balance, Date date) {
 		boolean added;
 		switch (accountType) {
-			case 1 -> added = db.add(new Checking(holder, balance, date, isDirectOrLoyal));
-			case 2 -> added = db.add(new Savings(holder, balance, date, isDirectOrLoyal));
+			case 1 -> added = db.add(new Checking(holder, balance, date, policyCheckBox.isSelected()));
+			case 2 -> added = db.add(new Savings(holder, balance, date, policyCheckBox.isSelected()));
 			default -> added = db.add(new MoneyMarket(holder, balance, date)); // case 3
 		}
 		feedback.setText(added? "Added to database!" : "ERROR: account already Exist!");
@@ -132,22 +145,23 @@ public class OpenAndClose {
 		openAccountRadio.setToggleGroup(serviceTG);
 		closeAccountRadio.setToggleGroup(serviceTG);
 		serviceTG.selectedToggleProperty().addListener(
-				// use grid column index to determine open account or close account.
-				(observable, preToggle, thisToggle) -> isOpenAccount = !isOpenAccount
+				(observable, preToggle, thisToggle) -> isOpenAccount = (thisToggle == openAccountRadio)
 		);
 		checkingRadio.setSelected(true);
 		checkingRadio.setToggleGroup(accountTG);
 		savingRadio.setToggleGroup(accountTG);
 		moneyMarketRadio.setToggleGroup(accountTG);
 		accountTG.selectedToggleProperty().addListener(
-				// use grid column index to determine open account or close account.
-				(observable, preToggle, thisToggle) -> accountType = (int) thisToggle.getProperties().get("gridpane-column")
+				(observable, preToggle, thisToggle) -> {
+					if (thisToggle == checkingRadio) {
+						accountType = 1;
+					} else if (thisToggle == savingRadio) {
+						accountType = 2;
+					} else if (thisToggle == moneyMarketRadio) {
+						accountType = 3;
+					}
+				}
 		);
-		yesRadio.setSelected(true);
-		yesRadio.setToggleGroup(policyTG);
-		noRadio.setToggleGroup(policyTG);
-		policyTG.selectedToggleProperty().addListener(
-				(observable, preToggle, thisToggle) -> isDirectOrLoyal = !isDirectOrLoyal
-		);
+		policyCheckBox.setSelected(false);
 	}
 }

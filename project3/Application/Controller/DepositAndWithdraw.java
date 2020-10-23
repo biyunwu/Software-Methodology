@@ -1,20 +1,19 @@
 package Application.Controller;
 
 import Application.Model.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class DepositAndWithdraw {
 	private final AccountDatabase db;
 	private final ToggleGroup transactionTG, accountTG;
-	private int transactionType; // 1: deposit, 2: withdraw
+	private boolean isDeposit; // true: deposit, false: withdraw
 	private int accountType; // 1: checking, 2: savings, 3: money market
 
 	public DepositAndWithdraw(AccountDatabase db) {
 		this.db = db; // Model
 		transactionTG = new ToggleGroup();
-		transactionType = 1;
+		isDeposit = true;
 		accountTG = new ToggleGroup();
 		accountType = 1;
 	}
@@ -29,11 +28,19 @@ public class DepositAndWithdraw {
 	private TextArea feedback;
 
 	@FXML
-	void doTransaction(ActionEvent event) {
+	void clearTab2() {
+		firstNameTextField.clear();
+		lastNameTextField.clear();
+		amountTextFiled.clear();
+		feedback.clear();
+	}
+
+	@FXML
+	void doTransaction() {
 		try {
 			Profile holder = OpenAndClose.getHolder(firstNameTextField.getText(), lastNameTextField.getText());
 			double amount = Double.parseDouble(amountTextFiled.getText());
-			if (transactionType == 1) { // deposit
+			if (isDeposit) { // deposit
 				deposit(holder, amount);
 			} else { // withdraw
 				withdraw(holder, amount);
@@ -65,15 +72,6 @@ public class DepositAndWithdraw {
 		feedback.setText(isSuccess == 0 ? "Withdrew!" : "ERROR: account does not exist or no sufficient fund!");
 	}
 
-	private void checkNameAndAmount(String firstName, String lastName, double amount) {
-		if ((firstName == null || firstName.isEmpty()) || (lastName == null || lastName.isEmpty())) {
-			throw new IllegalArgumentException("ERROR: first name and last name cannot be empty");
-		}
-		if (amount < 0) {
-			throw new IllegalArgumentException("ERROR: only positive number is accepted!");
-		}
-	}
-
 	@FXML
 	public void initialize() {
 		// service toggle group.
@@ -81,8 +79,7 @@ public class DepositAndWithdraw {
 		depositRadio.setToggleGroup(transactionTG);
 		withdrawRadio.setToggleGroup(transactionTG);
 		transactionTG.selectedToggleProperty().addListener(
-				// use column index to determine deposit or withdraw.
-				(observable, oldVal, newVal) -> transactionType = (int) newVal.getProperties().get("gridpane-column")
+				(observable, prevRadio, newRadio) -> isDeposit = (newRadio == depositRadio)
 		);
 		// account toggle group.
 		checkingRadioDW.setSelected(true);
@@ -91,7 +88,15 @@ public class DepositAndWithdraw {
 		moneyMarketRadioDW.setToggleGroup(accountTG);
 		accountTG.selectedToggleProperty().addListener(
 				// use column index to determine account type.
-				(observable, oldVal, newVal) -> accountType = (int) newVal.getProperties().get("gridpane-column")
+				(observable, prevRadio, newRadio) -> {
+					if (newRadio == checkingRadioDW) {
+						accountType = 1;
+					} else if (newRadio == savingRadioDW) {
+						accountType = 2;
+					} else if (newRadio == moneyMarketRadioDW) {
+						accountType = 3;
+					}
+				}
 		);
 	}
 }

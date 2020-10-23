@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
@@ -9,14 +9,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="ocTab" minHeight="0.0" minWidth="0.0" prefHeight="483.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.Controller.OpenAndClose">
 
 
-            <GridPane hgap="10.0" layoutX="13.0" layoutY="32.0" prefHeight="219.0" prefWidth="534.0">
+            <GridPane hgap="10.0" layoutX="13.0" layoutY="18.0" prefHeight="218.0" prefWidth="534.0">
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="136.0" />
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.0" minWidth="10.0" prefWidth="126.0" />
@@ -24,24 +23,25 @@
          <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.0" minWidth="10.0" prefWidth="124.0" />
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                    <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                    <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                    <RowConstraints maxHeight="78.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                    <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="78.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
                 </rowConstraints>
 
-                    <RadioButton fx:id="savingRadio" mnemonicParsing="false" onAction="#enablePolicyGroup" text="Savings" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                    <RadioButton fx:id="checkingRadio" mnemonicParsing="false" onAction="#enablePolicyGroup" text="Checking" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                    <RadioButton fx:id="moneyMarketRadio" mnemonicParsing="false" onAction="#disablePolicyGroup" text="Money Market" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                    <RadioButton fx:id="savingRadio" mnemonicParsing="false" onAction="#enableCheckBoxRow" text="Savings" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                    <RadioButton fx:id="checkingRadio" mnemonicParsing="false" onAction="#enableCheckBoxRow" text="Checking" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <RadioButton fx:id="moneyMarketRadio" mnemonicParsing="false" onAction="#disableCheckBoxRow" text="Money Market" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                     <Label fx:id="dateLabel" text="Open Date:" GridPane.rowIndex="3" />
                     <Label fx:id="balanceLabel" text="New Balance:" GridPane.rowIndex="2" />
                     <Label text="Select Service:" />
                     <RadioButton fx:id="openAccountRadio" layoutX="10.0" layoutY="69.0" mnemonicParsing="false" onAction="#selectOpenAccount" text="Open Account" GridPane.columnIndex="1" />
                     <RadioButton fx:id="closeAccountRadio" layoutX="177.0" layoutY="15.0" mnemonicParsing="false" onAction="#selectCloseAccount" text="Close Account" GridPane.columnIndex="2" />
-                    <TextField fx:id="firstName" promptText="first name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField fx:id="firstNameTF" promptText="first name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <TextField fx:id="lastName" promptText="last name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                    <TextField fx:id="newBalance" promptText="&gt; 0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <TextField fx:id="newBalance" promptText="999.99" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <TextField fx:id="monthTF" maxWidth="110.0" promptText="mm" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     <Label text="Profile:" GridPane.rowIndex="1" />
       <Label text="Select Account Type:" GridPane.rowIndex="4" />
@@ -57,22 +57,12 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <CheckBox fx:id="policyCheckBox" mnemonicParsing="false" text="Direct Deposit" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Label fx:id="checkLabel" text="Check:" GridPane.rowIndex="5" />
 
             </GridPane>
-            <HBox fx:id="policyGroup" layoutX="13.0" layoutY="251.0" prefHeight="20.0" prefWidth="503.0">
-                <Label fx:id="policyLabel" minWidth="133.0" text="Direct Deposite:" />
-                <RadioButton fx:id="yesRadio" mnemonicParsing="false" text="Yes">
-                    <padding>
-                        <Insets left="10.0" />
-                    </padding>
-                </RadioButton>
-                <RadioButton fx:id="noRadio" mnemonicParsing="false" text="No">
-                    <padding>
-                      <Insets left="10.0" />
-                    </padding>
-                </RadioButton>
-            </HBox>
-            <Button layoutX="249.0" layoutY="280.0" mnemonicParsing="false" onAction="#processAccount" text="Process" />
-            <Label layoutX="18.0" layoutY="313.0" text="Feedback:" />
-            <TextArea fx:id="feedback" layoutX="16.0" layoutY="337.0" prefHeight="97.0" prefWidth="528.0" />
+            <Button layoutX="156.0" layoutY="252.0" minWidth="100.0" mnemonicParsing="false" onAction="#processAccount" text="Process" />
+            <Label layoutX="15.0" layoutY="291.0" text="Feedback:" />
+            <TextArea fx:id="feedback" layoutX="16.0" layoutY="314.0" prefHeight="120.0" prefWidth="528.0" />
+   <Button layoutX="305.0" layoutY="252.0" minWidth="100.0" mnemonicParsing="false" onAction="#clearTab1" text="Clear" />
 </AnchorPane>
