@@ -169,6 +169,18 @@ public class AccountDatabase {
 		return sb.toString();
 	}
 
+	/**
+	 * Stringify accounts.
+	 * @return string that contains accounts info (1 account per line).
+	 */
+	public String export() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < size; i++) {
+			sb.append(accounts[i].export()).append("\n");
+		}
+		return sb.toString();
+	}
+
 	/** Helper method to print account balance, as well as any interest or fees */
 	private StringBuilder printDetail() {
 		StringBuilder sb = new StringBuilder();

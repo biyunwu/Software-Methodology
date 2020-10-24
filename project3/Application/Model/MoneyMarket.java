@@ -85,4 +85,13 @@ public class MoneyMarket extends Account {
 		return withdrawals == 1 ? "*Money Market*" + super.toString() + "*" + withdrawals + " withdrawal*"
 				: "*Money Market*" + super.toString() + "*" + withdrawals + " withdrawals*";
 	}
+
+	/**
+	 * Convert account info to string.
+	 * @return account info in string.
+	 */
+	@Override
+	public String export() {
+		return "M," + super.export() + withdrawals;
+	}
 }

@@ -69,12 +69,12 @@ public class Checking extends Account {
 		return "*Checking*" + super.toString() + (directDeposit ? "*direct deposit account*" : "");
 	}
 
-//	/**
-//	 * Convert account info to string.
-//	 * @return account info in string.
-//	 */
-//	@Override
-//	public String export() {
-////		return "C," + this.getProfile().toStringSeparateByComma() + "," + this.getBalance() + "," + this.
-//	}
+	/**
+	 * Convert account info to string.
+	 * @return account info in string.
+	 */
+	@Override
+	public String export() {
+		return "C," + super.export() + directDeposit;
+	}
 }

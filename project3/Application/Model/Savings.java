@@ -70,4 +70,13 @@ public class Savings extends Account {
 	public String toString() {
 		return "*Savings*" + super.toString() + (isLoyal ? "*special Savings account*" : "");
 	}
+
+	/**
+	 * Convert account info to string.
+	 * @return account info in string.
+	 */
+	@Override
+	public String export() {
+		return "S," + super.export() + isLoyal;
+	}
 }

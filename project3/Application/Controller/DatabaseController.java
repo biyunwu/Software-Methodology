@@ -27,10 +27,11 @@ public class DatabaseController {
 		Stage stage = new Stage();
 		File sourceFile = chooser.showOpenDialog(stage);
 		try {
+			if (sourceFile == null) throw new IllegalArgumentException("no source file selected!");
 			feedback.setText("importing...\n");
-			BufferedReader br = new BufferedReader(new FileReader(sourceFile));  // for test
-			br.lines().forEach(line -> {
-				feedback.setText(feedback.getText() + line + "\n");
+			BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
+			reader.lines().forEach(line -> {
+				feedback.appendText(line + "\n"); // for test
 				String[] params = line.split(",");
 				Profile holder = new Profile(params[1], params[2]);
 				double balance = Double.parseDouble(params[3]);
@@ -42,13 +43,14 @@ public class DatabaseController {
 					default -> throw new IllegalArgumentException("Invalid line in file: " + line);
 				}
 			});
-			feedback.setText(feedback.getText() + "finished!\n");
+			reader.close();
+			feedback.appendText("finished!\n");
 		} catch (FileNotFoundException e) {
 			feedback.setText("Failed opening file!\n" + e.toString());
 		} catch (IllegalArgumentException e) {
 			feedback.setText(e.toString());
 		} catch (Exception e) {
-			feedback.setText("Invalid data in file!");
+			feedback.setText("import stopped!");
 		}
 	}
 
@@ -60,6 +62,16 @@ public class DatabaseController {
 				new FileChooser.ExtensionFilter("All Files", "*.*"));
 		Stage stage = new Stage();
 		File targetFile = chooser.showSaveDialog(stage);
+		try {
+			if (targetFile == null) throw new IllegalArgumentException("export cancelled!");
+			BufferedWriter writer = new BufferedWriter(new FileWriter(targetFile));
+			writer.append(db.export());
+			writer.close();
+		} catch (IllegalArgumentException e) {
+			feedback.setText(e.toString());
+		} catch (Exception e) {
+			feedback.setText("export stopped: \n" + e.toString());
+		}
 	}
 
 	@FXML

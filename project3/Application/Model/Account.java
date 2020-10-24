@@ -109,11 +109,11 @@ public abstract class Account {
 	 */
 	public abstract boolean equals(Account account);
 
-//	/**
-//	 * Stringify account info.
-//	 * @return account info in string.
-//	 */
-//	public String export() {
-//		return holder.toStringSeparateByComma() + "," + balance + "," + dateOpen.toString() + ",";
-//	};
+	/**
+	 * Stringify account info.
+	 * @return account info in string.
+	 */
+	public String export() {
+		return holder.toStringSeparateByComma() + "," + balance + "," + dateOpen.toString() + ",";
+	};
 }
