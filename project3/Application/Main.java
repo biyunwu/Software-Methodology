@@ -25,16 +25,16 @@ public class Main extends Application {
                         }
                     }
                 }
-                // cannot find appropriate constructor, use default constructor.
+                // cannot find controllers which requires dependency, use default constructor.
                 return type.getDeclaredConstructor().newInstance();
-            } catch (Exception exc) {
-                throw new RuntimeException(exc);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         });
         // Parent root = FXMLLoader.load(getClass().getResource("View/window.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("Transaction Interface");
-        primaryStage.setScene(new Scene(root, 600, 500));
+        primaryStage.setScene(new Scene(root, 560, 500));
         primaryStage.show();
     }
 

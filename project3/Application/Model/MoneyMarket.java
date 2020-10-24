@@ -23,6 +23,18 @@ public class MoneyMarket extends Account {
 	}
 
 	/**
+	 * Constructor with parameters with specified withdrawals.
+	 *
+	 * @param holder:   The profile of the account holder
+	 * @param balance:  The current balance of the account
+	 * @param dateOpen: The date the account was opened
+	 */
+	public MoneyMarket(Profile holder, double balance, Date dateOpen, int withdrawals) {
+		super(holder, balance, dateOpen);
+		this.withdrawals = withdrawals;
+	}
+
+	/**
 	 * Takes money out of an account
 	 * 
 	 * @param amount: The amount of money to take out

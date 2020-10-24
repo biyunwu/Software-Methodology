@@ -59,4 +59,12 @@ public class Profile {
 	public String toString() {
 		return fname + " " + lname;
 	}
+
+	/**
+	 * Stringify profile.
+	 * @return full name separate by comma.
+	 */
+	public String toStringSeparateByComma() {
+		return fname + "," + lname;
+	}
 }

@@ -108,4 +108,12 @@ public abstract class Account {
 	 * @return true if the two accounts are equal, false if not
 	 */
 	public abstract boolean equals(Account account);
+
+//	/**
+//	 * Stringify account info.
+//	 * @return account info in string.
+//	 */
+//	public String export() {
+//		return holder.toStringSeparateByComma() + "," + balance + "," + dateOpen.toString() + ",";
+//	};
 }

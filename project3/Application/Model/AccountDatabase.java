@@ -128,54 +128,62 @@ public class AccountDatabase {
 		mergeSort(true, 0, size);
 	}
 
-	/** Helper method to print accounts in order of date opened */
-	public void printByDateOpen() {
+	/** Method to list accounts in order of date opened */
+	public String printByDateOpen() {
+		StringBuilder sb = new StringBuilder();
 		if (size == 0) {
-			System.out.println("Database is empty.");
-			return;
+			sb.append("Database is empty.\n");
+			return sb.toString();
 		}
 		sortByDateOpen();
-		System.out.println("\n--Printing statements by date opened--");
-		printDetail();
-
+		sb.append("\n--Printing statements by date opened--\n");
+		sb.append(printDetail());
+		return sb.toString();
 	}
 
-	/** Helper method to print accounts in order of last name */
-	public void printByLastName() {
+	/** Method to list accounts in order of last name */
+	public String printByLastName() {
+		StringBuilder sb = new StringBuilder();
 		if (size == 0) {
-			System.out.println("Database is empty.");
-			return;
+			sb.append("Database is empty.\n");
+			return sb.toString();
 		}
 		sortByLastName();
-		System.out.println("\n--Printing statements by last name--");
-		printDetail();
+		sb.append("\n--Printing statements by last name--\n");
+		sb.append(printDetail());
+		return sb.toString();
 	}
 
-	/** Helper method to print accounts in database */
-	public void printAccounts() {
+	/** Method to list accounts in database */
+	public String printAccounts() {
+		StringBuilder sb = new StringBuilder();
 		if (size == 0) {
-			System.out.println("Database is empty.");
-			return;
+			sb.append("Database is empty.\n");
+			return sb.toString();
 		}
-		System.out.println("--Listing accounts in the database--");
+		sb.append("--Listing accounts in the database--\n");
 		for (int i = 0; i < size; i++) {
-			System.out.println(accounts[i].toString());
+			sb.append(accounts[i].toString()).append("\n");
 		}
-		System.out.println("--end of listing--");
+		sb.append("--end of listing--\n");
+		return sb.toString();
 	}
 
 	/** Helper method to print account balance, as well as any interest or fees */
-	private void printDetail() {
+	private StringBuilder printDetail() {
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < size; i++) {
-			System.out.println("\n" + accounts[i].toString());
+			sb.append("\n").append(accounts[i].toString()).append("\n");
 			double interest = accounts[i].monthlyInterest();
 			double fee = accounts[i].monthlyFee();
 			double difference = interest - fee;
 			accounts[i].credit(difference);
-			System.out.printf("-interest: $ %,.2f\n-fee: $ %.2f\n-new balance: $ %,.2f\n", interest, fee,
+			String s = String.format("-interest: $ %,.2f\n-fee: $ %.2f\n-new balance: $ %,.2f\n", interest, fee,
 					accounts[i].getBalance());
+			sb.append(s);
 		}
-		System.out.println("--end of printing--\n");
+		sb.append("--end of printing--\n\n");
+		return sb;
 	}
 
 	/**
@@ -222,6 +230,6 @@ public class AccountDatabase {
 				temp[k] = accounts[i++];
 			}
 		}
-		System.arraycopy(temp, 0, accounts, low, n); // Copied sorted sub-array back to accounts.
+		System.arraycopy(temp, 0, accounts, low, n); // Copy sorted sub-array back to accounts.
 	}
 }
