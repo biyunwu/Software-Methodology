@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -220,7 +221,7 @@ public class Controller {
 			dateYear.clear();
 			return;
 		} catch (ArrayIndexOutOfBoundsException e) {
-			outputArea.appendText("Please enter a date.\n");
+			outputArea.appendText("Please enter a valid date.\n");
 			dateDay.clear();
 			dateMonth.clear();
 			dateYear.clear();
@@ -320,13 +321,13 @@ public class Controller {
 				String lastName = accounts[i].getProfile().getLastName();
 				String amount = String.valueOf(accounts[i].getBalance());
 				String date = accounts[i].getDate().toString();
-				boolean loyalDepsoitOrWithdraws = accounts[i].loyalDepsoitOrWithdraws() == 0 ? false : true;
+				boolean isLoyalOrDesposit = accounts[i].loyalDepsoitOrWithdraws() == 0 ? false : true;
 				if (accounts[i] instanceof Checking) {
 					fileWriter.append("C," + firstName + "," + lastName + "," + amount + "," + date + ","
-							+ loyalDepsoitOrWithdraws + "\n");
+							+ isLoyalOrDesposit + "\n");
 				} else if (accounts[i] instanceof Savings) {
 					fileWriter.append("S," + firstName + "," + lastName + "," + amount + "," + date + ","
-							+ loyalDepsoitOrWithdraws + "\n");
+							+ isLoyalOrDesposit + "\n");
 				} else {
 					fileWriter.append("M," + firstName + "," + lastName + "," + amount + "," + date + ","
 							+ accounts[i].loyalDepsoitOrWithdraws() + "\n");
@@ -334,7 +335,7 @@ public class Controller {
 			}
 			fileWriter.close();
 		} catch (IOException e) {
-			outputArea.appendText("An error occurred.");
+			outputArea.appendText("An error occurred exporting the file.\n");
 		}
 		outputArea.appendText("Exported to file.\n");
 	}
@@ -342,45 +343,48 @@ public class Controller {
 	@FXML
 	void importFile(ActionEvent event) {
 		outputArea.appendText("Importing file...\n");
-		try {
 			FileChooser chooser = new FileChooser();
 			chooser.setTitle("Open Source File for the Import");
 			chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"),
 					new ExtensionFilter("All Files", "*.*"));
 			Stage stage = new Stage();
-			File sourceFile = chooser.showOpenDialog(stage); // get the reference of the source file
-			Scanner sc = new Scanner(sourceFile);
+			File sourceFile = chooser.showOpenDialog(stage); 
+			Scanner sc = null;
+			try {
+				sc = new Scanner(sourceFile);
+			} catch (FileNotFoundException e) {
+				outputArea.appendText("File not found.\n");
+			}
 			while (sc.hasNextLine()) {
-				String line = sc.nextLine();
-				String[] tokens = line.split(",");
-				Profile profile = new Profile(tokens[1], tokens[2]);
-				Date date = new Date(tokens[4]);
-				if (!date.isValid()) {
-					outputArea.appendText("Invalid Date.");
-					continue;
-				}
-				if (tokens[0].equals("C")) {
-					Account newChecking = new Checking(profile, Double.parseDouble(tokens[3]), date,
-							Boolean.parseBoolean(tokens[5]));
-					db.add(newChecking);
-				} else if (tokens[0].equals("S")) {
-					Account newSavings = new Savings(profile, Double.parseDouble(tokens[3]), date,
-							Boolean.parseBoolean(tokens[5]));
-					db.add(newSavings);
-				} else {
-					MoneyMarket newMoneyMarket = new MoneyMarket(profile, Double.parseDouble(tokens[3]), date);
-					newMoneyMarket.setWithdrawals(Integer.parseInt(tokens[5]));
-					db.add(newMoneyMarket);
+				try {
+					String line = sc.nextLine();
+					String[] tokens = line.split(",");
+					Profile profile = new Profile(tokens[1], tokens[2]);
+					Date date = new Date(tokens[4]);
+					if (!date.isValid()) {
+						outputArea.appendText("Invalid Date.");
+						continue;
+					}
+					if (tokens[0].equals("C")) {
+						Account newChecking = new Checking(profile, Double.parseDouble(tokens[3]), date,
+								Boolean.parseBoolean(tokens[5]));
+						db.add(newChecking);
+					} else if (tokens[0].equals("S")) {
+						Account newSavings = new Savings(profile, Double.parseDouble(tokens[3]), date,
+								Boolean.parseBoolean(tokens[5]));
+						db.add(newSavings);
+					} else {
+						MoneyMarket newMoneyMarket = new MoneyMarket(profile, Double.parseDouble(tokens[3]), date);
+						newMoneyMarket.setWithdrawals(Integer.parseInt(tokens[5]));
+						db.add(newMoneyMarket);
+					} 
+				} catch (NumberFormatException e) {
+					outputArea.appendText("Invalid parameter.\n");
+				} catch (NullPointerException e) {
+					outputArea.appendText("Invalid parameter.\n");
 				}
 			}
-			sc.close();
-		} catch (IOException e) {
-			outputArea.appendText("An error occurred.");
-		} catch (NumberFormatException e) {
-			outputArea.appendText("Invalid parameter.");
-		} catch (NullPointerException e) {
-			outputArea.appendText("Invalid parameter.");
-		}
+		sc.close();
 		outputArea.appendText("Imported file.\n");
 	}
 
@@ -437,6 +441,7 @@ public class Controller {
 			clearAll();
 		} else {
 			outputArea.appendText("Account does not exist.\n");
+			clearAll();
 		}
 	}
 
@@ -475,6 +480,7 @@ public class Controller {
 			clearAll();
 		} else {
 			outputArea.appendText("Account does not exist.\n");
+			clearAll();
 		}
 	}
 
