@@ -32,9 +32,7 @@ public class Controller {
 	void selectOpenAccount() {
 		disableBalanceAndDate(false);
 		if(!moneyMarketRadio.isSelected()) {
-			disableCheckBoxes(false);
-			directDepositCheckBox.setDisable(savingRadio.isSelected());
-			loyaltyCheckBox.setDisable(checkingRadio.isSelected());
+			enableCheckBoxRow();
 		}
 	}
 
@@ -42,20 +40,23 @@ public class Controller {
 	@FXML
 	void selectCloseAccount() {
 		disableBalanceAndDate(true);
-		disableCheckBoxes(true);
+		disableCheckBoxRow();
 	}
 
 	/** Enable 1 of the 2 checkboxes as well as the label in this row.*/
 	@FXML
 	void enableCheckBoxRow() {
-		disableCheckBoxes(!openAccountRadio.isSelected());
-		if (openAccountRadio.isSelected()) { // toggle checkbox when opening account.
+		if (openAccountRadio.isSelected()) {
+			checkLabel.setDisable(false);
 			if (checkingRadio.isSelected()) {
 				directDepositCheckBox.setDisable(false);
 				loyaltyCheckBox.setDisable(true);
 			} else if (savingRadio.isSelected()) {
 				directDepositCheckBox.setDisable(true);
 				loyaltyCheckBox.setDisable(false);
+			} else {
+				directDepositCheckBox.setDisable(true);
+				loyaltyCheckBox.setDisable(true);
 			}
 		}
 	}
@@ -63,17 +64,9 @@ public class Controller {
 	/** Disable the row contains direct deposit and loyalty checkboxes.*/
 	@FXML
 	void disableCheckBoxRow() {
-		disableCheckBoxes(true);
-	}
-
-	/**
-	 * Helper method to disable or enable checkboxes.
-	 * @param bool true: disable; false: enable.
-	 */
-	private void disableCheckBoxes(boolean bool) {
-		checkLabel.setDisable(bool);
-		directDepositCheckBox.setDisable(bool);
-		loyaltyCheckBox.setDisable(bool);
+		checkLabel.setDisable(true);
+		directDepositCheckBox.setDisable(true);
+		loyaltyCheckBox.setDisable(true);
 	}
 
 	/**
