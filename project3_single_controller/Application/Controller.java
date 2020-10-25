@@ -104,7 +104,7 @@ public class Controller {
 
 	private double getBalance(String s) {
 		try {
-			double balance = Double.parseDouble(balanceTF.getText());
+			double balance = Double.parseDouble(s);
 			if (balance < 0) throw new IllegalArgumentException("ERROR: negative number is not allowed!");
 			return balance;
 		} catch (NumberFormatException e) {
@@ -131,7 +131,7 @@ public class Controller {
 		} else if (moneyMarketRadio.isSelected()) {
 			added = db.add(new MoneyMarket(holder, balance, date));
 		}
-		feedback.setText(added? "Added to database!" : "ERROR: account already Exist!");
+		feedback.setText(added? "Added to database!" : "ERROR: account already exist!");
 	}
 
 	private void closeAccount(Profile holder) {

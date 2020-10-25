@@ -21,8 +21,8 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.Controller">
    <top>
       <TabPane prefHeight="301.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-          <Tab fx:id="tab1" text="Open/Close Account">
-              <AnchorPane fx:id="ocTab" minHeight="0.0" minWidth="0.0" prefWidth="600.0">
+          <Tab text="Open/Close Account">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="600.0">
                   <GridPane hgap="10.0" layoutX="13.0" layoutY="6.0" prefHeight="221.0" prefWidth="534.0">
                       <columnConstraints>
                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="136.0" />
@@ -74,8 +74,8 @@
                   <Button layoutX="305.0" layoutY="237.0" minWidth="100.0" mnemonicParsing="false" onAction="#clearTab1" text="Clear" />
               </AnchorPane>
           </Tab>
-          <Tab fx:id="tab2" text="Deposit/Withdraw">
-              <AnchorPane fx:id="dwTab" minHeight="0.0" minWidth="0.0" prefWidth="560.0">
+          <Tab text="Deposit/Withdraw">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="560.0">
                   <GridPane hgap="10.0" layoutX="16.0" layoutY="8.0" prefHeight="185.0" prefWidth="527.0">
                       <columnConstraints>
                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="130.0" />
@@ -93,7 +93,7 @@
                       <RadioButton fx:id="checkingRadioDW" mnemonicParsing="false" text="Checking" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                       <RadioButton fx:id="savingRadioDW" mnemonicParsing="false" text="Savings" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                       <RadioButton fx:id="moneyMarketRadioDW" mnemonicParsing="false" text="Money Market" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                      <RadioButton fx:id="depositRadio" mnemonicParsing="false" text="Deposite" GridPane.columnIndex="1" />
+                      <RadioButton fx:id="depositRadio" mnemonicParsing="false" text="Deposit" GridPane.columnIndex="1" />
                       <RadioButton fx:id="withdrawRadio" mnemonicParsing="false" text="Withdraw" GridPane.columnIndex="2" />
                       <Label text="Select Account Type:" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
                       <Label text="Transaction Amount:" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
@@ -106,8 +106,8 @@
                   <Button layoutX="309.0" layoutY="208.0" minWidth="100.0" mnemonicParsing="false" onAction="#clearTab2" text="Clear" />
               </AnchorPane>
           </Tab>
-          <Tab fx:id="tab3" text="Account Database">
-              <AnchorPane fx:id="dbTab">
+          <Tab text="Account Database">
+              <AnchorPane>
                   <GridPane layoutX="24.0" layoutY="47.0" prefHeight="110.0" prefWidth="555.0">
                       <columnConstraints>
                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="191.0" />
@@ -117,7 +117,6 @@
                       <rowConstraints>
                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       </rowConstraints>
-                      <children>
                           <SplitMenuButton minWidth="160.0" mnemonicParsing="false" onAction="#importFile" prefHeight="28.0" prefWidth="91.0" text="Import / Export" GridPane.halignment="CENTER">
                               <items>
                                   <MenuItem mnemonicParsing="false" onAction="#importFile" text="Import to Database" />
@@ -132,7 +131,6 @@
                               </items>
                           </SplitMenuButton>
                          <Button minWidth="100.0" mnemonicParsing="false" onAction="#clearTab3" text="Clear" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                      </children>
                   </GridPane>
               </AnchorPane>
           </Tab>
