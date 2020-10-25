@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.Controller">
+   <top>
+      <TabPane prefHeight="301.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+          <Tab fx:id="tab1" text="Open/Close Account">
+              <AnchorPane fx:id="ocTab" minHeight="0.0" minWidth="0.0" prefWidth="600.0">
+                  <GridPane hgap="10.0" layoutX="13.0" layoutY="6.0" prefHeight="221.0" prefWidth="534.0">
+                      <columnConstraints>
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="136.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.0" minWidth="10.0" prefWidth="126.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.0" minWidth="10.0" prefWidth="128.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.0" minWidth="10.0" prefWidth="124.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                          <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                          <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                          <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                          <RowConstraints maxHeight="78.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                          <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                          <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+
+                      <RadioButton fx:id="savingRadio" mnemonicParsing="false" onAction="#enableCheckBoxRow" text="Savings" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                      <RadioButton fx:id="checkingRadio" mnemonicParsing="false" onAction="#enableCheckBoxRow" text="Checking" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                      <RadioButton fx:id="moneyMarketRadio" mnemonicParsing="false" onAction="#disableCheckBoxRow" text="Money Market" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                      <Label fx:id="dateLabel" text="Open Date:" GridPane.rowIndex="3" />
+                      <Label fx:id="balanceLabel" text="New Balance:" GridPane.rowIndex="2" />
+                      <Label text="Select Service:" />
+                      <RadioButton fx:id="openAccountRadio" layoutX="10.0" layoutY="69.0" mnemonicParsing="false" onAction="#selectOpenAccount" text="Open Account" GridPane.columnIndex="1" />
+                      <RadioButton fx:id="closeAccountRadio" layoutX="177.0" layoutY="15.0" mnemonicParsing="false" onAction="#selectCloseAccount" text="Close Account" GridPane.columnIndex="2" />
+                      <TextField fx:id="firstNameTF" promptText="first name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                      <TextField fx:id="lastName" promptText="last name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                      <TextField fx:id="balanceTF" promptText="999.99" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                      <TextField fx:id="monthTF" maxWidth="110.0" promptText="mm" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                      <Label text="Profile:" GridPane.rowIndex="1" />
+                      <Label text="Select Account Type:" GridPane.rowIndex="4" />
+                      <TextField fx:id="dayTF" layoutX="143.0" layoutY="162.0" maxWidth="110.0" promptText="dd" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                      <TextField fx:id="yearTF" layoutX="277.0" layoutY="162.0" maxWidth="110.0" promptText="yyyy" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                      <Label text="/" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                          <font>
+                              <Font size="18.0" />
+                          </font>
+                      </Label>
+                      <Label layoutX="272.0" layoutY="146.0" text="/" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                          <font>
+                              <Font size="18.0" />
+                          </font>
+                      </Label>
+                      <CheckBox fx:id="directDepositCheckBox" mnemonicParsing="false" text="Direct Deposit" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                      <Label fx:id="checkLabel" text="Check:" GridPane.rowIndex="5" />
+                  <CheckBox fx:id="loyaltyCheckBox" layoutX="153.0" layoutY="207.0" mnemonicParsing="false" text="Loyal Customer" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+
+                  </GridPane>
+                  <Button layoutX="156.0" layoutY="237.0" minWidth="100.0" mnemonicParsing="false" onAction="#processAccount" text="Process" />
+                  <Button layoutX="305.0" layoutY="237.0" minWidth="100.0" mnemonicParsing="false" onAction="#clearTab1" text="Clear" />
+              </AnchorPane>
+          </Tab>
+          <Tab fx:id="tab2" text="Deposit/Withdraw">
+              <AnchorPane fx:id="dwTab" minHeight="0.0" minWidth="0.0" prefWidth="560.0">
+                  <GridPane hgap="10.0" layoutX="16.0" layoutY="8.0" prefHeight="185.0" prefWidth="527.0">
+                      <columnConstraints>
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="130.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="121.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="115.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="10.0" prefWidth="147.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                          <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+                          <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+                          <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+                          <RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                      <Label text="Select Service:" GridPane.halignment="LEFT" />
+                      <RadioButton fx:id="checkingRadioDW" mnemonicParsing="false" text="Checking" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                      <RadioButton fx:id="savingRadioDW" mnemonicParsing="false" text="Savings" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                      <RadioButton fx:id="moneyMarketRadioDW" mnemonicParsing="false" text="Money Market" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                      <RadioButton fx:id="depositRadio" mnemonicParsing="false" text="Deposite" GridPane.columnIndex="1" />
+                      <RadioButton fx:id="withdrawRadio" mnemonicParsing="false" text="Withdraw" GridPane.columnIndex="2" />
+                      <Label text="Select Account Type:" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                      <Label text="Transaction Amount:" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                      <TextField fx:id="amountTextFiled" promptText="100.00" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                      <Label text="Profile:" GridPane.rowIndex="2" />
+                      <TextField fx:id="firstNameTextField" promptText="First Name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                      <TextField fx:id="lastNameTextField" promptText="Last Name" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  </GridPane>
+                  <Button layoutX="153.0" layoutY="208.0" minWidth="100.0" mnemonicParsing="false" onAction="#doTransaction" text="OK" />
+                  <Button layoutX="309.0" layoutY="208.0" minWidth="100.0" mnemonicParsing="false" onAction="#clearTab2" text="Clear" />
+              </AnchorPane>
+          </Tab>
+          <Tab fx:id="tab3" text="Account Database">
+              <AnchorPane fx:id="dbTab">
+                  <GridPane layoutX="24.0" layoutY="47.0" prefHeight="110.0" prefWidth="555.0">
+                      <columnConstraints>
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="191.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="414.0" minWidth="10.0" prefWidth="187.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="414.0" minWidth="10.0" prefWidth="177.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                      <children>
+                          <SplitMenuButton minWidth="160.0" mnemonicParsing="false" onAction="#importFile" prefHeight="28.0" prefWidth="91.0" text="Import / Export" GridPane.halignment="CENTER">
+                              <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#importFile" text="Import to Database" />
+                                  <MenuItem mnemonicParsing="false" onAction="#exportFile" text="Export to Text File" />
+                              </items>
+                          </SplitMenuButton>
+                          <SplitMenuButton minWidth="160.0" mnemonicParsing="false" onAction="#printAccounts" prefHeight="28.0" prefWidth="57.0" text="Print Accounts" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                              <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#printAccounts" text="Print Accounts" />
+                                  <MenuItem mnemonicParsing="false" onAction="#printByDate" text="Print by Open Date" />
+                                  <MenuItem mnemonicParsing="false" onAction="#printByLastName" text="Print by Last Name" />
+                              </items>
+                          </SplitMenuButton>
+                         <Button minWidth="100.0" mnemonicParsing="false" onAction="#clearTab3" text="Clear" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                      </children>
+                  </GridPane>
+              </AnchorPane>
+          </Tab>
+      </TabPane>
+   </top>
+   <bottom>
+         <GridPane prefHeight="199.0" prefWidth="576.0" BorderPane.alignment="CENTER">
+             <columnConstraints>
+                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+             </columnConstraints>
+             <rowConstraints>
+                 <RowConstraints maxHeight="195.0" minHeight="0.0" prefHeight="17.0" vgrow="SOMETIMES" />
+                 <RowConstraints maxHeight="273.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+             </rowConstraints>
+             <Label text="Feedback:" />
+             <TextArea fx:id="feedback" GridPane.rowIndex="1" />
+         <BorderPane.margin>
+            <Insets bottom="15.0" left="12.0" right="12.0" />
+         </BorderPane.margin>
+         </GridPane>
+   </bottom>
+</BorderPane>
