@@ -27,25 +27,28 @@ public class Controller {
 	@FXML
 	private TextArea feedback;
 
+	/** Enable balance, date and 1 of the 2 checkboxes.*/
 	@FXML
 	void selectOpenAccount() {
-		toggleBalanceAndDate(false);
+		disableBalanceAndDate(false);
 		if(!moneyMarketRadio.isSelected()) {
-			hideCheckBoxes(false);
+			disableCheckBoxes(false);
 			directDepositCheckBox.setDisable(savingRadio.isSelected());
 			loyaltyCheckBox.setDisable(checkingRadio.isSelected());
 		}
 	}
 
+	/** Disable balance, date and checkboxes.*/
 	@FXML
 	void selectCloseAccount() {
-		toggleBalanceAndDate(true);
-		hideCheckBoxes(true);
+		disableBalanceAndDate(true);
+		disableCheckBoxes(true);
 	}
 
+	/** Enable 1 of the 2 checkboxes as well as the label in this row.*/
 	@FXML
 	void enableCheckBoxRow() {
-		hideCheckBoxes(!openAccountRadio.isSelected());
+		disableCheckBoxes(!openAccountRadio.isSelected());
 		if (openAccountRadio.isSelected()) { // toggle checkbox when opening account.
 			if (checkingRadio.isSelected()) {
 				directDepositCheckBox.setDisable(false);
@@ -57,17 +60,36 @@ public class Controller {
 		}
 	}
 
+	/** Disable the row contains direct deposit and loyalty checkboxes.*/
 	@FXML
 	void disableCheckBoxRow() {
-		hideCheckBoxes(true);
+		disableCheckBoxes(true);
 	}
 
-	private void hideCheckBoxes(boolean bool) {
+	/**
+	 * Helper method to disable or enable checkboxes.
+	 * @param bool true: disable; false: enable.
+	 */
+	private void disableCheckBoxes(boolean bool) {
 		checkLabel.setDisable(bool);
 		directDepositCheckBox.setDisable(bool);
 		loyaltyCheckBox.setDisable(bool);
 	}
 
+	/**
+	 * Disable or enable the labels and text fields of the balance and date row.
+	 * @param bool true: disable; false: enable.
+	 */
+	private void disableBalanceAndDate(boolean bool) {
+		balanceLabel.setDisable(bool);
+		balanceTF.setDisable(bool);
+		dateLabel.setDisable(bool);
+		monthTF.setDisable(bool);
+		dayTF.setDisable(bool);
+		yearTF.setDisable(bool);
+	}
+
+	/** Clear text fields and text area in tab 1 (open and close account).*/
 	@FXML
 	void clearTab1 () {
 		firstNameTF.clear();
@@ -79,6 +101,7 @@ public class Controller {
 		feedback.clear();
 	}
 
+	/** Open or close account based on the user input.*/
 	@FXML
 	void processAccount() {
 		try {
@@ -95,6 +118,12 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Helper method to generate account holder's profile.
+	 * @param first first name
+	 * @param last last name
+	 * @return Profile object.
+	 */
 	private Profile getHolder(String first, String last) { // This method is also used in Tab 2.
 		if (first == null || last == null || first.length() == 0 || last.length() == 0) {
 			throw new IllegalArgumentException("ERROR! First name and last name CANNOT be empty!!!");
@@ -102,6 +131,11 @@ public class Controller {
 		return new Profile(first, last);
 	}
 
+	/**
+	 * Helper method to convert balance in string to balance in double.
+	 * @param s string which represents the new balance to be deposited.
+	 * @return balance in double.
+	 */
 	private double getBalance(String s) {
 		try {
 			double balance = Double.parseDouble(s);
@@ -112,6 +146,13 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Helper method to generate account's open date.
+	 * @param month integer month in string
+	 * @param day integer day in string
+	 * @param year integer year in string
+	 * @return  Date object
+	 */
 	private Date getDate(String month, String day, String year) {
 		try {
 			Date date = new Date(Integer.parseInt(month), Integer.parseInt(day), Integer.parseInt(year));
@@ -122,6 +163,12 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Helper method to open an account.
+	 * @param holder a Profile object.
+	 * @param balance new balance in double
+	 * @param date a Date project.
+	 */
 	private void openAccount(Profile holder, double balance, Date date) {
 		boolean added = false;
 		if (checkingRadio.isSelected()) {
@@ -134,6 +181,10 @@ public class Controller {
 		feedback.setText(added? "Added to database!" : "ERROR: account already exist!");
 	}
 
+	/**
+	 * Helper method to close an account.
+	 * @param holder a Profile object which contains the account holder's info.
+	 */
 	private void closeAccount(Profile holder) {
 		boolean removed = false; // if found, delete; else, report error.
 		if (checkingRadio.isSelected()) {
@@ -146,24 +197,14 @@ public class Controller {
 		feedback.setText(removed ? "Account Removed!" : "ERROR: account doesn't exist!");
 	}
 
-	private void toggleBalanceAndDate(boolean bool) {
-		balanceLabel.setDisable(bool);
-		balanceTF.setDisable(bool);
-		dateLabel.setDisable(bool);
-		monthTF.setDisable(bool);
-		dayTF.setDisable(bool);
-		yearTF.setDisable(bool);
-	}
-
 	// Tab 2: deposit and withdraw
-//	private final ToggleGroup transactionGroupDW = new ToggleGroup(), accountGroupDW = new ToggleGroup();
-
 	@FXML
 	private RadioButton depositRadio, withdrawRadio, checkingRadioDW, savingRadioDW, moneyMarketRadioDW;
 
 	@FXML
 	private TextField firstNameTextField, lastNameTextField, amountTextFiled;
 
+	/** Clear text fields and the text area in Tab 2 (deposit and withdraw).*/
 	@FXML
 	void clearTab2() {
 		firstNameTextField.clear();
@@ -172,6 +213,7 @@ public class Controller {
 		feedback.clear();
 	}
 
+	/** Deposit or withdraw based on user input.*/
 	@FXML
 	void doTransaction() {
 		try {
@@ -189,6 +231,11 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Helper method to deposit money into account.
+	 * @param holder account holder's Profile object.
+	 * @param amount amount in double to be deposited.
+	 */
 	private void deposit(Profile holder, double amount) {
 		boolean isSuccess = false;
 		if (checkingRadioDW.isSelected()) {
@@ -201,6 +248,11 @@ public class Controller {
 		feedback.setText(isSuccess ? "Deposited $" + amount : "ERROR: account does not exist!");
 	}
 
+	/**
+	 * Helper method to withdraw money from account.
+	 * @param holder account holder's Profile object.
+	 * @param amount amount in double to be withdrew.
+	 */
 	private void withdraw(Profile holder, double amount) {
 		int isSuccess = -1;
 		if (checkingRadioDW.isSelected()) {
@@ -214,6 +266,8 @@ public class Controller {
 	}
 
 	// Tab 3: Account Database
+
+	/** Import data from text file to the database.*/
 	@FXML
 	void importFile() {
 		FileChooser chooser = new FileChooser();
@@ -250,6 +304,7 @@ public class Controller {
 		}
 	}
 
+	/** Export data from database to text file.*/
 	@FXML
 	void exportFile() {
 		FileChooser chooser = new FileChooser();
@@ -271,27 +326,31 @@ public class Controller {
 		}
 	}
 
+	/** Display accounts in the database to the user interface.*/
 	@FXML
 	void printAccounts() {
 		feedback.setText(db.printAccounts());
 	}
 
+	/** Display accounts in the database to the user interface by the order of open date.*/
 	@FXML
 	void printByDate() {
 		feedback.setText(db.printByDateOpen());
 	}
 
+	/** Display accounts in the database to the user interface by the order of account holder's last name.*/
 	@FXML
 	void printByLastName() {
 		feedback.setText(db.printByLastName());
 	}
 
+	/** Clear text fields and the text area in Tab 3 (import/export and print).*/
 	@FXML
 	void clearTab3() {
 		feedback.clear();
 	}
 
-
+	/** Initialize the user interface by grouping radio buttons by category and setting default states*/
 	@FXML
 	public void initialize() { // initialize toggle groups and set components' default properties.
 		// initialize tab 1
@@ -302,10 +361,9 @@ public class Controller {
 		checkingRadio.setToggleGroup(accountTG);
 		savingRadio.setToggleGroup(accountTG);
 		moneyMarketRadio.setToggleGroup(accountTG);
-		// set default value
+		// set default state
 		openAccountRadio.setSelected(true);
 		checkingRadio.setSelected(true);
-		directDepositCheckBox.setSelected(false);
 		loyaltyCheckBox.setDisable(true);
 
 		// initialize tab 2
@@ -316,7 +374,7 @@ public class Controller {
 		checkingRadioDW.setToggleGroup(accountGroupDW);
 		savingRadioDW.setToggleGroup(accountGroupDW);
 		moneyMarketRadioDW.setToggleGroup(accountGroupDW);
-		// set default value
+		// set default state
 		depositRadio.setSelected(true);
 		checkingRadioDW.setSelected(true);
 	}
