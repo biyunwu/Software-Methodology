@@ -39,7 +39,7 @@
                           <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
                       </rowConstraints>
 
-                      <RadioButton fx:id="savingRadio" mnemonicParsing="false" onAction="#enableCheckBoxRow" text="Savings" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                         <RadioButton fx:id="savingRadio" mnemonicParsing="false" onAction="#enableCheckBoxRow" text="Savings" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                       <RadioButton fx:id="checkingRadio" mnemonicParsing="false" onAction="#enableCheckBoxRow" text="Checking" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                       <RadioButton fx:id="moneyMarketRadio" mnemonicParsing="false" onAction="#disableCheckBoxRow" text="Money Market" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                       <Label fx:id="dateLabel" text="Open Date:" GridPane.rowIndex="3" />
@@ -69,7 +69,7 @@
                       <Label fx:id="checkLabel" text="Check:" GridPane.rowIndex="5" />
                   <CheckBox fx:id="loyaltyCheckBox" layoutX="153.0" layoutY="207.0" mnemonicParsing="false" text="Loyal Customer" GridPane.columnIndex="2" GridPane.rowIndex="5" />
 
-                  </GridPane>
+                     </GridPane>
                   <Button layoutX="156.0" layoutY="237.0" minWidth="100.0" mnemonicParsing="false" onAction="#processAccount" text="Process" />
                   <Button layoutX="305.0" layoutY="237.0" minWidth="100.0" mnemonicParsing="false" onAction="#clearTab1" text="Clear" />
               </AnchorPane>
@@ -136,8 +136,8 @@
           </Tab>
       </TabPane>
    </top>
-   <bottom>
-         <GridPane prefHeight="199.0" prefWidth="576.0" BorderPane.alignment="CENTER">
+   <center>
+         <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
              <columnConstraints>
                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
              </columnConstraints>
@@ -146,10 +146,10 @@
                  <RowConstraints maxHeight="273.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
              </rowConstraints>
              <Label text="Feedback:" />
-             <TextArea fx:id="feedback" GridPane.rowIndex="1" />
+             <TextArea fx:id="feedback" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" />
          <BorderPane.margin>
             <Insets bottom="15.0" left="12.0" right="12.0" />
          </BorderPane.margin>
          </GridPane>
-   </bottom>
+   </center>
 </BorderPane>

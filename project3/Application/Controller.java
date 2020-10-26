@@ -1,5 +1,11 @@
 package Application;
 
+/**
+ * JavaFX controller class.
+ *
+ * @author Biyun Wu, Anthony Triolo
+ */
+
 import Application.Model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -85,13 +91,18 @@ public class Controller {
 	/** Clear text fields and text area in tab 1 (open and close account).*/
 	@FXML
 	void clearTab1 () {
+		clearTextFieldsTab1();
+		feedback.clear();
+	}
+
+	/** Clear text fields in tab 1.*/
+	private void clearTextFieldsTab1() {
 		firstNameTF.clear();
 		lastName.clear();
 		balanceTF.clear();
 		monthTF.clear();
 		dayTF.clear();
 		yearTF.clear();
-		feedback.clear();
 	}
 
 	/** Open or close account based on the user input.*/
@@ -99,16 +110,27 @@ public class Controller {
 	void processAccount() {
 		try {
 			if (openAccountRadio.isSelected()) {
-				Profile holder = getHolder(firstNameTF.getText(), lastName.getText());
-				double balance = getBalance(balanceTF.getText());
-				Date date = getDate(monthTF.getText(), dayTF.getText(), yearTF.getText());
+				Profile holder = getHolder(getStr(firstNameTF), getStr(lastName));
+				double balance = getBalance(getStr(balanceTF));
+				Date date = getDate(getStr(monthTF), getStr(dayTF), getStr(yearTF));
 				openAccount(holder, balance, date);
 			} else if (closeAccountRadio.isSelected()){
-				closeAccount(getHolder(firstNameTF.getText(), lastName.getText()));
+				closeAccount(getHolder(getStr(firstNameTF), getStr(lastName)));
 			}
 		} catch (Exception e) {
-			feedback.setText(e.toString());
+			feedback.appendText(e.getMessage()+"\n");
+		} finally {
+			clearTextFieldsTab1();
 		}
+	}
+
+	/**
+	 * Get rid of whitespaces in the string.
+	 * @param tf Text Field contains string to be processes.
+	 * @return string without whitespaces.
+	 */
+	private String getStr(TextField tf) { // this method is also used in tab 2.
+		return tf.getText().replaceAll("\\s+", "");
 	}
 
 	/**
@@ -171,7 +193,8 @@ public class Controller {
 		} else if (moneyMarketRadio.isSelected()) {
 			added = db.add(new MoneyMarket(holder, balance, date));
 		}
-		feedback.setText(added? "Added to database!" : "ERROR: account already exist!");
+		String message = added? "Added to database!" : "ERROR: account already exist!";
+		feedback.appendText(message + "\n");
 	}
 
 	/**
@@ -187,7 +210,8 @@ public class Controller {
 		} else if (moneyMarketRadio.isSelected()) {
 			removed = db.remove(new MoneyMarket(holder, 0, null));
 		}
-		feedback.setText(removed ? "Account Removed!" : "ERROR: account doesn't exist!");
+		String message = removed ? "Account Removed!" : "ERROR: account doesn't exist!";
+		feedback.appendText(message + "\n");
 	}
 
 	// Tab 2: deposit and withdraw
@@ -200,27 +224,34 @@ public class Controller {
 	/** Clear text fields and the text area in Tab 2 (deposit and withdraw).*/
 	@FXML
 	void clearTab2() {
+		clearTextFieldsTab2();
+		feedback.clear();
+	}
+
+	/** Clear text fields in tab 2.*/
+	private void clearTextFieldsTab2() {
 		firstNameTextField.clear();
 		lastNameTextField.clear();
 		amountTextFiled.clear();
-		feedback.clear();
 	}
 
 	/** Deposit or withdraw based on user input.*/
 	@FXML
 	void doTransaction() {
 		try {
-			Profile holder = getHolder(firstNameTextField.getText(), lastNameTextField.getText());
-			double amount = Double.parseDouble(amountTextFiled.getText());
+			Profile holder = getHolder(getStr(firstNameTextField), getStr(lastNameTextField));
+			double amount = Double.parseDouble(getStr(amountTextFiled));
 			if (depositRadio.isSelected()) { // deposit
 				deposit(holder, amount);
 			} else if (withdrawRadio.isSelected()) { // withdraw
 				withdraw(holder, amount);
 			}
 		} catch (NumberFormatException e) {
-			feedback.setText("ERROR: invalid amount, only numeric value is accepted!");
+			feedback.appendText("ERROR: invalid amount, only numeric value is accepted!\n");
 		} catch (Exception e) {
-			feedback.setText(e.toString());
+			feedback.appendText(e.getMessage() + "\n");
+		} finally {
+			clearTextFieldsTab2();
 		}
 	}
 
@@ -238,7 +269,8 @@ public class Controller {
 		} else if (moneyMarketRadioDW.isSelected()) {
 			isSuccess = db.deposit(new MoneyMarket(holder, 0, null), amount);
 		}
-		feedback.setText(isSuccess ? "Deposited $" + amount : "ERROR: account does not exist!");
+		String message = isSuccess ? "Deposited $" + amount : "ERROR: account does not exist!";
+		feedback.appendText(message + "\n");
 	}
 
 	/**
@@ -255,11 +287,11 @@ public class Controller {
 		} else if (moneyMarketRadioDW.isSelected()) {
 			isSuccess = db.withdrawal(new MoneyMarket(holder, 0, null), amount);
 		}
-		feedback.setText(isSuccess == 0 ? "Withdrew $" + amount : "ERROR: account does not exist or no sufficient fund!");
+		String message = isSuccess == 0 ? "Withdrew $" + amount : "ERROR: account does not exist or no sufficient fund!";
+		feedback.appendText(message + "\n");
 	}
 
 	// Tab 3: Account Database
-
 	/** Import data from text file to the database.*/
 	@FXML
 	void importFile() {
@@ -271,7 +303,7 @@ public class Controller {
 		File sourceFile = chooser.showOpenDialog(stage);
 		try {
 			if (sourceFile == null) throw new IllegalArgumentException("no source file selected!");
-			feedback.setText("importing...\n");
+			feedback.appendText("importing...\n");
 			BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
 			reader.lines().forEach(line -> {
 				feedback.appendText(line + "\n"); // for test
@@ -289,11 +321,11 @@ public class Controller {
 			reader.close();
 			feedback.appendText("finished!\n");
 		} catch (FileNotFoundException e) {
-			feedback.setText("Failed opening file!\n" + e.toString());
+			feedback.appendText("Failed opening file: " + e.getMessage() + "\n");
 		} catch (IllegalArgumentException e) {
-			feedback.setText(e.toString());
+			feedback.appendText(e.getMessage() + "\n");
 		} catch (Exception e) {
-			feedback.setText("import stopped!");
+			feedback.appendText("import stopped!" + "\n");
 		}
 	}
 
@@ -311,30 +343,30 @@ public class Controller {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(targetFile));
 			writer.append(db.export());
 			writer.close();
-			feedback.setText("export finished!");
+			feedback.appendText("export finished!\n");
 		} catch (IllegalArgumentException e) {
-			feedback.setText(e.toString());
+			feedback.appendText(e.getMessage() + "\n");
 		} catch (Exception e) {
-			feedback.setText("export stopped: \n" + e.toString());
+			feedback.appendText("export stopped: " + e.getMessage() + "\n");
 		}
 	}
 
 	/** Display accounts in the database to the user interface.*/
 	@FXML
 	void printAccounts() {
-		feedback.setText(db.printAccounts());
+		feedback.appendText(db.printAccounts() + "\n");
 	}
 
 	/** Display accounts in the database to the user interface by the order of open date.*/
 	@FXML
 	void printByDate() {
-		feedback.setText(db.printByDateOpen());
+		feedback.appendText(db.printByDateOpen() + "\n");
 	}
 
 	/** Display accounts in the database to the user interface by the order of account holder's last name.*/
 	@FXML
 	void printByLastName() {
-		feedback.setText(db.printByLastName());
+		feedback.appendText(db.printByLastName() + "\n");
 	}
 
 	/** Clear text fields and the text area in Tab 3 (import/export and print).*/
@@ -343,9 +375,9 @@ public class Controller {
 		feedback.clear();
 	}
 
-	/** Initialize the user interface by grouping radio buttons by category and setting default states*/
+	/** Initialize the user interface through grouping radio buttons by category and setting default states*/
 	@FXML
-	public void initialize() { // initialize toggle groups and set components' default properties.
+	public void initialize() {
 		// initialize tab 1
 		ToggleGroup serviceTG = new ToggleGroup(); // service toggle group.
 		openAccountRadio.setToggleGroup(serviceTG);
