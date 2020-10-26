@@ -37,12 +37,6 @@ public class MoneyMarket extends Account {
 	 * @return The amount of monthly interest
 	 */
 	@Override
-	public void debit(double amount) {
-		super.debit(amount);
-		this.withdrawals++;
-	}
-
-	@Override
 	public double monthlyInterest() {
 		double INTEREST_RATE = 0.0065;
 		double MONTHS = 12;
