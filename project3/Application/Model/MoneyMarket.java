@@ -45,6 +45,11 @@ public class MoneyMarket extends Account {
 		this.withdrawals++;
 	}
 
+	/**
+	 * Calculates the monthly interest on a MoneyMarket account
+	 *
+	 * @return The amount of monthly interest
+	 */
 	@Override
 	public double monthlyInterest() {
 		double INTEREST_RATE = 0.0065;
