@@ -1,8 +1,10 @@
 package Application;
 
 /**
- * JavaFX controller class.
- *
+ * Definition of the JavaFX Controller class. 
+ * This class defines all of the elements within the UI and 
+ * contains all of the methods that are used by each UI element.
+ * 
  * @author Biyun Wu, Anthony Triolo
  */
 
@@ -13,11 +15,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.text.DecimalFormat;
 
 public class Controller {
 	private final AccountDatabase db = new AccountDatabase(); // Model: shared between tabs.
+	private final DecimalFormat df = new DecimalFormat("0.00");
 
-	// Tab 1
+	// Tab 1 Items
 	@FXML
 	private RadioButton openAccountRadio, closeAccountRadio, savingRadio, checkingRadio, moneyMarketRadio;
 
@@ -33,23 +37,23 @@ public class Controller {
 	@FXML
 	private TextArea feedback;
 
-	/** Enable balance, date and 1 of the 2 checkboxes.*/
+	/** Enable balance, date and 1 of the 2 checkboxes. */
 	@FXML
 	void selectOpenAccount() {
 		disableBalanceAndDate(false);
-		if(!moneyMarketRadio.isSelected()) {
+		if (!moneyMarketRadio.isSelected()) {
 			enableCheckBoxRow();
 		}
 	}
 
-	/** Disable balance, date and checkboxes.*/
+	/** Disable balance, date and checkboxes. */
 	@FXML
 	void selectCloseAccount() {
 		disableBalanceAndDate(true);
 		disableCheckBoxRow();
 	}
 
-	/** Enable 1 of the 2 checkboxes as well as the label in this row.*/
+	/** Enable 1 of the 2 checkboxes as well as the label in this row. */
 	@FXML
 	void enableCheckBoxRow() {
 		if (openAccountRadio.isSelected()) {
@@ -67,16 +71,19 @@ public class Controller {
 		}
 	}
 
-	/** Disable the row contains direct deposit and loyalty checkboxes.*/
+	/** Disable the row contains direct deposit and loyalty checkboxes. */
 	@FXML
 	void disableCheckBoxRow() {
 		checkLabel.setDisable(true);
 		directDepositCheckBox.setDisable(true);
+		directDepositCheckBox.setSelected(false);
 		loyaltyCheckBox.setDisable(true);
+		loyaltyCheckBox.setSelected(false);
 	}
 
 	/**
 	 * Disable or enable the labels and text fields of the balance and date row.
+	 * 
 	 * @param bool true: disable; false: enable.
 	 */
 	private void disableBalanceAndDate(boolean bool) {
@@ -88,14 +95,14 @@ public class Controller {
 		yearTF.setDisable(bool);
 	}
 
-	/** Clear text fields and text area in tab 1 (open and close account).*/
+	/** Clear text fields and text area in tab 1 (open and close account). */
 	@FXML
-	void clearTab1 () {
+	void clearTab1() {
 		clearTextFieldsTab1();
 		feedback.clear();
 	}
 
-	/** Clear text fields in tab 1.*/
+	/** Clear text fields in tab 1. */
 	private void clearTextFieldsTab1() {
 		firstNameTF.clear();
 		lastName.clear();
@@ -105,7 +112,7 @@ public class Controller {
 		yearTF.clear();
 	}
 
-	/** Open or close account based on the user input.*/
+	/** Open or close account based on the user input. */
 	@FXML
 	void processAccount() {
 		try {
@@ -114,11 +121,11 @@ public class Controller {
 				double balance = getBalance(getStr(balanceTF));
 				Date date = getDate(getStr(monthTF), getStr(dayTF), getStr(yearTF));
 				openAccount(holder, balance, date);
-			} else if (closeAccountRadio.isSelected()){
+			} else if (closeAccountRadio.isSelected()) {
 				closeAccount(getHolder(getStr(firstNameTF), getStr(lastName)));
 			}
 		} catch (Exception e) {
-			feedback.appendText(e.getMessage()+"\n");
+			feedback.appendText(e.getMessage() + "\n");
 		} finally {
 			clearTextFieldsTab1();
 		}
@@ -126,6 +133,7 @@ public class Controller {
 
 	/**
 	 * Get rid of whitespaces in the string.
+	 * 
 	 * @param tf Text Field contains string to be processes.
 	 * @return string without whitespaces.
 	 */
@@ -135,54 +143,60 @@ public class Controller {
 
 	/**
 	 * Helper method to generate account holder's profile.
-	 * @param first first name
-	 * @param last last name
+	 * 
+	 * @param first: first name
+	 * @param last:  last name
 	 * @return Profile object.
 	 */
 	private Profile getHolder(String first, String last) { // This method is also used in Tab 2.
 		if (first == null || last == null || first.length() == 0 || last.length() == 0) {
-			throw new IllegalArgumentException("ERROR! First name and last name CANNOT be empty!!!");
+			throw new IllegalArgumentException("ERROR: First name and last name CANNOT be empty!!!");
 		}
 		return new Profile(first, last);
 	}
 
 	/**
 	 * Helper method to convert balance in string to balance in double.
+	 * 
 	 * @param s string which represents the new balance to be deposited.
 	 * @return balance in double.
 	 */
 	private double getBalance(String s) {
 		try {
 			double balance = Double.parseDouble(s);
-			if (balance < 0) throw new IllegalArgumentException("ERROR: negative number is not allowed!");
+			if (balance < 0)
+				throw new IllegalArgumentException("ERROR: Negative number is not allowed!");
 			return balance;
 		} catch (NumberFormatException e) {
-			throw new NumberFormatException("ERROR: Balance filed requires integer or decimal input!");
+			throw new NumberFormatException("ERROR: Balance field requires integer or decimal input!");
 		}
 	}
 
 	/**
 	 * Helper method to generate account's open date.
+	 * 
 	 * @param month integer month in string
-	 * @param day integer day in string
-	 * @param year integer year in string
-	 * @return  Date object
+	 * @param day   integer day in string
+	 * @param year  integer year in string
+	 * @return Date object
 	 */
 	private Date getDate(String month, String day, String year) {
 		try {
 			Date date = new Date(Integer.parseInt(month), Integer.parseInt(day), Integer.parseInt(year));
-			if (!date.isValid()) throw new IllegalArgumentException("ERROR: invalid date!");
+			if (!date.isValid())
+				throw new IllegalArgumentException("ERROR: Invalid date!");
 			return date;
 		} catch (NumberFormatException e) {
-			throw new NumberFormatException("ERROR: date fields require integer input!");
+			throw new NumberFormatException("ERROR: Date fields require integer input!");
 		}
 	}
 
 	/**
 	 * Helper method to open an account.
-	 * @param holder a Profile object.
+	 * 
+	 * @param holder  a Profile object.
 	 * @param balance new balance in double
-	 * @param date a Date project.
+	 * @param date    a Date project.
 	 */
 	private void openAccount(Profile holder, double balance, Date date) {
 		boolean added = false;
@@ -193,12 +207,13 @@ public class Controller {
 		} else if (moneyMarketRadio.isSelected()) {
 			added = db.add(new MoneyMarket(holder, balance, date));
 		}
-		String message = added? "Added to database!" : "ERROR: account already exist!";
+		String message = added ? "Added to database!" : "ERROR: Account already exist!";
 		feedback.appendText(message + "\n");
 	}
 
 	/**
 	 * Helper method to close an account.
+	 * 
 	 * @param holder a Profile object which contains the account holder's info.
 	 */
 	private void closeAccount(Profile holder) {
@@ -210,7 +225,7 @@ public class Controller {
 		} else if (moneyMarketRadio.isSelected()) {
 			removed = db.remove(new MoneyMarket(holder, 0, null));
 		}
-		String message = removed ? "Account Removed!" : "ERROR: account doesn't exist!";
+		String message = removed ? "Account Removed!" : "ERROR: Account doesn't exist!";
 		feedback.appendText(message + "\n");
 	}
 
@@ -219,35 +234,36 @@ public class Controller {
 	private RadioButton depositRadio, withdrawRadio, checkingRadioDW, savingRadioDW, moneyMarketRadioDW;
 
 	@FXML
-	private TextField firstNameTextField, lastNameTextField, amountTextFiled;
+	private TextField firstNameTextField, lastNameTextField, amountTextField;
 
-	/** Clear text fields and the text area in Tab 2 (deposit and withdraw).*/
+	/** Clear text fields and the text area in Tab 2 (deposit and withdraw). */
 	@FXML
 	void clearTab2() {
 		clearTextFieldsTab2();
 		feedback.clear();
 	}
 
-	/** Clear text fields in tab 2.*/
+	/** Clear text fields in tab 2. */
 	private void clearTextFieldsTab2() {
 		firstNameTextField.clear();
 		lastNameTextField.clear();
-		amountTextFiled.clear();
+		amountTextField.clear();
 	}
 
-	/** Deposit or withdraw based on user input.*/
+	/** Deposit or withdraw based on user input. */
 	@FXML
 	void doTransaction() {
 		try {
 			Profile holder = getHolder(getStr(firstNameTextField), getStr(lastNameTextField));
-			double amount = Double.parseDouble(getStr(amountTextFiled));
+			double amount = Double.parseDouble(getStr(amountTextField));
+			if (amount < 0) throw new IllegalArgumentException("ERROR: Transaction amount should NOT be negative");
 			if (depositRadio.isSelected()) { // deposit
 				deposit(holder, amount);
 			} else if (withdrawRadio.isSelected()) { // withdraw
 				withdraw(holder, amount);
 			}
 		} catch (NumberFormatException e) {
-			feedback.appendText("ERROR: invalid amount, only numeric value is accepted!\n");
+			feedback.appendText("ERROR: Invalid amount, only numeric value is accepted!\n");
 		} catch (Exception e) {
 			feedback.appendText(e.getMessage() + "\n");
 		} finally {
@@ -257,6 +273,7 @@ public class Controller {
 
 	/**
 	 * Helper method to deposit money into account.
+	 * 
 	 * @param holder account holder's Profile object.
 	 * @param amount amount in double to be deposited.
 	 */
@@ -269,12 +286,13 @@ public class Controller {
 		} else if (moneyMarketRadioDW.isSelected()) {
 			isSuccess = db.deposit(new MoneyMarket(holder, 0, null), amount);
 		}
-		String message = isSuccess ? "Deposited $" + amount : "ERROR: account does not exist!";
+		String message = isSuccess ? "Deposited $" + df.format(amount) : "ERROR: Account does not exist!";
 		feedback.appendText(message + "\n");
 	}
 
 	/**
 	 * Helper method to withdraw money from account.
+	 * 
 	 * @param holder account holder's Profile object.
 	 * @param amount amount in double to be withdrew.
 	 */
@@ -287,12 +305,13 @@ public class Controller {
 		} else if (moneyMarketRadioDW.isSelected()) {
 			isSuccess = db.withdrawal(new MoneyMarket(holder, 0, null), amount);
 		}
-		String message = isSuccess == 0 ? "Withdrew $" + amount : "ERROR: account does not exist or no sufficient fund!";
+		String message = isSuccess == 0 ? "Withdrew $" + df.format(amount)
+				: "ERROR: Account does not exist or no sufficient fund!";
 		feedback.appendText(message + "\n");
 	}
 
 	// Tab 3: Account Database
-	/** Import data from text file to the database.*/
+	/** Import data from text file to the database. */
 	@FXML
 	void importFile() {
 		FileChooser chooser = new FileChooser();
@@ -302,34 +321,35 @@ public class Controller {
 		Stage stage = new Stage();
 		File sourceFile = chooser.showOpenDialog(stage);
 		try {
-			if (sourceFile == null) throw new IllegalArgumentException("no source file selected!");
-			feedback.appendText("importing...\n");
+			if (sourceFile == null)
+				throw new IllegalArgumentException("No source file selected!");
+			feedback.appendText("Importing...\n");
 			BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
 			reader.lines().forEach(line -> {
 				feedback.appendText(line + "\n"); // for test
 				String[] params = line.split(",");
 				Profile holder = new Profile(params[1], params[2]);
 				double balance = Double.parseDouble(params[3]);
-				Date date = new Date(params[4]); // need to verify date string here?
+				Date date = new Date(params[4]);
 				switch (line.charAt(0)) {
-					case 'C' -> db.add(new Checking(holder, balance, date, Boolean.parseBoolean(params[5])));
-					case 'S' -> db.add(new Savings(holder, balance, date, Boolean.parseBoolean(params[5])));
-					case 'M' -> db.add(new MoneyMarket(holder, balance, date, Integer.parseInt(params[5])));
-					default -> throw new IllegalArgumentException("Invalid line in file: " + line);
+				case 'C' -> db.add(new Checking(holder, balance, date, Boolean.parseBoolean(params[5])));
+				case 'S' -> db.add(new Savings(holder, balance, date, Boolean.parseBoolean(params[5])));
+				case 'M' -> db.add(new MoneyMarket(holder, balance, date, Integer.parseInt(params[5])));
+				default -> throw new IllegalArgumentException("Invalid line in file: " + line);
 				}
 			});
 			reader.close();
-			feedback.appendText("finished!\n");
+			feedback.appendText("Finished!\n");
 		} catch (FileNotFoundException e) {
 			feedback.appendText("Failed opening file: " + e.getMessage() + "\n");
 		} catch (IllegalArgumentException e) {
 			feedback.appendText(e.getMessage() + "\n");
 		} catch (Exception e) {
-			feedback.appendText("import stopped!" + "\n");
+			feedback.appendText("Import stopped!" + "\n");
 		}
 	}
 
-	/** Export data from database to text file.*/
+	/** Export data from database to text file. */
 	@FXML
 	void exportFile() {
 		FileChooser chooser = new FileChooser();
@@ -339,45 +359,56 @@ public class Controller {
 		Stage stage = new Stage();
 		File targetFile = chooser.showSaveDialog(stage);
 		try {
-			if (targetFile == null) throw new IllegalArgumentException("export cancelled!");
+			if (targetFile == null)
+				throw new IllegalArgumentException("Export cancelled!");
 			BufferedWriter writer = new BufferedWriter(new FileWriter(targetFile));
 			writer.append(db.export());
 			writer.close();
-			feedback.appendText("export finished!\n");
+			feedback.appendText("Export finished!\n");
 		} catch (IllegalArgumentException e) {
 			feedback.appendText(e.getMessage() + "\n");
 		} catch (Exception e) {
-			feedback.appendText("export stopped: " + e.getMessage() + "\n");
+			feedback.appendText("Export stopped: " + e.getMessage() + "\n");
 		}
 	}
 
-	/** Display accounts in the database to the user interface.*/
+	/** Display accounts in the database to the user interface. */
 	@FXML
 	void printAccounts() {
-		feedback.appendText(db.printAccounts() + "\n");
+		feedback.appendText(db.printAccounts());
 	}
 
-	/** Display accounts in the database to the user interface by the order of open date.*/
+	/**
+	 * Display accounts in the database to the user interface by the order of open
+	 * date.
+	 */
 	@FXML
 	void printByDate() {
-		feedback.appendText(db.printByDateOpen() + "\n");
+		feedback.appendText(db.printByDateOpen());
 	}
 
-	/** Display accounts in the database to the user interface by the order of account holder's last name.*/
+	/**
+	 * Display accounts in the database to the user interface by the order of
+	 * account holder's last name.
+	 */
 	@FXML
 	void printByLastName() {
-		feedback.appendText(db.printByLastName() + "\n");
+		feedback.appendText(db.printByLastName());
 	}
 
-	/** Clear text fields and the text area in Tab 3 (import/export and print).*/
+	/** Clear text fields and the text area in Tab 3 (import/export and print). */
 	@FXML
 	void clearTab3() {
 		feedback.clear();
 	}
 
-	/** Initialize the user interface through grouping radio buttons by category and setting default states*/
+	/**
+	 * Initialize the user interface through grouping radio buttons by category and
+	 * setting default states
+	 */
 	@FXML
 	public void initialize() {
+		feedback.setEditable(false);
 		// initialize tab 1
 		ToggleGroup serviceTG = new ToggleGroup(); // service toggle group.
 		openAccountRadio.setToggleGroup(serviceTG);

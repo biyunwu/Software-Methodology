@@ -93,6 +93,7 @@ public class MoneyMarket extends Account {
 
 	/**
 	 * Convert account info to string.
+	 * 
 	 * @return account info in string.
 	 */
 	@Override

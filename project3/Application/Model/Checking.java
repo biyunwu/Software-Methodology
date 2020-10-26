@@ -71,6 +71,7 @@ public class Checking extends Account {
 
 	/**
 	 * Convert account info to string.
+	 * 
 	 * @return account info in string.
 	 */
 	@Override

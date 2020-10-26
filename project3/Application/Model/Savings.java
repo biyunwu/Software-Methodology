@@ -73,6 +73,7 @@ public class Savings extends Account {
 
 	/**
 	 * Convert account info to string.
+	 * 
 	 * @return account info in string.
 	 */
 	@Override

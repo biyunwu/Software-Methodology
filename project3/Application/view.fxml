@@ -97,7 +97,7 @@
                       <RadioButton fx:id="withdrawRadio" mnemonicParsing="false" text="Withdraw" GridPane.columnIndex="2" />
                       <Label text="Select Account Type:" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
                       <Label text="Transaction Amount:" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
-                      <TextField fx:id="amountTextFiled" promptText="100.00" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                      <TextField fx:id="amountTextField" promptText="100.00" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                       <Label text="Profile:" GridPane.rowIndex="2" />
                       <TextField fx:id="firstNameTextField" promptText="First Name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                       <TextField fx:id="lastNameTextField" promptText="Last Name" GridPane.columnIndex="2" GridPane.rowIndex="2" />
