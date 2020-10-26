@@ -354,33 +354,49 @@ public class Controller {
 				sc = new Scanner(sourceFile);
 			} catch (FileNotFoundException e) {
 				outputArea.appendText("File not found.\n");
+				return;
 			}
 			while (sc.hasNextLine()) {
 				try {
 					String line = sc.nextLine();
 					String[] tokens = line.split(",");
+					if (!tokens[1].matches("[a-zA-Z]+") || !tokens[2].matches("[a-zA-Z]+")) {
+						outputArea.appendText("Invalid first or last name.\n");
+						continue;
+					}
 					Profile profile = new Profile(tokens[1], tokens[2]);
 					Date date = new Date(tokens[4]);
 					if (!date.isValid()) {
-						outputArea.appendText("Invalid Date.");
+						outputArea.appendText("Invalid Date.\n");
 						continue;
 					}
 					if (tokens[0].equals("C")) {
 						Account newChecking = new Checking(profile, Double.parseDouble(tokens[3]), date,
 								Boolean.parseBoolean(tokens[5]));
-						db.add(newChecking);
+						if(!db.add(newChecking)) {
+							outputArea.appendText("Account is already in the database.\n");
+							continue;
+						}
 					} else if (tokens[0].equals("S")) {
 						Account newSavings = new Savings(profile, Double.parseDouble(tokens[3]), date,
 								Boolean.parseBoolean(tokens[5]));
-						db.add(newSavings);
+						if(!db.add(newSavings)) {
+							outputArea.appendText("Account is already in the database.\n");
+							continue;
+						}
 					} else {
 						MoneyMarket newMoneyMarket = new MoneyMarket(profile, Double.parseDouble(tokens[3]), date);
 						newMoneyMarket.setWithdrawals(Integer.parseInt(tokens[5]));
-						db.add(newMoneyMarket);
+						if(!db.add(newMoneyMarket)) {
+							outputArea.appendText("Account is already in the database.\n");
+							continue;
+						}
 					} 
 				} catch (NumberFormatException e) {
 					outputArea.appendText("Invalid parameter.\n");
 				} catch (NullPointerException e) {
+					outputArea.appendText("Invalid parameter.\n");
+				} catch (ArrayIndexOutOfBoundsException e) {
 					outputArea.appendText("Invalid parameter.\n");
 				}
 			}
