@@ -4,7 +4,7 @@ package Application;
  * Definition of the JavaFX Controller class. 
  * This class defines all of the elements within the UI and 
  * contains all of the methods that are used by each UI element.
- * 
+ *
  * @author Biyun Wu, Anthony Triolo
  */
 
@@ -52,7 +52,7 @@ public class Controller {
 		disableBalanceAndDate(true);
 		disableCheckBoxRow();
 	}
-
+  
 	/** Enable 1 of the 2 checkboxes as well as the label in this row. */
 	@FXML
 	void enableCheckBoxRow() {
@@ -197,7 +197,6 @@ public class Controller {
 	 * @param holder  a Profile object.
 	 * @param balance new balance in double
 	 * @param date    a Date project.
-	 */
 	private void openAccount(Profile holder, double balance, Date date) {
 		boolean added = false;
 		if (checkingRadio.isSelected()) {
