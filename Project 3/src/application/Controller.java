@@ -336,6 +336,10 @@ public class Controller {
 			fileWriter.close();
 		} catch (IOException e) {
 			outputArea.appendText("An error occurred exporting the file.\n");
+			return;
+		} catch(NullPointerException e) {
+			outputArea.appendText("No file selected.\n");
+			return;
 		}
 		outputArea.appendText("Exported to file.\n");
 	}
@@ -354,6 +358,9 @@ public class Controller {
 				sc = new Scanner(sourceFile);
 			} catch (FileNotFoundException e) {
 				outputArea.appendText("File not found.\n");
+				return;
+			} catch (NullPointerException e) {
+				outputArea.appendText("No file selected.\n");
 				return;
 			}
 			while (sc.hasNextLine()) {
