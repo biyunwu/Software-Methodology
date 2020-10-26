@@ -197,6 +197,7 @@ public class Controller {
 	 * @param holder  a Profile object.
 	 * @param balance new balance in double
 	 * @param date    a Date project.
+	 */
 	private void openAccount(Profile holder, double balance, Date date) {
 		boolean added = false;
 		if (checkingRadio.isSelected()) {
