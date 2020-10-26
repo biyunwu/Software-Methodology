@@ -1,9 +1,10 @@
 package Application.Model;
 
 /**
- * Definition of AccountDatabase
- * It has 2 member variables: an object array to store accounts, and the number of accounts in the array.
- * @author Biyun Wu, Anthony Triolo 
+ * Definition of AccountDatabase It has 2 member variables: an object array to
+ * store accounts, and the number of accounts in the array.
+ * 
+ * @author Biyun Wu, Anthony Triolo
  */
 
 public class AccountDatabase {
@@ -128,7 +129,11 @@ public class AccountDatabase {
 		mergeSort(true, 0, size);
 	}
 
-	/** Method to list accounts in order of date opened */
+	/**
+	 * Method to list accounts in order of date opened
+	 * 
+	 * @return String that contains list of accounts in order of date opened
+	 */
 	public String printByDateOpen() {
 		StringBuilder sb = new StringBuilder();
 		if (size == 0) {
@@ -136,12 +141,16 @@ public class AccountDatabase {
 			return sb.toString();
 		}
 		sortByDateOpen();
-		sb.append("\n--Printing statements by date opened--\n");
+		sb.append("--Printing statements by date opened--\n");
 		sb.append(printDetail());
 		return sb.toString();
 	}
 
-	/** Method to list accounts in order of last name */
+	/**
+	 * Method to list accounts in order of last name
+	 * 
+	 * @return String that contains list of accounts in order of last name
+	 */
 	public String printByLastName() {
 		StringBuilder sb = new StringBuilder();
 		if (size == 0) {
@@ -149,12 +158,16 @@ public class AccountDatabase {
 			return sb.toString();
 		}
 		sortByLastName();
-		sb.append("\n--Printing statements by last name--\n");
+		sb.append("--Printing statements by last name--\n");
 		sb.append(printDetail());
 		return sb.toString();
 	}
 
-	/** Method to list accounts in database */
+	/**
+	 * Method to list accounts in database
+	 * 
+	 * @return String that contains list of accounts
+	 */
 	public String printAccounts() {
 		StringBuilder sb = new StringBuilder();
 		if (size == 0) {
@@ -171,6 +184,7 @@ public class AccountDatabase {
 
 	/**
 	 * Stringify accounts.
+	 * 
 	 * @return string that contains accounts info (1 account per line).
 	 */
 	public String export() {
@@ -181,7 +195,12 @@ public class AccountDatabase {
 		return sb.toString();
 	}
 
-	/** Helper method to print account balance, as well as any interest or fees */
+	/**
+	 * Helper method to print account balance, as well as any interest or fees
+	 * 
+	 * @return StringBuilder that contains all of the details of the accounts in the
+	 *         database
+	 */
 	private StringBuilder printDetail() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < size; i++) {
@@ -194,16 +213,16 @@ public class AccountDatabase {
 					accounts[i].getBalance());
 			sb.append(s);
 		}
-		sb.append("--end of printing--\n\n");
+		sb.append("--end of printing--\n");
 		return sb;
 	}
 
 	/**
 	 * Helper recursive mergesort method.
 	 *
-	 * @param toSortByLastName 	Whether or not to sort by last name
-	 * @param low 	first index of the array to be sorted
-	 * @param high 	(last index of the array to be sorted) + 1
+	 * @param toSortByLastName Whether or not to sort by last name
+	 * @param low              first index of the array to be sorted
+	 * @param high             (last index of the array to be sorted) + 1
 	 */
 	private void mergeSort(boolean toSortByLastName, int low, int high) { // Sort accounts[low, high)
 		if (high - low <= 1) { // Base case.
@@ -218,10 +237,10 @@ public class AccountDatabase {
 	/**
 	 * Helper method to merge two sub-arrays for mergesort
 	 *
-	 * @param toSortByLastName 	Whether or not to sort by last name
-	 * @param low	first index of the first sub-array
-	 * @param mid	first index of the second sub-array
-	 * @param high 	(last index of the second sub-array) + 1
+	 * @param toSortByLastName Whether or not to sort by last name
+	 * @param low              first index of the first sub-array
+	 * @param mid              first index of the second sub-array
+	 * @param high             (last index of the second sub-array) + 1
 	 */
 	private void mergeSubArrays(boolean toSortByLastName, int low, int mid, int high) {
 		// Merge accounts[lo, mid) with accounts[mid, hi) into temp[0, hi-lo)
@@ -234,9 +253,8 @@ public class AccountDatabase {
 				temp[k] = accounts[j++];
 			} else if (j == high) {
 				temp[k] = accounts[i++];
-			} else if ((toSortByLastName
-						? accounts[j].compareLastNameTo(accounts[i])
-						: accounts[j].compareDateTo(accounts[i])) < 0) {
+			} else if ((toSortByLastName ? accounts[j].compareLastNameTo(accounts[i])
+					: accounts[j].compareDateTo(accounts[i])) < 0) {
 				temp[k] = accounts[j++];
 			} else {
 				temp[k] = accounts[i++];

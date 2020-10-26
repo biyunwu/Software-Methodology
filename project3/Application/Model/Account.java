@@ -28,6 +28,7 @@ public abstract class Account {
 
 	/**
 	 * Helper method to take money out of an account
+	 * 
 	 * @param amount: The amount of money to take out
 	 */
 	public void debit(double amount) {
@@ -36,6 +37,7 @@ public abstract class Account {
 
 	/**
 	 * Helper method to add money to an account
+	 * 
 	 * @param amount: The amount of money to add
 	 */
 	public void credit(double amount) {
@@ -54,6 +56,7 @@ public abstract class Account {
 
 	/**
 	 * Helper method to compare the last names of two accounts
+	 * 
 	 * @param account: The account to compare to
 	 * @return The result of comparing the profiles of each account
 	 */
@@ -63,6 +66,7 @@ public abstract class Account {
 
 	/**
 	 * Helper method to compare the dates of two accounts
+	 * 
 	 * @param account: The account to compare to
 	 * @return The result of comparing the dates of each account
 	 */
@@ -72,6 +76,7 @@ public abstract class Account {
 
 	/**
 	 * Gets the balance of an account
+	 * 
 	 * @return the balance of the calling account
 	 */
 	public double getBalance() {
@@ -80,6 +85,7 @@ public abstract class Account {
 
 	/**
 	 * Gets the profile of an account
+	 * 
 	 * @return the profile associated with the calling account
 	 */
 	public Profile getProfile() {
@@ -100,7 +106,6 @@ public abstract class Account {
 	 */
 	public abstract double monthlyFee();
 
-	
 	/**
 	 * Check if two accounts are the same
 	 * 
@@ -111,6 +116,7 @@ public abstract class Account {
 
 	/**
 	 * Stringify account info.
+	 * 
 	 * @return account info in string.
 	 */
 	public String export() {
