@@ -37,7 +37,8 @@ public class Profile {
 	 * Compare this Profile(name1) with given Profile(name2) based on last name.
 	 * 
 	 * @param p: Profile with name2
-	 * @return -1 if name1 is less than name2, 0 if name1 equals name2, otherwise, return 1.
+	 * @return -1 if name1 is less than name2, 0 if name1 equals name2, otherwise,
+	 *         return 1.
 	 */
 	public int compareTo(Profile p) {
 		String lastName1 = lname.toLowerCase();
@@ -54,7 +55,12 @@ public class Profile {
 		// Two last names have chars from index 0 to shorterLength - 1 identical.
 		return Integer.compare(lastName1.length(), lastName2.length());
 	}
-
+	
+	/**
+	 * Stringify profile.
+	 * 
+	 * @return full name separate by space.
+	 */
 	@Override
 	public String toString() {
 		return fname + " " + lname;
@@ -62,6 +68,7 @@ public class Profile {
 
 	/**
 	 * Stringify profile.
+	 * 
 	 * @return full name separate by comma.
 	 */
 	public String toStringSeparateByComma() {
