@@ -48,7 +48,7 @@
                       <RadioButton fx:id="openAccountRadio" layoutX="10.0" layoutY="69.0" mnemonicParsing="false" onAction="#selectOpenAccount" text="Open Account" GridPane.columnIndex="1" />
                       <RadioButton fx:id="closeAccountRadio" layoutX="177.0" layoutY="15.0" mnemonicParsing="false" onAction="#selectCloseAccount" text="Close Account" GridPane.columnIndex="2" />
                       <TextField fx:id="firstNameTF" promptText="first name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                      <TextField fx:id="lastName" promptText="last name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                      <TextField fx:id="lastNameTF" promptText="last name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                       <TextField fx:id="balanceTF" promptText="999.99" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                       <TextField fx:id="monthTF" maxWidth="110.0" promptText="mm" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                       <Label text="Profile:" GridPane.rowIndex="1" />
