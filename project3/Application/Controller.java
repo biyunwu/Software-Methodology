@@ -21,12 +21,12 @@ public class Controller {
 	private final AccountDatabase db = new AccountDatabase(); // Model: shared between tabs.
 	private final DecimalFormat df = new DecimalFormat("0.00");
 
-	// Tab 1 Items
+	// Tab 1: open and close account.
 	@FXML
 	private RadioButton openAccountRadio, closeAccountRadio, savingRadio, checkingRadio, moneyMarketRadio;
 
 	@FXML
-	private TextField firstNameTF, lastName, balanceTF, monthTF, dayTF, yearTF;
+	private TextField firstNameTF, lastNameTF, balanceTF, monthTF, dayTF, yearTF;
 
 	@FXML
 	private CheckBox directDepositCheckBox, loyaltyCheckBox;
@@ -35,7 +35,7 @@ public class Controller {
 	private Label balanceLabel, dateLabel, checkLabel;
 
 	@FXML
-	private TextArea feedback;
+	private TextArea feedback; // Shared between tabs.
 
 	/** Enable balance, date and 1 of the 2 checkboxes. */
 	@FXML
@@ -52,7 +52,7 @@ public class Controller {
 		disableBalanceAndDate(true);
 		disableCheckBoxRow();
 	}
-  
+
 	/** Enable 1 of the 2 checkboxes as well as the label in this row. */
 	@FXML
 	void enableCheckBoxRow() {
@@ -105,7 +105,7 @@ public class Controller {
 	/** Clear text fields in tab 1. */
 	private void clearTextFieldsTab1() {
 		firstNameTF.clear();
-		lastName.clear();
+		lastNameTF.clear();
 		balanceTF.clear();
 		monthTF.clear();
 		dayTF.clear();
@@ -117,12 +117,12 @@ public class Controller {
 	void processAccount() {
 		try {
 			if (openAccountRadio.isSelected()) {
-				Profile holder = getHolder(getStr(firstNameTF), getStr(lastName));
+				Profile holder = getHolder(getStr(firstNameTF), getStr(lastNameTF));
 				double balance = getBalance(getStr(balanceTF));
 				Date date = getDate(getStr(monthTF), getStr(dayTF), getStr(yearTF));
 				openAccount(holder, balance, date);
 			} else if (closeAccountRadio.isSelected()) {
-				closeAccount(getHolder(getStr(firstNameTF), getStr(lastName)));
+				closeAccount(getHolder(getStr(firstNameTF), getStr(lastNameTF)));
 			}
 		} catch (Exception e) {
 			feedback.appendText(e.getMessage() + "\n");
@@ -175,14 +175,19 @@ public class Controller {
 	/**
 	 * Helper method to generate account's open date.
 	 * 
-	 * @param month integer month in string
-	 * @param day   integer day in string
-	 * @param year  integer year in string
+	 * @param monthStr integer month in string
+	 * @param dayStr   integer day in string
+	 * @param yearStr  integer year in string
 	 * @return Date object
 	 */
-	private Date getDate(String month, String day, String year) {
+	private Date getDate(String monthStr, String dayStr, String yearStr) {
 		try {
-			Date date = new Date(Integer.parseInt(month), Integer.parseInt(day), Integer.parseInt(year));
+			int month = Integer.parseInt(monthStr);
+			int day = Integer.parseInt(dayStr);
+			int year = Integer.parseInt(yearStr);
+			if (month <= 0 || day <= 0 || year <= 0)
+				throw new IllegalArgumentException("ERROR: Date fields require positive integers!");
+			Date date = new Date(month, day, year);
 			if (!date.isValid())
 				throw new IllegalArgumentException("ERROR: Invalid date!");
 			return date;
@@ -408,7 +413,6 @@ public class Controller {
 	 */
 	@FXML
 	public void initialize() {
-		feedback.setEditable(false);
 		// initialize tab 1
 		ToggleGroup serviceTG = new ToggleGroup(); // service toggle group.
 		openAccountRadio.setToggleGroup(serviceTG);
@@ -420,7 +424,6 @@ public class Controller {
 		// set default state
 		openAccountRadio.setSelected(true);
 		checkingRadio.setSelected(true);
-		loyaltyCheckBox.setDisable(true);
 
 		// initialize tab 2
 		ToggleGroup transactionGroupDW = new ToggleGroup(); // transaction toggle group.
@@ -433,5 +436,10 @@ public class Controller {
 		// set default state
 		depositRadio.setSelected(true);
 		checkingRadioDW.setSelected(true);
+
+		feedback.setEditable(false);
+		feedback.textProperty().addListener( // always scroll text area to the bottom when new text is appended.
+				(observable, oldVal, newVal) -> feedback.setScrollTop(Double.MAX_VALUE)
+		);
 	}
 }
