@@ -52,7 +52,7 @@ public class Controller {
 		disableBalanceAndDate(true);
 		disableCheckBoxRow();
 	}
-  
+
 	/** Enable 1 of the 2 checkboxes as well as the label in this row. */
 	@FXML
 	void enableCheckBoxRow() {
