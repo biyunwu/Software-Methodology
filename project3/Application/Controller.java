@@ -311,7 +311,7 @@ public class Controller {
 			isSuccess = db.withdrawal(new MoneyMarket(holder, 0, null), amount);
 		}
 		String message = isSuccess == 0 ? "Withdrew $" + df.format(amount)
-				: "ERROR: Account does not exist or no sufficient fund!";
+				: "ERROR: Account does not exist or insufficient funds!";
 		feedback.appendText(message + "\n");
 	}
 
@@ -325,22 +325,39 @@ public class Controller {
 				new FileChooser.ExtensionFilter("All Files", "*.*"));
 		Stage stage = new Stage();
 		File sourceFile = chooser.showOpenDialog(stage);
+		feedback.appendText("Importing...\n");
 		try {
 			if (sourceFile == null)
 				throw new IllegalArgumentException("No source file selected!");
-			feedback.appendText("Importing...\n");
 			BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
 			reader.lines().forEach(line -> {
-				feedback.appendText(line + "\n"); // for test
-				String[] params = line.split(",");
-				Profile holder = new Profile(params[1], params[2]);
-				double balance = Double.parseDouble(params[3]);
-				Date date = new Date(params[4]);
-				switch (line.charAt(0)) {
-				case 'C' -> db.add(new Checking(holder, balance, date, Boolean.parseBoolean(params[5])));
-				case 'S' -> db.add(new Savings(holder, balance, date, Boolean.parseBoolean(params[5])));
-				case 'M' -> db.add(new MoneyMarket(holder, balance, date, Integer.parseInt(params[5])));
-				default -> throw new IllegalArgumentException("Invalid line in file: " + line);
+				try {
+					boolean added = false;
+					String[] params = line.split(",");
+					Profile holder = new Profile(params[1], params[2]);
+					double balance = Double.parseDouble(params[3]);
+					Date date = new Date(params[4]);
+				
+					if(!date.isValid()) {
+						feedback.appendText("ERROR: Invalid date in line: \"" + line + "\"!\n");
+						return;
+					}
+					switch (line.charAt(0)) {
+						case 'C' -> added = db.add(new Checking(holder, balance, date, Boolean.parseBoolean(params[5])));
+						case 'S' -> added = db.add(new Savings(holder, balance, date, Boolean.parseBoolean(params[5])));
+						case 'M' -> added = db.add(new MoneyMarket(holder, balance, date, Integer.parseInt(params[5])));
+						default -> {
+							feedback.appendText("Invalid command in line: \"" + line + "\"!\n");
+							return;
+						}
+					}
+					if(added == false) {
+						String message = "ERROR: Account already exist!";
+						feedback.appendText(message + "\n");
+					}
+				} catch (NumberFormatException e) {
+					feedback.appendText("ERROR: Invalid parameter type in line: \"" + line + "\"!\n");
+					return;
 				}
 			});
 			reader.close();
@@ -349,8 +366,8 @@ public class Controller {
 			feedback.appendText("Failed opening file: " + e.getMessage() + "\n");
 		} catch (IllegalArgumentException e) {
 			feedback.appendText(e.getMessage() + "\n");
-		} catch (Exception e) {
-			feedback.appendText("Import stopped!" + "\n");
+		} catch (IOException e) {
+			feedback.appendText("Import stopped!\n");
 		}
 	}
 
