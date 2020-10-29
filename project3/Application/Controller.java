@@ -311,7 +311,7 @@ public class Controller {
 			isSuccess = db.withdrawal(new MoneyMarket(holder, 0, null), amount);
 		}
 		String message = isSuccess == 0 ? "Withdrew $" + df.format(amount)
-				: "ERROR: Account does not exist or no sufficient fund!";
+				: "ERROR: Account does not exist or insufficient funds!";
 		feedback.appendText(message + "\n");
 	}
 
@@ -331,17 +331,22 @@ public class Controller {
 			feedback.appendText("Importing...\n");
 			BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
 			reader.lines().forEach(line -> {
-				feedback.appendText(line + "\n"); // for test
+				boolean added = false;
 				String[] params = line.split(",");
 				Profile holder = new Profile(params[1], params[2]);
 				double balance = Double.parseDouble(params[3]);
 				Date date = new Date(params[4]);
 				switch (line.charAt(0)) {
-				case 'C' -> db.add(new Checking(holder, balance, date, Boolean.parseBoolean(params[5])));
-				case 'S' -> db.add(new Savings(holder, balance, date, Boolean.parseBoolean(params[5])));
-				case 'M' -> db.add(new MoneyMarket(holder, balance, date, Integer.parseInt(params[5])));
+				case 'C' -> added = db.add(new Checking(holder, balance, date, Boolean.parseBoolean(params[5])));
+				case 'S' -> added = db.add(new Savings(holder, balance, date, Boolean.parseBoolean(params[5])));
+				case 'M' -> added = db.add(new MoneyMarket(holder, balance, date, Integer.parseInt(params[5])));
 				default -> throw new IllegalArgumentException("Invalid line in file: " + line);
 				}
+				if(added == false) {
+					String message = "ERROR: Account already exist!";
+					feedback.appendText(message + "\n");
+				}
+				
 			});
 			reader.close();
 			feedback.appendText("Finished!\n");
@@ -350,7 +355,7 @@ public class Controller {
 		} catch (IllegalArgumentException e) {
 			feedback.appendText(e.getMessage() + "\n");
 		} catch (Exception e) {
-			feedback.appendText("Import stopped!" + "\n");
+			feedback.appendText("Import stopped!\n");
 		}
 	}
 
