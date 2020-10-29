@@ -366,7 +366,7 @@ public class Controller {
 			feedback.appendText("Failed opening file: " + e.getMessage() + "\n");
 		} catch (IllegalArgumentException e) {
 			feedback.appendText(e.getMessage() + "\n");
-		} catch (IOException e) {
+		} catch (Exception e) {
 			feedback.appendText("Import stopped!\n");
 		}
 	}
