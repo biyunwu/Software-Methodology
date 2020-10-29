@@ -346,7 +346,10 @@ public class Controller {
 						case 'C' -> added = db.add(new Checking(holder, balance, date, Boolean.parseBoolean(params[5])));
 						case 'S' -> added = db.add(new Savings(holder, balance, date, Boolean.parseBoolean(params[5])));
 						case 'M' -> added = db.add(new MoneyMarket(holder, balance, date, Integer.parseInt(params[5])));
-						default -> throw new IllegalArgumentException("Invalid line in file: " + line);
+						default -> {
+							feedback.appendText("Invalid command in line: \"" + line + "\"!\n");
+							return;
+						}
 					}
 					if(added == false) {
 						String message = "ERROR: Account already exist!";
