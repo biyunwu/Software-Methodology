@@ -3,7 +3,7 @@ package app.model.sandwich;
 public class Extra {
 	private final String name;
 
-	public Extra(String name, double price) {
+	public Extra(String name) {
 		this.name = name;
 	}
 

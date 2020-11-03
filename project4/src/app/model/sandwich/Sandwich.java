@@ -49,13 +49,4 @@ public abstract class Sandwich implements Customizable {
 		}
 		return "no extra ingredient";
 	}
-
-//	private boolean isDuplicate(Extra e) {
-//		for (Extra extra: extras) {
-//			if (extra.equals(e)) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
 }
