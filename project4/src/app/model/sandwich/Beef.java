@@ -12,14 +12,18 @@ public class Beef extends Sandwich{
 
 	@Override
 	public double price() {
-		return BASE_PRICE + PER_EXTRA * extras.size(); // if null exists in ArrayList, does it count to size?
+		return BASE_PRICE + PER_EXTRA * extras.size();
 	}
 
 	@Override
 	public String toString() {
-		String baseIngres = "Base: Roast Beef, Provolone Cheese, Mustard. ";
+		String baseIngres = "Base: " + String.join(", ", this.getBaseIngredients()) + ". ";
 		String extraIngres = "Extra: " + super.toString() + ". ";
-		return "Beef Sandwich. " + baseIngres + extraIngres + "Price: $" + price();
+		return "Beef Sandwich. " + baseIngres + extraIngres;
+	}
+
+	public String[] getBaseIngredients() {
+		return new String[]{"Roast Beef", "Provolone Cheese", "Mustard"};
 	}
 }
 

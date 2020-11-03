@@ -16,8 +16,12 @@ public class Chicken extends Sandwich{
 
 	@Override
 	public String toString() {
-		String baseIngres = "Base: Fried Chicken, Spicy Sauce, Pickles. ";
+		String baseIngres = "Base: " + String.join(", ", this.getBaseIngredients()) + ". ";
 		String extraIngres = "Extra: " + super.toString() + ". ";
-		return "Chicken Sandwich. " + baseIngres + extraIngres + "Price: $" + price();
+		return "Chicken Sandwich. " + baseIngres + extraIngres;
+	}
+
+	public String[] getBaseIngredients() {
+		return new String[]{"Fried Chicken", "Spicy Sauce", "Pickles"};
 	}
 }

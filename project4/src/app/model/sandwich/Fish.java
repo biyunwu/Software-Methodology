@@ -17,8 +17,12 @@ public class Fish extends Sandwich{
 
 	@Override
 	public String toString() {
-		String baseIngres = "Base: Grilled Snapper, Cilantro, Lime. ";
+		String baseIngres = "Base: " + String.join(", ", this.getBaseIngredients()) + ". ";
 		String extraIngres = "Extra: " + super.toString() + ". ";
-		return "Fish Sandwich. " + baseIngres + extraIngres + "Price: $" + price();
+		return "Fish Sandwich. " + baseIngres + extraIngres;
+	}
+
+	public String[] getBaseIngredients() {
+		return new String[]{"Grilled Snapper", "Cilantro", "Lime"};
 	}
 }

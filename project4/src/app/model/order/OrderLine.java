@@ -8,18 +8,13 @@ public class OrderLine {
 	private double price;
 
 	public OrderLine(Sandwich sandwich) {
-		this.lineNumber = ++(Order.lineNumber);
+		lineNumber = ++(Order.lineNumber);
 		this.sandwich = sandwich;
 		price = sandwich.price();
 	}
 
 	@Override
 	public String toString() {
-		return lineNumber + " " + sandwich.toString() + "$" + price;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return obj instanceof OrderLine && lineNumber == ((OrderLine) obj).lineNumber;
+		return lineNumber + " " + sandwich.toString() + "Price: $" + price;
 	}
 }
