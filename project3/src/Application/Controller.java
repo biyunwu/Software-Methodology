@@ -261,7 +261,8 @@ public class Controller {
 		try {
 			Profile holder = getHolder(getStr(firstNameTextField), getStr(lastNameTextField));
 			double amount = Double.parseDouble(getStr(amountTextField));
-			if (amount < 0) throw new IllegalArgumentException("ERROR: Transaction amount should NOT be negative");
+			if (amount < 0)
+				throw new IllegalArgumentException("ERROR: Transaction amount should NOT be negative");
 			if (depositRadio.isSelected()) { // deposit
 				deposit(holder, amount);
 			} else if (withdrawRadio.isSelected()) { // withdraw
@@ -337,8 +338,7 @@ public class Controller {
 					Profile holder = new Profile(params[1], params[2]);
 					double balance = Double.parseDouble(params[3]);
 					Date date = new Date(params[4]);
-				
-					if(!date.isValid()) {
+					if (!date.isValid()) {
 						feedback.appendText("ERROR: Invalid date in line: \"" + line + "\"!\n");
 						return;
 					}
@@ -351,12 +351,12 @@ public class Controller {
 							return;
 						}
 					}
-					if(added == false) {
+					if (added == false) {
 						String message = "ERROR: Account already exist!";
 						feedback.appendText(message + "\n");
 					}
-				} catch (NumberFormatException e) {
-					feedback.appendText("ERROR: Invalid parameter type in line: \"" + line + "\"!\n");
+				} catch (Exception e) {
+					feedback.appendText("ERROR: Invalid line: \"" + line + "\"!\n");
 					return;
 				}
 			});
@@ -366,7 +366,7 @@ public class Controller {
 			feedback.appendText("Failed opening file: " + e.getMessage() + "\n");
 		} catch (IllegalArgumentException e) {
 			feedback.appendText(e.getMessage() + "\n");
-		} catch (IOException e) {
+		} catch (Exception e) {
 			feedback.appendText("Import stopped!\n");
 		}
 	}
@@ -456,7 +456,6 @@ public class Controller {
 
 		feedback.setEditable(false);
 		feedback.textProperty().addListener( // always scroll text area to the bottom when new text is appended.
-				(observable, oldVal, newVal) -> feedback.setScrollTop(Double.MAX_VALUE)
-		);
+				(observable, oldVal, newVal) -> feedback.setScrollTop(Double.MAX_VALUE));
 	}
 }
