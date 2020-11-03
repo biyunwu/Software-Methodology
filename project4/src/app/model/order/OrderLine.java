@@ -7,8 +7,8 @@ public class OrderLine {
 	private Sandwich sandwich;
 	private double price;
 
-	public OrderLine(int lineNumber, Sandwich sandwich) {
-		this.lineNumber = lineNumber;
+	public OrderLine(Sandwich sandwich) {
+		this.lineNumber = ++(Order.lineNumber);
 		this.sandwich = sandwich;
 		price = sandwich.price();
 	}

@@ -17,8 +17,8 @@ public class Fish extends Sandwich{
 
 	@Override
 	public String toString() {
-		String baseIngres = "Base Ingredients: Grilled Snapper, Cilantro, Lime.\n";
-		String extraIngres = "Extra Ingredients: " + super.toString() + ".\n";
-		return "Fish Sandwich\n " + baseIngres + extraIngres;
+		String baseIngres = "Base: Grilled Snapper, Cilantro, Lime. ";
+		String extraIngres = "Extra: " + super.toString() + ". ";
+		return "Fish Sandwich. " + baseIngres + extraIngres + "Price: $" + price();
 	}
 }

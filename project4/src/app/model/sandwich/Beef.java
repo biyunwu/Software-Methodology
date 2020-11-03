@@ -17,9 +17,9 @@ public class Beef extends Sandwich{
 
 	@Override
 	public String toString() {
-		String baseIngres = "Base Ingredients: Roast Beef, Provolone Cheese, Mustard\n";
-		String extraIngres = "Extra Ingredients: " + super.toString() + "\n";
-		return "Beef Sandwich\n " + baseIngres + extraIngres;
+		String baseIngres = "Base: Roast Beef, Provolone Cheese, Mustard. ";
+		String extraIngres = "Extra: " + super.toString() + ". ";
+		return "Beef Sandwich. " + baseIngres + extraIngres + "Price: $" + price();
 	}
 }
 
