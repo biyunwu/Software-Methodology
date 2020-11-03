@@ -1,6 +1,7 @@
 .metadata/
 timeLog.docx
 timeLog2.docx
+timeLog3.docx
 **/.DS_Store
 **/.settings
 **/bin
@@ -13,3 +14,4 @@ Test\ Document.docx
 Project\ 1.zip
 Project\ 2.zip
 Project\ 3/
+Project\ 3.zip
