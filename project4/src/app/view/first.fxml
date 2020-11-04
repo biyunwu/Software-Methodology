@@ -1,8 +1,107 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<GridPane fx:controller="app.controller.First"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.First">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0" minWidth="10.0" prefWidth="146.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="2.0" prefWidth="43.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="151.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" prefWidth="260.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="264.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="264.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="307.0" minHeight="10.0" prefHeight="218.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <RadioButton fx:id="beefButton" mnemonicParsing="false" onAction="#changeDetails" text="Beef">
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </RadioButton>
+      <RadioButton fx:id="chickenButton" mnemonicParsing="false" onAction="#changeDetails" selected="true" text="Chicken">
+         <GridPane.margin>
+            <Insets bottom="50.0" left="20.0" />
+         </GridPane.margin>
+      </RadioButton>
+      <RadioButton fx:id="fishButton" mnemonicParsing="false" onAction="#changeDetails" text="Fish">
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets top="50.0" />
+         </GridPane.margin>
+      </RadioButton>
+      <Label text="Sandwich Type:">
+         <GridPane.margin>
+            <Insets bottom="100.0" left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <TextArea fx:id="basicIngredients" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+         <GridPane.margin>
+            <Insets top="30.0" />
+         </GridPane.margin>
+      </TextArea>
+      <ImageView fx:id="sandwichImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+         <image>
+            <Image url="@../ChickenSandwich.jpg" />
+         </image>
+      </ImageView>
+      <Label text="Not on Sandwich:" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <ListView fx:id="notOnSandwich" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+      <ListView fx:id="onSandwich" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Button fx:id="rightButton" mnemonicParsing="false" onAction="#addIngredient" text="&gt;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets top="40.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="leftButton" mnemonicParsing="false" onAction="#removeIngredient" text="&lt;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="40.0" />
+         </GridPane.margin>
+      </Button>
+      <Label text="On Sandwich:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <TextField fx:id="totalPrice" maxWidth="50.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="70.0" right="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label text="Total:" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="70.0" left="90.0" />
+         </GridPane.margin>
+      </Label>
+      <Button fx:id="addToOrderButton" mnemonicParsing="false" text="Add to Order" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="30.0" right="20.0" top="50.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="viewOrderButton" mnemonicParsing="false" text="View Order" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="30.0" right="20.0" top="120.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearFields" text="Clear" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets right="20.0" top="160.0" />
+         </GridPane.margin>
+      </Button>
+      <Label text="Base Ingredients:" GridPane.columnIndex="2" GridPane.valignment="TOP">
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </Label>
+   </children>
 </GridPane>
