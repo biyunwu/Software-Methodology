@@ -16,7 +16,7 @@ public class Extra {
 
 	public static ArrayList<Extra> getExtraList() {
 		String[] ingredients = {"Lettuce", "Tomato", "Onion", "Mayo", "American", "Swiss",
-				"Ketchup", "Mustard", "Bacon", "Mushrooms"};
+				"Ketchup", "Mustard", "Bacon", "Mushroom"};
 		ArrayList<Extra> extras = new ArrayList<>();
 		for (String s: ingredients) {
 			extras.add(new Extra(s));

@@ -11,6 +11,16 @@ public abstract class Sandwich implements Customizable {
 
 	public abstract double price();
 
+	public abstract String[] getBaseIngredients();
+
+	public ArrayList<Extra> getExtras() {
+		return extras;
+	}
+
+	public void removeExtras() {
+		extras = new ArrayList<>();
+	}
+
 	@Override
 	public boolean add(Object obj) {
 		if (extras.size() < MAX_EXTRAS && obj instanceof Extra && !extras.contains(obj)) {

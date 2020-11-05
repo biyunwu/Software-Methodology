@@ -22,6 +22,7 @@ public class Fish extends Sandwich{
 		return "Fish Sandwich. " + baseIngres + extraIngres;
 	}
 
+	@Override
 	public String[] getBaseIngredients() {
 		return new String[]{"Grilled Snapper", "Cilantro", "Lime"};
 	}

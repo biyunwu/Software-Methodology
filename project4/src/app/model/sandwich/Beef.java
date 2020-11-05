@@ -22,6 +22,7 @@ public class Beef extends Sandwich{
 		return "Beef Sandwich. " + baseIngres + extraIngres;
 	}
 
+	@Override
 	public String[] getBaseIngredients() {
 		return new String[]{"Roast Beef", "Provolone Cheese", "Mustard"};
 	}

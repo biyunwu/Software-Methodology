@@ -21,6 +21,7 @@ public class Chicken extends Sandwich{
 		return "Chicken Sandwich. " + baseIngres + extraIngres;
 	}
 
+	@Override
 	public String[] getBaseIngredients() {
 		return new String[]{"Fried Chicken", "Spicy Sauce", "Pickles"};
 	}

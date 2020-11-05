@@ -1,8 +1,85 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<GridPane fx:controller="app.controller.First"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.First">
+   <children>
+      <GridPane hgap="10.0" layoutX="28.0" layoutY="30.0" prefHeight="432.0" prefWidth="642.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="211.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="212.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.0" minWidth="10.0" prefWidth="219.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="53.0" minHeight="21.0" prefHeight="21.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="133.0" minHeight="10.0" prefHeight="98.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="77.0" minHeight="9.0" prefHeight="36.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="293.0" minHeight="10.0" prefHeight="268.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Sandwich Type" />
+            <ComboBox fx:id="combobox" prefWidth="150.0" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+            <Label text="Base Ingredients" GridPane.columnIndex="1" />
+            <ListView fx:id="baseVL" prefHeight="86.0" prefWidth="205.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ImageView fx:id="imageView" fitHeight="99.0" fitWidth="214.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="Select Extra Ingredients" GridPane.rowIndex="2" />
+            <Label text="Extra Ingredients Selected" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <ListView fx:id="extraVL" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+            <ListView fx:id="selectedVL" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <VBox prefHeight="200.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <children>
+                  <GridPane prefHeight="256.0" prefWidth="155.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button minWidth="100.0" mnemonicParsing="false" onAction="#add" text="Add &gt;&gt;" GridPane.rowIndex="1" />
+                        <Button minWidth="100.0" mnemonicParsing="false" onAction="#remove" text="&lt;&lt; Remove" GridPane.rowIndex="2" />
+                        <Button minWidth="100.0" mnemonicParsing="false" onAction="#clear" text="Clear Selection" GridPane.rowIndex="3" />
+                        <Button minWidth="100.0" mnemonicParsing="false" onAction="#addToOrder" text="Add to Order" GridPane.rowIndex="4" />
+                        <Button minWidth="100.0" mnemonicParsing="false" text="Show Order" GridPane.rowIndex="5" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Price: $">
+                                 <HBox.margin>
+                                    <Insets left="42.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="priceLabel" minWidth="50.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </GridPane>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </VBox>
+         </children>
+      </GridPane>
+      <TextArea fx:id="feedback" layoutX="28.0" layoutY="484.0" prefHeight="131.0" prefWidth="642.0" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</Pane>

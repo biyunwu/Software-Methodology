@@ -29,4 +29,8 @@ public class Order implements Customizable {
 		}
 		return false;
 	}
+
+	public ArrayList<OrderLine> getOrderlines() {
+		return orderlines;
+	}
 }
