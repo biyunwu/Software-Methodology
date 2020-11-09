@@ -30,7 +30,15 @@ public class Order implements Customizable {
 		return false;
 	}
 
-	public ArrayList<OrderLine> getOrderlines() {
+	public ArrayList<OrderLine> getOrderLines() {
 		return orderlines;
+	}
+
+	public void serialize() {
+		lineNumber = orderlines.size();
+		int i = 1;
+		for (OrderLine ol : orderlines) {
+			ol.setLineNumber(i++);
+		}
 	}
 }

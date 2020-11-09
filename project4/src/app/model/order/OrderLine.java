@@ -13,6 +13,14 @@ public class OrderLine {
 		price = sandwich.price();
 	}
 
+	public Sandwich getSandwich() {
+		return sandwich;
+	}
+
+	public void setLineNumber(int lineNumber) {
+		this.lineNumber = lineNumber;
+	}
+
 	@Override
 	public String toString() {
 		return lineNumber + " " + sandwich.toString() + "Price: $" + price;

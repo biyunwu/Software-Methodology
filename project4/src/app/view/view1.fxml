@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.First">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.View1Controller">
    <children>
       <GridPane hgap="10.0" layoutX="28.0" layoutY="30.0" prefHeight="432.0" prefWidth="642.0">
         <columnConstraints>
@@ -57,7 +57,7 @@
                         <Button minWidth="100.0" mnemonicParsing="false" onAction="#remove" text="&lt;&lt; Remove" GridPane.rowIndex="2" />
                         <Button minWidth="100.0" mnemonicParsing="false" onAction="#clear" text="Clear Selection" GridPane.rowIndex="3" />
                         <Button minWidth="100.0" mnemonicParsing="false" onAction="#addToOrder" text="Add to Order" GridPane.rowIndex="4" />
-                        <Button minWidth="100.0" mnemonicParsing="false" text="Show Order" GridPane.rowIndex="5" />
+                        <Button minWidth="100.0" mnemonicParsing="false" onAction="#showOrder" text="Show Order" GridPane.rowIndex="5" />
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Label text="Price: $">

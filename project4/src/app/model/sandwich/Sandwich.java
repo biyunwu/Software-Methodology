@@ -17,7 +17,7 @@ public abstract class Sandwich implements Customizable {
 		return extras;
 	}
 
-	public void removeExtras() {
+	public void resetExtraList() {
 		extras = new ArrayList<>();
 	}
 
