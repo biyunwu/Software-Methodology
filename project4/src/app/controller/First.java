@@ -39,6 +39,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -145,7 +146,13 @@ public class First {
 	@FXML
 	void addToOrder() {
 		OrderLine line = new OrderLine(sandwich);
-		order.add(line);
+		if(order.add(line)) {
+			Alert alert = new Alert(AlertType.WARNING, "Added sandwich to order.", ButtonType.OK);
+			alert.showAndWait();
+		}else {
+			Alert alert = new Alert(AlertType.WARNING, "Error adding sandwich to order.", ButtonType.OK);
+			alert.showAndWait();
+		}
 		clearFields();
 	}
 
@@ -170,6 +177,7 @@ public class First {
 			controller2.setOrder(order);
 			Scene scene = new Scene(root, 600, 400);
 			Stage stage = new Stage();
+			stage.initModality(Modality.APPLICATION_MODAL); // disable primary stage when child stage is open.
 			stage.setScene(scene);
 			stage.setTitle("View Order");
 			stage.setOnCloseRequest(new EventHandler<WindowEvent>() {

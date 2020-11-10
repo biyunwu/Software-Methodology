@@ -38,10 +38,19 @@ public class Second {
     private ListView<OrderLine> orderList;
 	
     @FXML
-    private Button copyLineButton, removeLineButton, clearOrderButton, saveToFileButton;
+    private Button copyLineButton, removeLineButton, clearOrderButton, saveToFileButton, backButton;
 
     @FXML
     private TextField orderTotal;
+    
+    /**
+     * Exits the order view and goes back to the sandwich selection
+     */
+    @FXML
+    void goBack() {
+    	Stage s = (Stage) backButton.getScene().getWindow();
+		s.close();
+    }
 
     /**
      * Clears the order list
