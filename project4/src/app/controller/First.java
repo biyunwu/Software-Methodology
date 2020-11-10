@@ -18,6 +18,7 @@ import app.model.sandwich.Extra;
 import app.model.sandwich.Fish;
 import app.model.sandwich.Sandwich;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -28,6 +29,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -45,9 +47,6 @@ public class First {
 	private Sandwich sandwich = new Chicken();
 
 	@FXML
-	private RadioButton beefButton, chickenButton, fishButton;
-
-	@FXML
 	private TextArea basicIngredients;
 
 	@FXML
@@ -61,6 +60,9 @@ public class First {
 
 	@FXML
 	private TextField totalPrice;
+	
+	@FXML
+    private ComboBox<String> sandwichSelector;
 
 	/**
 	 * Change details within UI based on sandwich selection
@@ -69,24 +71,29 @@ public class First {
 	void changeDetails() {
 		notOnSandwich.setItems(FXCollections.observableArrayList(extras));
 		onSandwich.getItems().clear();
-		if (chickenButton.isSelected()) {
-			sandwich = new Chicken();
-			totalPrice.setText(Double.toString(sandwich.price()));
-			basicIngredients.setText("Fried Chicken\nSpicy Sauce\nPickles");
-			Image image = new Image("file:src/ChickenSandwich.jpg");
-			sandwichImage.setImage(image);
-		} else if (beefButton.isSelected()) {
-			sandwich = new Beef();
-			totalPrice.setText(Double.toString(sandwich.price()));
-			basicIngredients.setText("Roast Beef\nProvolone Cheese\nMustard");
-			Image image = new Image("file:src/BeefSandwich.jpg");
-			sandwichImage.setImage(image);
-		} else {
-			sandwich = new Fish();
-			totalPrice.setText(Double.toString(sandwich.price()));
-			basicIngredients.setText("Grilled Snapper\nCilantro\nLime");
-			Image image = new Image("file:src/FishSandwich.jpg");
-			sandwichImage.setImage(image);
+		String selectedSandwich = sandwichSelector.getSelectionModel().getSelectedItem();
+		switch(selectedSandwich) {
+			case "Chicken" -> {
+				sandwich = new Chicken();
+				totalPrice.setText(Double.toString(sandwich.price()));
+				basicIngredients.setText("Fried Chicken\nSpicy Sauce\nPickles");
+				Image image = new Image("file:src/ChickenSandwich.jpg");
+				sandwichImage.setImage(image);
+			}
+			case "Beef" -> {
+				sandwich = new Beef();
+				totalPrice.setText(Double.toString(sandwich.price()));
+				basicIngredients.setText("Roast Beef\nProvolone Cheese\nMustard");
+				Image image = new Image("file:src/BeefSandwich.jpg");
+				sandwichImage.setImage(image);
+			}
+			case "Fish" -> {
+				sandwich = new Fish();
+				totalPrice.setText(Double.toString(sandwich.price()));
+				basicIngredients.setText("Grilled Snapper\nCilantro\nLime");
+				Image image = new Image("file:src/FishSandwich.jpg");
+				sandwichImage.setImage(image);
+			}
 		}
 	}
 
@@ -144,7 +151,7 @@ public class First {
 	 */
 	@FXML
 	void clearFields() {
-		chickenButton.setSelected(true);
+		sandwichSelector.getSelectionModel().selectFirst();
 		changeDetails();
 	}
 
@@ -183,11 +190,9 @@ public class First {
 	 **/
 	public void initialize() {
 		// group radio buttons, set default choice to chicken sandwich.
-		ToggleGroup sandwichTG = new ToggleGroup();
-		chickenButton.setToggleGroup(sandwichTG);
-		fishButton.setToggleGroup(sandwichTG);
-		beefButton.setToggleGroup(sandwichTG);
-		chickenButton.setSelected(true);
+		ObservableList<String> sandwichTypes = FXCollections.observableArrayList("Chicken", "Beef", "Fish");
+		sandwichSelector.setItems(sandwichTypes);
+		sandwichSelector.getSelectionModel().selectFirst();
 
 		// set details of sandwich
 		changeDetails();
