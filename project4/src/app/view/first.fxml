@@ -7,94 +7,118 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.First">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0" minWidth="10.0" prefWidth="146.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="2.0" prefWidth="43.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="151.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" prefWidth="260.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="264.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="264.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="307.0" minHeight="10.0" prefHeight="218.0" vgrow="SOMETIMES" />
-  </rowConstraints>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.First">
    <children>
-      <Label text="Sandwich Type:" GridPane.valignment="TOP">
-         <GridPane.margin>
-            <Insets left="10.0" top="12.0" />
-         </GridPane.margin>
-      </Label>
-      <TextArea fx:id="basicIngredients" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
-         <GridPane.margin>
-            <Insets top="30.0" />
-         </GridPane.margin>
-      </TextArea>
-      <ImageView fx:id="sandwichImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER">
-         <image>
-            <Image url="@../ChickenSandwich.jpg" />
-         </image>
-      </ImageView>
-      <Label text="Not on Sandwich:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-         <GridPane.margin>
-            <Insets bottom="10.0" />
-         </GridPane.margin></Label>
-      <ListView fx:id="notOnSandwich" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
-      <ListView fx:id="onSandwich" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <Button fx:id="rightButton" mnemonicParsing="false" onAction="#addIngredient" text="&gt;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets top="40.0" />
-         </GridPane.margin>
-      </Button>
-      <Button fx:id="leftButton" mnemonicParsing="false" onAction="#removeIngredient" text="&lt;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets bottom="40.0" />
-         </GridPane.margin>
-      </Button>
-      <Label text="On Sandwich:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-         <GridPane.margin>
-            <Insets bottom="10.0" />
-         </GridPane.margin></Label>
-      <TextField fx:id="totalPrice" maxWidth="50.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets bottom="70.0" right="10.0" />
-         </GridPane.margin>
-      </TextField>
-      <Label text="Total:" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets bottom="70.0" left="90.0" />
-         </GridPane.margin>
-      </Label>
-      <Button fx:id="addToOrderButton" mnemonicParsing="false" onAction="#addToOrder" text="Add to Order" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets bottom="30.0" right="20.0" top="50.0" />
-         </GridPane.margin>
-      </Button>
-      <Button fx:id="viewOrderButton" mnemonicParsing="false" onAction="#openOrderList" text="View Order" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets bottom="30.0" right="20.0" top="120.0" />
-         </GridPane.margin>
-      </Button>
-      <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearFields" text="Clear" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets right="20.0" top="160.0" />
-         </GridPane.margin>
-      </Button>
-      <Label text="Base Ingredients:" GridPane.columnIndex="2" GridPane.valignment="TOP">
-         <GridPane.margin>
-            <Insets top="10.0" />
-         </GridPane.margin>
-      </Label>
-      <ComboBox fx:id="sandwichSelector" onAction="#changeDetails" prefWidth="150.0" GridPane.valignment="TOP">
-         <GridPane.margin>
-            <Insets left="10.0" top="35.0" />
-         </GridPane.margin>
-      </ComboBox>
+      <GridPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="600.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0" minWidth="10.0" prefWidth="39.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="145.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="2.0" prefWidth="63.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="153.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="47.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="341.0" minWidth="10.0" prefWidth="155.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" prefWidth="39.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="264.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="264.0" minHeight="10.0" prefHeight="127.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="264.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="307.0" minHeight="10.0" prefHeight="278.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Sandwich Type:" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets top="12.0" />
+               </GridPane.margin>
+            </Label>
+            <TextArea fx:id="basicIngredients" prefHeight="88.0" prefWidth="147.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets top="34.0" />
+               </GridPane.margin>
+            </TextArea>
+            <GridPane prefHeight="118.0" prefWidth="129.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="20.0" top="20.0" />
+               </GridPane.margin>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <ImageView fx:id="sandwichImage" fitHeight="120.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  </ImageView>
+               </children>
+            </GridPane>
+            <Label text="Not On Sandwitch:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </Label>
+            <ListView fx:id="notOnSandwich" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ListView fx:id="onSandwich" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" onAction="#addIngredient" text="&gt;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets top="40.0" />
+               </GridPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#removeIngredient" text="&lt;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="40.0" />
+               </GridPane.margin>
+            </Button>
+            <Label text="On Sandwich:" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Base Ingredients:" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+            </Label>
+            <ComboBox fx:id="sandwichSelector" onAction="#changeDetails" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets top="35.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <GridPane prefHeight="253.0" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="14.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="135.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button minWidth="100.0" mnemonicParsing="false" onAction="#addToOrder" prefWidth="100.0" text="Add to Order" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button minWidth="100.0" mnemonicParsing="false" onAction="#openOrderList" prefWidth="100.0" text="View Order" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Button minWidth="100.0" mnemonicParsing="false" onAction="#clearFields" prefWidth="100.0" text="Clear" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                  <HBox prefHeight="72.0" prefWidth="138.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <children>
+                        <Label minWidth="50.0" text="Total: $">
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="totalPrice" maxWidth="50.0" minWidth="60.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
    </children>
-</GridPane>
+</Pane>

@@ -8,20 +8,25 @@ package app.controller;
  * @author Biyun Wu, Anthony Triolo
  */
 
-import app.model.order.Order;
-import app.model.order.OrderLine;
-import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import app.model.order.Order;
+import app.model.order.OrderLine;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class Second {
 	
@@ -31,11 +36,25 @@ public class Second {
 	
 	@FXML
     private ListView<OrderLine> orderList;
+	
+    @FXML
+    private Button copyLineButton, removeLineButton, clearOrderButton, saveToFileButton, backButton;
 
     @FXML
     private TextField orderTotal;
+    
+    /**
+     * Exits the order view and goes back to the sandwich selection
+     */
+    @FXML
+    void goBack() {
+    	Stage s = (Stage) backButton.getScene().getWindow();
+		s.close();
+    }
 
-    /** Clears the order list. */
+    /**
+     * Clears the order list
+     */
     @FXML
     void clearOrder() {
     	order = new Order();
@@ -44,14 +63,17 @@ public class Second {
     	orderTotal.setText(calculateTotal());
     }
 
-    /** Add a copy of the selected line to the order. */
+    /**
+     * Add a copy of the selected line to the order
+     */
     @FXML
     void copyLine() {
     	OrderLine selection = orderList.getSelectionModel().getSelectedItem();
     	if(selection == null) {
     		Alert alert = new Alert(AlertType.WARNING, "Please select a line to copy", ButtonType.OK);
     		alert.showAndWait();
-    	} else {
+    		return;
+    	}else {
     		OrderLine newLine = new OrderLine(selection.getSandwich());
     		order.add(newLine);
     		orderList.getItems().add(newLine);
@@ -59,7 +81,9 @@ public class Second {
     	}
     }
 
-    /** Remove the selected line from the order. */
+    /**
+     * Remove the selected line from the order
+     */
     @FXML
     void removeLine() {
     	OrderLine selection = orderList.getSelectionModel().getSelectedItem();
@@ -71,6 +95,7 @@ public class Second {
     	if(selection == null) {
     		Alert alert = new Alert(AlertType.WARNING, "Please select a line to remove", ButtonType.OK);
     		alert.showAndWait();
+    		return;
     	}else {
     		for(int i = orderList.getSelectionModel().getSelectedIndex(); i < orderList.getItems().size(); i++) {
     			orderList.getItems().get(i).shiftLineUp();
@@ -82,14 +107,9 @@ public class Second {
     	}
     }
 
-    /** Close the current window. */
-	@FXML
-	void goBack() {
-		Stage s = (Stage) orderTotal.getScene().getWindow(); // from any component to get a reference to the stage.
-		s.close();
-	}
-
-    /** Export the order to a file. */
+    /**
+     * Export the order to a file
+     */
     @FXML
     void saveToFile() {
     	FileChooser chooser = new FileChooser();
@@ -103,12 +123,13 @@ public class Second {
 				throw new IllegalArgumentException("Export cancelled!");
 			BufferedWriter writer = new BufferedWriter(new FileWriter(targetFile));
 			for(OrderLine line: order.getOrderLines()) {
-				writer.append(line.toString()).append("\n");
+				writer.append(line.toString() + "\n");
 			}
 			writer.close();
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.WARNING, "Export Failed!", ButtonType.OK);
     		alert.showAndWait();
+    		return;
 		}
     }
     
@@ -142,4 +163,5 @@ public class Second {
     public Order getOrder() {
     	return this.order;
     }
+
 }
