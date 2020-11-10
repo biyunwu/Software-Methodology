@@ -11,6 +11,7 @@ package app.controller;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import app.model.order.Order;
@@ -31,6 +32,7 @@ public class Second {
 	
 	private Order order;
 	private ArrayList<OrderLine> lines;
+	DecimalFormat df = new DecimalFormat("0.00");
 	
 	@FXML
     private ListView<OrderLine> orderList;
@@ -142,7 +144,7 @@ public class Second {
     	for(OrderLine line : lines) {
     		orderPrice+=line.getPrice();
     	}
-    	return Double.toString(orderPrice);
+    	return df.format(orderPrice);
     }
     
     /**

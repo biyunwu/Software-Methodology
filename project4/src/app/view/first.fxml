@@ -26,9 +26,9 @@
     <RowConstraints maxHeight="307.0" minHeight="10.0" prefHeight="218.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Sandwich Type:">
+      <Label text="Sandwich Type:" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets bottom="100.0" left="10.0" />
+            <Insets left="10.0" top="12.0" />
          </GridPane.margin>
       </Label>
       <TextArea fx:id="basicIngredients" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
@@ -41,7 +41,10 @@
             <Image url="@../ChickenSandwich.jpg" />
          </image>
       </ImageView>
-      <Label text="Not on Sandwich:" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label text="Not on Sandwich:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="10.0" />
+         </GridPane.margin></Label>
       <ListView fx:id="notOnSandwich" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
       <ListView fx:id="onSandwich" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Button fx:id="rightButton" mnemonicParsing="false" onAction="#addIngredient" text="&gt;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
@@ -54,7 +57,10 @@
             <Insets bottom="40.0" />
          </GridPane.margin>
       </Button>
-      <Label text="On Sandwich:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label text="On Sandwich:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="10.0" />
+         </GridPane.margin></Label>
       <TextField fx:id="totalPrice" maxWidth="50.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="70.0" right="10.0" />
@@ -81,13 +87,13 @@
          </GridPane.margin>
       </Button>
       <Label text="Base Ingredients:" GridPane.columnIndex="2" GridPane.valignment="TOP">
-         <padding>
-            <Insets top="10.0" />
-         </padding>
-      </Label>
-      <ComboBox fx:id="sandwichSelector" onAction="#changeDetails" prefWidth="150.0">
          <GridPane.margin>
-            <Insets bottom="30.0" left="10.0" />
+            <Insets top="10.0" />
+         </GridPane.margin>
+      </Label>
+      <ComboBox fx:id="sandwichSelector" onAction="#changeDetails" prefWidth="150.0" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="10.0" top="35.0" />
          </GridPane.margin>
       </ComboBox>
    </children>

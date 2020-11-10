@@ -1,5 +1,7 @@
 package app.controller;
 
+import java.text.DecimalFormat;
+
 /**
  * Definition of the JavaFX First controller class. 
  * This class defines all of the elements within the First UI and 
@@ -45,6 +47,7 @@ public class First {
 	private ArrayList<Extra> extras = Extra.getExtraList();
 	private Order order = new Order();
 	private Sandwich sandwich = new Chicken();
+	DecimalFormat df = new DecimalFormat("0.00");
 
 	@FXML
 	private TextArea basicIngredients;
@@ -75,21 +78,21 @@ public class First {
 		switch(selectedSandwich) {
 			case "Chicken" -> {
 				sandwich = new Chicken();
-				totalPrice.setText(Double.toString(sandwich.price()));
+				totalPrice.setText(df.format(sandwich.price()));
 				basicIngredients.setText("Fried Chicken\nSpicy Sauce\nPickles");
 				Image image = new Image("file:src/ChickenSandwich.jpg");
 				sandwichImage.setImage(image);
 			}
 			case "Beef" -> {
 				sandwich = new Beef();
-				totalPrice.setText(Double.toString(sandwich.price()));
+				totalPrice.setText(df.format(sandwich.price()));
 				basicIngredients.setText("Roast Beef\nProvolone Cheese\nMustard");
 				Image image = new Image("file:src/BeefSandwich.jpg");
 				sandwichImage.setImage(image);
 			}
 			case "Fish" -> {
 				sandwich = new Fish();
-				totalPrice.setText(Double.toString(sandwich.price()));
+				totalPrice.setText(df.format(sandwich.price()));
 				basicIngredients.setText("Grilled Snapper\nCilantro\nLime");
 				Image image = new Image("file:src/FishSandwich.jpg");
 				sandwichImage.setImage(image);
@@ -115,7 +118,7 @@ public class First {
 		} else {
 			onSandwich.getItems().add(selection);
 			notOnSandwich.getItems().remove(selection);
-			totalPrice.setText(Double.toString(sandwich.price()));
+			totalPrice.setText(df.format(sandwich.price()));
 		}
 	}
 
@@ -133,7 +136,7 @@ public class First {
 		sandwich.remove(selection);
 		onSandwich.getItems().remove(selection);
 		notOnSandwich.getItems().add(selection);
-		totalPrice.setText(Double.toString(sandwich.price()));
+		totalPrice.setText(df.format(sandwich.price()));
 	}
 
 	/**
@@ -183,12 +186,14 @@ public class First {
 		}
 
 	}
+	
 
 	/**
 	 * Initialize the user interface through grouping radio buttons by category and
 	 * setting default states
 	 **/
 	public void initialize() {
+		basicIngredients.setEditable(false);
 		// group radio buttons, set default choice to chicken sandwich.
 		ObservableList<String> sandwichTypes = FXCollections.observableArrayList("Chicken", "Beef", "Fish");
 		sandwichSelector.setItems(sandwichTypes);
@@ -196,8 +201,5 @@ public class First {
 
 		// set details of sandwich
 		changeDetails();
-
-		basicIngredients.setEditable(false);
-
 	}
 }
