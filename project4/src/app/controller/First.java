@@ -1,5 +1,13 @@
 package app.controller;
 
+/**
+ * Definition of the JavaFX First controller class.
+ * This class defines all of the elements within the Second UI and
+ * contains all of the methods that are used by each UI element.
+ *
+ * @author Biyun Wu, Anthony Triolo
+ */
+
 import app.model.order.Order;
 import app.model.order.OrderLine;
 import app.model.sandwich.*;
@@ -112,6 +120,8 @@ public class First {
 		OrderLine line = new OrderLine(sandwich);
 		order.add(line);
 		clearFields();
+		Alert confirm = new Alert(AlertType.INFORMATION, "Added to order!", ButtonType.OK);
+		confirm.show();
 	}
 
 	/** Reset all fields back to default. */
@@ -143,10 +153,7 @@ public class First {
 	}
 	
 
-	/**
-	 * Initialize the user interface through grouping radio buttons by category and
-	 * setting default states.
-	 **/
+	/** Initialize the user interface through grouping radio buttons by category and setting default states. */
 	public void initialize() {
 		basicIngredients.setEditable(false);
 		// set default choice to chicken sandwich.

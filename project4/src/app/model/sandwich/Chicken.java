@@ -1,7 +1,7 @@
 package app.model.sandwich;
 
 /**
- * Definition of the Beef class. It extends the Sandwich class and has one member variable:
+ * Definition of the Chicken class. It extends the Sandwich class and has one member variable:
  * the base price of a chicken sandwich
  *
  * @author Biyun Wu, Anthony Triolo
