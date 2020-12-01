@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="moma_adult">25</integer>
+    <integer name="moma_senior">18</integer>
+    <integer name="moma_student">14</integer>
+    <integer name="amnh_adult">23</integer>
+    <integer name="amnh_senior">18</integer>
+    <integer name="amnh_student">18</integer>
+    <integer name="met_adult">25</integer>
+    <integer name="met_senior">17</integer>
+    <integer name="met_student">12</integer>
+    <integer name="noguchi_adult">10</integer>
+    <integer name="noguchi_senior">5</integer>
+    <integer name="noguchi_student">5</integer>
+</resources>

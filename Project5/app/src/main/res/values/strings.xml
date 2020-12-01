@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Museum Tickets</string>
+    <string name="nyc_museum_tickets">NYC Museum Tickets</string>
+    <string name="textview">Test</string>
+    <string name='museum_name'>Museum</string>
+    <string name="museum_pic">Museum Pic</string>
+    <string name="ticketType">Ticket Type:</string>
+    <string name="adultLabel">Adult: $%1$d</string>
+    <string name="seniorLabel">Senior: $%1$d</string>
+    <string name="studentLabel">Student: $%1$d</string>
+    <string name="quantityLabel">Quantity:</string>
+    <string name="sub_total_label">Sub Total:</string>
+    <string name="subTotal">0</string>
+    <string name="taxLabel">Tax:</string>
+    <string name="taxAmount">0</string>
+    <string name="totalLabel">Total:</string>
+    <string name="totalAmount">0</string>
+    <string name="museum_activity_title">Ticket Price Calculator</string>
+    <string name="moma_url">https://www.moma.org/</string>
+    <string name="amnh_url">https://www.amnh.org/</string>
+    <string name="met_url">https://www.metmuseum.org/</string>
+    <string name="noguchi_url">https://www.noguchi.org/</string>
+    <string name="ticket_toast">Maximum of 5 tickets for each!</string>
+    <string name="ticket_cost">$%1$.2f</string>
+    <string name="ticket_cost_int">$%1$d</string>
+    <string-array name="museums">
+        <item>The Museum of Modern Art</item>
+        <item>American Museum of Natural History</item>
+        <item>The Metropolitan Museum of Art</item>
+        <item>The Noguchi Museum</item>
+    </string-array>
+    <string-array name="tickets">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+</resources>
