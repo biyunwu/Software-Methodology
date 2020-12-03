@@ -37,4 +37,28 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+    <string-array name="moma_info">
+        <item>@string/moma_url</item>
+        <item>25</item>
+        <item>18</item>
+        <item>14</item>
+    </string-array>
+    <string-array name="amnh_info">
+        <item>@string/amnh_url</item>
+        <item>23</item>
+        <item>18</item>
+        <item>18</item>
+    </string-array>
+    <string-array name="met_info">
+        <item>@string/met_url</item>
+        <item>25</item>
+        <item>17</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="noguchi_info">
+        <item>@string/noguchi_url</item>
+        <item>10</item>
+        <item>5</item>
+        <item>5</item>
+    </string-array>
 </resources>

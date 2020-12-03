@@ -38,7 +38,6 @@ public class MuseumActivity extends AppCompatActivity implements AdapterView.OnI
     EditText taxAmount;
     EditText totalAmount;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +54,9 @@ public class MuseumActivity extends AppCompatActivity implements AdapterView.OnI
         adultLabel = findViewById(R.id.adultLabel);
         seniorLabel = findViewById(R.id.seniorLabel);
         studentLabel = findViewById(R.id.studentLabel);
-        adultQuantity = (Spinner) findViewById(R.id.adultQuantity);
-        seniorQuantity = (Spinner) findViewById(R.id.seniorQuantity);
-        studentQuantity = (Spinner) findViewById(R.id.studentQuantity);
+        adultQuantity = findViewById(R.id.adultQuantity);
+        seniorQuantity = findViewById(R.id.seniorQuantity);
+        studentQuantity = findViewById(R.id.studentQuantity);
         subTotal = findViewById(R.id.subTotal);
         taxAmount = findViewById(R.id.taxAmount);
         totalAmount = findViewById(R.id.totalAmount);
@@ -71,55 +70,46 @@ public class MuseumActivity extends AppCompatActivity implements AdapterView.OnI
         seniorQuantity.setOnItemSelectedListener(this);
         studentQuantity.setOnItemSelectedListener(this);
 
+        String[] museumInfo;
+        
         switch (museum) {
             case "The Museum of Modern Art": {
+                museumInfo = res.getStringArray(R.array.moma_info);
                 museumPic.setImageResource(R.drawable.moma);
-                webURL = res.getString(R.string.moma_url);
-                adultPrice = res.getInteger(R.integer.moma_adult);
-                adultLabel.setText(res.getString(R.string.adultLabel, adultPrice));
-                seniorPrice = res.getInteger(R.integer.moma_senior);
-                ;
-                seniorLabel.setText(res.getString(R.string.seniorLabel, seniorPrice));
-                studentPrice = res.getInteger(R.integer.moma_student);
-                ;
-                studentLabel.setText(res.getString(R.string.studentLabel, studentPrice));
+                setMuseumInfo(museumInfo);
                 break;
             }
             case "American Museum of Natural History": {
+                museumInfo = res.getStringArray(R.array.amnh_info);
                 museumPic.setImageResource(R.drawable.natural_history);
-                webURL = res.getString(R.string.amnh_url);
-                adultPrice = res.getInteger(R.integer.amnh_adult);
-                adultLabel.setText(res.getString(R.string.adultLabel, adultPrice));
-                seniorPrice = res.getInteger(R.integer.amnh_senior);
-                seniorLabel.setText(res.getString(R.string.seniorLabel, seniorPrice));
-                studentPrice = res.getInteger(R.integer.amnh_student);
-                studentLabel.setText(res.getString(R.string.studentLabel, studentPrice));
+                setMuseumInfo(museumInfo);
                 break;
             }
             case "The Metropolitan Museum of Art": {
+                museumInfo = res.getStringArray(R.array.met_info);
                 museumPic.setImageResource(R.drawable.met);
-                webURL = res.getString(R.string.met_url);
-                adultPrice = res.getInteger(R.integer.met_adult);
-                adultLabel.setText(res.getString(R.string.adultLabel, adultPrice));
-                seniorPrice = res.getInteger(R.integer.met_senior);
-                seniorLabel.setText(res.getString(R.string.seniorLabel, seniorPrice));
-                studentPrice = res.getInteger(R.integer.met_student);
-                studentLabel.setText(res.getString(R.string.studentLabel, studentPrice));
+                setMuseumInfo(museumInfo);
                 break;
             }
             case "The Noguchi Museum": {
+                museumInfo = res.getStringArray(R.array.noguchi_info);
                 museumPic.setImageResource(R.drawable.noguchi);
-                webURL = res.getString(R.string.noguchi_url);
-                adultPrice = res.getInteger(R.integer.noguchi_adult);
-                adultLabel.setText(res.getString(R.string.adultLabel, adultPrice));
-                seniorPrice = res.getInteger(R.integer.noguchi_senior);
-                seniorLabel.setText(res.getString(R.string.seniorLabel, seniorPrice));
-                studentPrice = res.getInteger(R.integer.noguchi_student);
-                studentLabel.setText(res.getString(R.string.studentLabel, studentPrice));
+                setMuseumInfo(museumInfo);
                 break;
             }
         }
         Toast.makeText(getApplicationContext(), res.getString(R.string.ticket_toast), Toast.LENGTH_LONG).show();
+    }
+
+    public void setMuseumInfo(String[] info){
+        Resources res = getResources();
+        webURL = info[0];
+        adultPrice = Integer.parseInt(info[1]);
+        adultLabel.setText(res.getString(R.string.adultLabel, adultPrice));
+        seniorPrice = Integer.parseInt(info[2]);
+        seniorLabel.setText(res.getString(R.string.seniorLabel, seniorPrice));
+        studentPrice = Integer.parseInt(info[3]);
+        studentLabel.setText(res.getString(R.string.studentLabel, studentPrice));
     }
 
     @Override
@@ -135,7 +125,10 @@ public class MuseumActivity extends AppCompatActivity implements AdapterView.OnI
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        Resources res = getResources();
+        subTotal.setText(res.getString(R.string.ticket_cost_int, 0));
+        taxAmount.setText(res.getString(R.string.ticket_cost, 0.0));
+        totalAmount.setText(res.getString(R.string.ticket_cost_int, 0.0));
     }
 
     public void onClick(View v) {
