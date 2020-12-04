@@ -29,36 +29,48 @@
         <item>The Metropolitan Museum of Art</item>
         <item>The Noguchi Museum</item>
     </string-array>
+
+    <array name="images">
+        <item>@drawable/moma</item>
+        <item>@drawable/natural_history</item>
+        <item>@drawable/met</item>
+        <item>@drawable/noguchi</item>
+    </array>
+
+    <string-array name="adult">
+        <item name="moma">25</item>
+        <item name="natural_history">23</item>
+        <item name="met">25</item>
+        <item name="noguchi">10</item>
+    </string-array>
+
+    <string-array name="senior">
+        <item name="moma">18</item>
+        <item name="natural_history">18</item>
+        <item name="met">17</item>
+        <item name="noguchi">5</item>
+    </string-array>
+
+    <string-array name="student">
+        <item name="moma">14</item>
+        <item name="natural_history">18</item>
+        <item name="met">2</item>
+        <item name="noguchi">5</item>
+    </string-array>
+
+    <string-array name="web_address">
+        <item name="moma">@string/moma_url</item>
+        <item name="natural_history">@string/amnh_url</item>
+        <item name="met">@string/met_url</item>
+        <item name="noguchi">@string/noguchi_url</item>
+    </string-array>
+
     <string-array name="tickets">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
-        <item>5</item>
-    </string-array>
-    <string-array name="moma_info">
-        <item>@string/moma_url</item>
-        <item>25</item>
-        <item>18</item>
-        <item>14</item>
-    </string-array>
-    <string-array name="amnh_info">
-        <item>@string/amnh_url</item>
-        <item>23</item>
-        <item>18</item>
-        <item>18</item>
-    </string-array>
-    <string-array name="met_info">
-        <item>@string/met_url</item>
-        <item>25</item>
-        <item>17</item>
-        <item>12</item>
-    </string-array>
-    <string-array name="noguchi_info">
-        <item>@string/noguchi_url</item>
-        <item>10</item>
-        <item>5</item>
         <item>5</item>
     </string-array>
 </resources>
