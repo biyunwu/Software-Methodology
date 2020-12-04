@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="adult">
+        <item name="moma">25</item>
+        <item name="natural_history">23</item>
+        <item name="met">25</item>
+        <item name="noguchi">10</item>
+    </integer-array>
+
+    <integer-array name="senior">
+        <item name="moma">18</item>
+        <item name="natural_history">18</item>
+        <item name="met">17</item>
+        <item name="noguchi">5</item>
+    </integer-array>
+
+    <integer-array name="student">
+        <item name="moma">14</item>
+        <item name="natural_history">18</item>
+        <item name="met">2</item>
+        <item name="noguchi">5</item>
+    </integer-array>
+</resources>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MuseumActivity">
+
+    <TextView
+        android:id="@+id/museumName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/museum_name"
+        android:textColor="#980505"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/museumPic"
+        android:layout_width="307dp"
+        android:layout_height="201dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/museum_pic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/museumName"
+        tools:srcCompat="@drawable/moma" />
+
+    <TextView
+        android:id="@+id/ticketLabel"
+        android:layout_width="116dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/ticketType"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/quantityLabel"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="@+id/museumPic"
+        app:layout_constraintTop_toBottomOf="@+id/museumPic" />
+
+    <TextView
+        android:id="@+id/adultLabel"
+        android:layout_width="110dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/adultLabel"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/adultQuantity"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ticketLabel" />
+
+    <TextView
+        android:id="@+id/seniorLabel"
+        android:layout_width="111dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/seniorLabel"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/seniorQuantity"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/adultLabel"
+        app:layout_constraintTop_toBottomOf="@+id/adultLabel" />
+
+    <TextView
+        android:id="@+id/studentLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/studentLabel"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/studentQuantity"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/seniorLabel"
+        app:layout_constraintTop_toBottomOf="@+id/seniorLabel" />
+
+    <TextView
+        android:id="@+id/quantityLabel"
+        android:layout_width="116dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+        android:text="@string/quantityLabel"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/museumPic"
+        app:layout_constraintTop_toTopOf="@+id/ticketLabel" />
+
+    <Spinner
+        android:id="@+id/adultQuantity"
+        android:layout_width="74dp"
+        android:layout_height="29dp"
+        app:layout_constraintBottom_toBottomOf="@+id/adultLabel"
+        app:layout_constraintEnd_toEndOf="@+id/quantityLabel"
+        app:layout_constraintStart_toStartOf="@+id/quantityLabel"
+        app:layout_constraintTop_toTopOf="@+id/adultLabel" />
+
+    <Spinner
+        android:id="@+id/seniorQuantity"
+        android:layout_width="74dp"
+        android:layout_height="29dp"
+        app:layout_constraintBottom_toBottomOf="@+id/seniorLabel"
+        app:layout_constraintEnd_toEndOf="@+id/quantityLabel"
+        app:layout_constraintStart_toStartOf="@+id/quantityLabel"
+        app:layout_constraintTop_toTopOf="@+id/seniorLabel" />
+
+    <Spinner
+        android:id="@+id/studentQuantity"
+        android:layout_width="74dp"
+        android:layout_height="29dp"
+        app:layout_constraintBottom_toBottomOf="@+id/studentLabel"
+        app:layout_constraintEnd_toEndOf="@+id/quantityLabel"
+        app:layout_constraintStart_toStartOf="@+id/quantityLabel"
+        app:layout_constraintTop_toTopOf="@+id/studentLabel" />
+
+    <TextView
+        android:id="@+id/subTotalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/sub_total_label"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/museumPic"
+        app:layout_constraintTop_toBottomOf="@+id/studentLabel" />
+
+    <EditText
+        android:id="@+id/subTotal"
+        android:layout_width="162dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/sub_total_label"
+        android:importantForAutofill="no"
+        android:inputType="none"
+        android:text="@string/subTotal"
+        app:layout_constraintBottom_toBottomOf="@+id/subTotalLabel"
+        app:layout_constraintEnd_toEndOf="@+id/museumPic"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/subTotalLabel"
+        app:layout_constraintTop_toTopOf="@+id/subTotalLabel"
+        app:layout_constraintVertical_bias="0.409" />
+
+    <TextView
+        android:id="@+id/taxLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/taxLabel"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/subTotalLabel"
+        app:layout_constraintTop_toBottomOf="@+id/subTotalLabel" />
+
+    <EditText
+        android:id="@+id/taxAmount"
+        android:layout_width="163dp"
+        android:layout_height="39dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/taxLabel"
+        android:inputType="none"
+        android:text="@string/taxAmount"
+        app:layout_constraintBottom_toBottomOf="@+id/taxLabel"
+        app:layout_constraintEnd_toEndOf="@+id/subTotal"
+        app:layout_constraintStart_toStartOf="@+id/subTotal"
+        app:layout_constraintTop_toTopOf="@+id/taxLabel" />
+
+    <TextView
+        android:id="@+id/totalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/totalLabel"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/taxLabel"
+        app:layout_constraintTop_toBottomOf="@+id/taxLabel" />
+
+    <EditText
+        android:id="@+id/totalAmount"
+        android:layout_width="163dp"
+        android:layout_height="43dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/totalLabel"
+        android:inputType="none"
+        android:text="@string/totalAmount"
+        app:layout_constraintBottom_toBottomOf="@+id/totalLabel"
+        app:layout_constraintEnd_toEndOf="@+id/taxAmount"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/taxAmount"
+        app:layout_constraintTop_toTopOf="@+id/totalLabel"
+        app:layout_constraintVertical_bias="1.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
