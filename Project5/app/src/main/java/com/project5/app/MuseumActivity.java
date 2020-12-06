@@ -14,9 +14,14 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Museum activity to show details about the selected museum, including its image, web URL
+ * and ticket info. It also calculates the total tickets price.
+ *
+ * @author Anthony Triolo, Biyun Wu
+ */
 public class MuseumActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final double NYC_TAX = 0.08875;
@@ -31,6 +36,11 @@ public class MuseumActivity extends AppCompatActivity implements AdapterView.OnI
     EditText subTotal, taxAmount, totalAmount;
     Toast toast;
 
+    /**
+     * Method to create the initial view for the museum activity.
+     *
+     * @param savedInstanceState state info for this view.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +108,14 @@ public class MuseumActivity extends AppCompatActivity implements AdapterView.OnI
         toast.show();
     }
 
+    /**
+     * Method to calculate ticket price when there is any change on the ticket quantities.
+     *
+     * @param parent parent view of the selected element.
+     * @param view selected view.
+     * @param position index of the selected child view.
+     * @param id unique identifier of the selected child view.
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         int subTotalPrice = Integer.parseInt(adultQuantity.getSelectedItem().toString()) * adultPrice
@@ -110,6 +128,11 @@ public class MuseumActivity extends AppCompatActivity implements AdapterView.OnI
         totalAmount.setText(getString(R.string.ticket_cost, totalPrice));
     }
 
+    /**
+     * Default action to be executed for the AdapterView.
+     *
+     * @param parent parent view.
+     */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         subTotal.setText(getString(R.string.ticket_cost_int, 0));
