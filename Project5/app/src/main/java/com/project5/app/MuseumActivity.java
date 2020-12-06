@@ -21,7 +21,8 @@ public class MuseumActivity extends AppCompatActivity implements AdapterView.OnI
 
     private static final double NYC_TAX = 0.08875;
 
-    String[] tickets, museumNames, urls, adultPrices, seniorPrices, studentPrices;
+    String[] tickets, museumNames, urls;
+    int[] adultPrices, seniorPrices, studentPrices;
     private int adultPrice, seniorPrice, studentPrice;
 
     ImageView museumPic;
@@ -43,9 +44,9 @@ public class MuseumActivity extends AppCompatActivity implements AdapterView.OnI
         tickets = res.getStringArray(R.array.tickets);
         museumNames = res.getStringArray(R.array.museums);
         urls = res.getStringArray(R.array.web_address);
-        adultPrices = res.getStringArray(R.array.adult);
-        seniorPrices = res.getStringArray(R.array.senior);
-        studentPrices = res.getStringArray(R.array.student);
+        adultPrices = res.getIntArray(R.array.adult);
+        seniorPrices = res.getIntArray(R.array.senior);
+        studentPrices = res.getIntArray(R.array.student);
 
         museumPic = findViewById(R.id.museumPic);
         adultLabel = findViewById(R.id.adultLabel);
@@ -83,11 +84,11 @@ public class MuseumActivity extends AppCompatActivity implements AdapterView.OnI
                     startActivity(web);
                     toast.cancel(); // when image is clicked and toast is still visible.
                 });
-                adultPrice = Integer.parseInt(adultPrices[i]);
+                adultPrice = adultPrices[i];
                 adultLabel.setText(res.getString(R.string.adultLabel, adultPrice));
-                seniorPrice = Integer.parseInt(seniorPrices[i]);
+                seniorPrice = seniorPrices[i];
                 seniorLabel.setText(res.getString(R.string.seniorLabel, seniorPrice));
-                studentPrice = Integer.parseInt(studentPrices[i]);
+                studentPrice = studentPrices[i];
                 studentLabel.setText(res.getString(R.string.studentLabel, studentPrice));
                 break;
             }
